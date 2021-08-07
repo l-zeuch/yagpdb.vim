@@ -44,6 +44,8 @@ syntax keyword yagpdb-ccFunction
     print
     printf
     println
+    js
+    html
 
     " math functions
     add
@@ -132,6 +134,7 @@ syntax keyword yagpdb-ccFunction
     sort
     shuffle
     sleep
+    call
 
     " execCC funcs
     execCC
@@ -154,6 +157,17 @@ syntax keyword yagpdb-ccFunction
     dbRank
     dbSetExpire
     dbTopEntries
+
+    " logic
+    not
+    and
+    or
+    ne
+    eq
+    lt
+    le
+    gt
+    ge
 
 highlight link yagpdb-ccKeyword Keyword
 highlight link yagpdb-ccFunction ccFunction
