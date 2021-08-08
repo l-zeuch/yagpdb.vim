@@ -10,19 +10,36 @@ endif
 
 " For category information, see :h group-name
 
+
 " Comment
-syntax region yagpdbccComment start=/\v\/\*/ end=/\*\//
+syntax region yagpdbccComment start=#\v\{\{\s*\/\*#ms=e-2 end=#\v\*\/\s*\}\}#me=s+2
+    " Inline comments, like {{ print "Hello" /*asdf*/ }}, aren't supported,
+    " although I don't think they're implemented yet in Yag either.
 highlight link yagpdbccComment Comment
 
 " Constants: String, Character, Number, Boolean, Float
-syntax region yagpdbccString start=/\v"/ skip=/\v\\./ end=/\v"|$/
+" String
+syntax region yagpdbccString start=#\v"# skip=#\v\\.# end=#\v"|$# contains=yagpdbccEscaped,yagpdbccFormat
     " We stop strings at EOL. The Error catgeory will match there as well, to
     " draw further attention to the issue.
-syntax region yagpdbccString start=/\v`/ end=/\v`/
+syntax region yagpdbccString start=#\v`# end=#\v`# contains=yagpdbccFormat
+    " Does *not* contain `yagpdbccEscaped`, since escapes aren't valid in
+    " backtick blocks.
 highlight link yagpdbccString String
+" Number
+syntax match yagpdbccNumber "\v\d+"
+syntax match yagpdbccNumber "\v0x[\dA-Fa-f]+"
+highlight link yagpdbccNumber Number
+" Float
+syntax match yagpdbccFloat "\v\d+\.\d+"
+    " TODO: Pending DZ approval :)
+highlight link yagpdbccFloat Float
+" Boolean
+syntax keyword yagpdbccBoolean true false
+highlight link yagpdbccBoolean Boolean
 
 " Identifier: Function (functions include methods of classes)
-syntax match yagpdbccIdentifier "\v\$\w+"
+syntax match yagpdbccIdentifier "\v\$([A-Za-z][A-Za-z0-9]*)?"
 highlight link yagpdbccIdentifier Identifier
 " Functions, defined by <https://docs.yagpdb.xyz/reference/templates#functions>
     " Type conversion
@@ -94,15 +111,24 @@ highlight link yagpdbccOperator Operator
 highlight link yagpdbccKeyword Keyword
 
 " Type
+"   Do we really use this in CCs?
 
 " Special
-"   Any special symbol, whatever that means
+"   Any special symbol
+syntax match yagpdbccEscaped "\v\\[nt\"\\]" contained
+highlight link yagpdbccEscaped Special
+syntax match yagpdbccFormat "\v\%\d?[dfsu\%]" contained
+    " This is *mostly* accurate, for now. Should probably be improved later.
+highlight link yagpdbccFormat Special
 
 " Underlined
 "   For URLs, maybe?
 
 " Ignore
-"   Ignore anything not in double braces
+syntax region yagpdbccIgnore start=#\v%^# end=#\v\{\{#me=s-1 start=#\v\}\}#ms=e end=#\v%$#
+highlight link yagpdbccIgnore Ignore
+highlight Ignore ctermfg=fg guifg=fg
+    " Make the Ignore highlight group be regular, instead of invisible
 
 " Error
 "   Error highlighting should apply to:
