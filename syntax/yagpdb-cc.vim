@@ -27,12 +27,11 @@ syntax region yagpdbccString start=#\v`# end=#\v`# contains=yagpdbccFormat
     " backtick blocks.
 highlight link yagpdbccString String
 " Number
-syntax match yagpdbccNumber "\v\d+"
-syntax match yagpdbccNumber "\v0x[\dA-Fa-f]+"
+syntax match yagpdbccNumber "\v[+-]?\d+([eE]\d+)?i?"
+syntax match yagpdbccNumber "\v[+-]?0x[\dA-Fa-f]+"
 highlight link yagpdbccNumber Number
 " Float
-syntax match yagpdbccFloat "\v\d+\.\d+"
-    " TODO: Pending DZ approval :)
+syntax match yagpdbccFloat "\v[+-]?\d+\.\d+([eE]\d+)?i?"
 highlight link yagpdbccFloat Float
 " Boolean
 syntax keyword yagpdbccBoolean true false
