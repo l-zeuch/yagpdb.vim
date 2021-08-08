@@ -110,7 +110,12 @@ highlight link yagpdbccOperator Operator
 highlight link yagpdbccKeyword Keyword
 
 " Type
-"   Do we really use this in CCs?
+syntax match yagpdbccDot "\v\."
+syntax match yagpdbccStruct "\v(\.[[:alnum:]\_]+)+"
+    " Order is key here. If you do the dot second, it takes priority over the
+    " generic struct/attribute syntax, breaking it.
+highlight link yagpdbccDot Type
+highlight link yagpdbccStruct Type
 
 " Special
 "   Any special symbol
@@ -119,9 +124,6 @@ highlight link yagpdbccEscaped Special
 syntax match yagpdbccFormat "\v\%\d?[dfsu\%]" contained
     " This is *mostly* accurate, for now. Should probably be improved later.
 highlight link yagpdbccFormat Special
-
-" Underlined
-"   For URLs, maybe?
 
 " Ignore
 syntax region yagpdbccIgnore start=#\v%^# end=#\v\{\{#me=s-1 start=#\v\}\}#ms=e end=#\v%$#
@@ -134,7 +136,7 @@ highlight Ignore ctermfg=fg guifg=fg
 "   - Nested double braces
 "   - Unclosed parens, brackets, double quotes (must close before the ending `{{`)
 "   - Everything after 2K characters
-"   Use regex for this
+"   Use regex for this. Will need DZ.
 
 " Todo
 syntax keyword yagpdbccTodo TODO FIXME XXX
