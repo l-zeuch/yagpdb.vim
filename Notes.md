@@ -6,7 +6,7 @@ This document is a comprehensive, but not exhaustive list of useful and helpful 
 
 * [Learn Vim Script the Hard Way](https://learnvimscriptthehardway.stevelosh.com)
 
-  An excellent resource walking through the rabbithole that Vim Script is.
+  An excellent resource walking through the rabbithole that Vim Script is. Also, chapters 41 and onward specifically cover plugin development.
 
 * [Vim RegEx Reference](https://learnbyexample.gitbooks.io/vim-reference/content/Regular_Expressions.html)
 
@@ -16,5 +16,8 @@ This document is a comprehensive, but not exhaustive list of useful and helpful 
 
 ## Other
 
+* Implement code folding. This can be based on:
+  * Indentation (easy, less reliable)
+  * Custom scripting (harder, more reliable, can be based on language feature like if/else/end blocks).
 * Consider automating certain files such as [`syntax/yagpdb-cc.vim`](./syntax/yagpdb-cc.vim)
 * Figure out a way to validate syntax - perhaps without the abuse of RegEx. Alternatively, RegEx.
