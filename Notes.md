@@ -20,6 +20,6 @@ This document is a comprehensive, but not exhaustive list of useful and helpful 
   * Indentation (easy, less reliable). *Already done.*
   * Custom scripting (harder, more reliable, can be based on language feature like if/else/end blocks).
     See <https://learnvimscriptthehardway.stevelosh.com/chapters/49.html>.
-* Consider automating certain files such as [`syntax/yagpdb-cc.vim`](./syntax/yagpdb-cc.vim)
+* Consider automating certain files such as [`syntax/yagpdbcc.vim`](./syntax/yagpdbcc.vim)
 * Figure out a way to validate syntax - perhaps without the abuse of RegEx. Alternatively, RegEx.
   * Vim's Error highlight type is great for this, and works seamlessly with RegEx. :)

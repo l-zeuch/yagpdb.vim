@@ -141,4 +141,4 @@ syntax keyword yagpdbccTodo TODO FIXME XXX
 highlight link yagpdbccTodo Todo
 
 
-let b:current_syntax = "yagpdb-cc"
+let b:current_syntax = "yagpdbcc"
