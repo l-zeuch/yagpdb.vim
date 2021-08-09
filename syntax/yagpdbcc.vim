@@ -75,7 +75,7 @@ syntax keyword yagpdbccFunction targetHasRoleID targetHasRoleName
 syntax keyword yagpdbccFunction currentUserCreated currentUserAgeHuman currentUserAgeMinutes
 syntax keyword yagpdbccFunction editNickname
     " Miscellaneous
-syntax keyword yagpdbccFunction getMember urlquery
+syntax keyword yagpdbccFunction getMember userArg
 syntax keyword yagpdbccFunction onlineCount onlineCountBots
 syntax keyword yagpdbccFunction adjective noun cembed
 syntax keyword yagpdbccFunction slice cslice dict sdict index
@@ -84,10 +84,10 @@ syntax keyword yagpdbccFunction hasPrefix hasSuffix
 syntax keyword yagpdbccFunction humanizeThousands
 syntax keyword yagpdbccFunction in inFold
 syntax keyword yagpdbccFunction kindOf len
-syntax keyword yagpdbccFunction parseArgs
+syntax keyword yagpdbccFunction parseArgs carg
 syntax keyword yagpdbccFunction sendTemplate senTemplateDM
 syntax keyword yagpdbccFunction seq sort shuffle
-syntax keyword yagpdbccFunction sleep call
+syntax keyword yagpdbccFunction sleep call urlquery
     " execCC funcs
 syntax keyword yagpdbccFunction execCC scheduleUniqueCC cancelScheduledUniqueCC
     " Ticket funcs
@@ -118,7 +118,7 @@ highlight link yagpdbccKeyword Keyword
 
 " Type
 syntax match yagpdbccDot "\v(\{\{|\s)\."ms=e
-syntax match yagpdbccStruct "\v\W(\.[[:alnum:]\_]+)+"ms=s+1
+syntax match yagpdbccStruct "\v(\.[[:alnum:]\_]+)+"
     " Order is key here. If you do the dot second, it takes priority over the
     " generic struct/attribute syntax, breaking it.
 highlight link yagpdbccDot Type
