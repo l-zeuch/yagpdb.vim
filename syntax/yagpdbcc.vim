@@ -12,7 +12,7 @@ endif
 
 
 " Comment
-syntax region yagpdbccComment start=#\v\{\{\s*\/\*#ms=e-2 end=#\v\*\/\s*\}\}#me=s+2
+syntax region yagpdbccComment start=#\v\{\{(-\s+)?\s*\/\*#ms=e-2 end=#\v\*\/\s*(\s+-)?\}\}#me=s+2
     " Inline comments, like {{ print "Hello" /*asdf*/ }}, aren't supported,
     " although I don't think they're implemented yet in Yag either.
 highlight link yagpdbccComment Comment
