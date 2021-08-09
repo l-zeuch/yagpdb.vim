@@ -110,8 +110,8 @@ highlight link yagpdbccOperator Operator
 highlight link yagpdbccKeyword Keyword
 
 " Type
-syntax match yagpdbccDot "\v\."
-syntax match yagpdbccStruct "\v(\.[[:alnum:]\_]+)+"
+syntax match yagpdbccDot "\v(\{\{|\s)\."ms=e
+syntax match yagpdbccStruct "\v\W(\.[[:alnum:]\_]+)+"ms=s+1
     " Order is key here. If you do the dot second, it takes priority over the
     " generic struct/attribute syntax, breaking it.
 highlight link yagpdbccDot Type
