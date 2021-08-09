@@ -39,11 +39,13 @@ highlight link yagpdbccBoolean Boolean
 
 " Identifier: Function (functions include methods of classes)
 syntax match yagpdbccIdentifier "\v\$([A-Za-z][A-Za-z0-9]*)?"
+    " Match any varible
 highlight link yagpdbccIdentifier Identifier
 " Functions, defined by <https://docs.yagpdb.xyz/reference/templates#functions>
     " Type conversion
 syntax keyword yagpdbccFunction json structToSdict
 syntax keyword yagpdbccFunction toByte toDuration toFloat toInt toInt64 toRune toString
+syntax keyword yagpdbccFunction str
     " String manipulation
 syntax keyword yagpdbccFunction joinStr lower upper slice urlescape split title
 syntax keyword yagpdbccFunction reFind reFindAll reFindAllSubmatches reReplace reSplit
@@ -59,6 +61,8 @@ syntax keyword yagpdbccFunction editMessage editMessageNoEscape
 syntax keyword yagpdbccFunction getMessage
 syntax keyword yagpdbccFunction sendDM sendMessage sendMessageNoEscape
 syntax keyword yagpdbccFunction sendMessageRetID sendMessageNoEscapeRetID
+    " Channel
+syntax keyword yagpdbccFunction getChannel editChannelTopic editChannelName
     " Mentions
 syntax keyword yagpdbccFunction mentionEveryone mentionHere mentionRoleName mentionRoleID
     " Role functions
@@ -69,7 +73,10 @@ syntax keyword yagpdbccFunction getRole setRoles
 syntax keyword yagpdbccFunction targetHasRoleID targetHasRoleName
     " Current user
 syntax keyword yagpdbccFunction currentUserCreated currentUserAgeHuman currentUserAgeMinutes
+syntax keyword yagpdbccFunction editNickname
     " Miscellaneous
+syntax keyword yagpdbccFunction getMember urlquery
+syntax keyword yagpdbccFunction onlineCount onlineCountBots
 syntax keyword yagpdbccFunction adjective noun cembed
 syntax keyword yagpdbccFunction slice cslice dict sdict index
 syntax keyword yagpdbccFunction exec execAdmin
