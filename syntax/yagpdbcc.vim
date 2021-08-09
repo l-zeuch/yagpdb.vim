@@ -127,9 +127,9 @@ highlight link yagpdbccFormat Special
 
 " Ignore
 syntax region yagpdbccIgnore start=#\v%^# end=#\v\{\{#me=s-1 start=#\v\}\}#ms=e end=#\v%$#
-highlight link yagpdbccIgnore Ignore
-highlight Ignore ctermfg=fg guifg=fg
-    " Make the Ignore highlight group be regular, instead of invisible
+highlight link yagpdbccIgnore Normal
+    " Instead of using the actual Ignore group, which is normally invisible,
+    " we just link to the Normal highlight.
 
 " Error
 "   Error highlighting should apply to:
