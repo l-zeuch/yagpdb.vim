@@ -12,7 +12,7 @@ endif
 
 
 " Comment
-syntax region yagpdbccComment start=#\v\{\{(-\_s+)?\_s*\/\*#rs=e-1 end=#\v\*\/\_s*(\_s+-)?\}\}#re=s+1
+syntax region yagpdbccComment start=#\v\{\{(-\_s+)?\_s*\/\*#rs=e-1 end=#\v\*\/\_s*(\_s+-)?\}\}#re=s+1 contains=@Spell
     " Inline comments, like {{ print "Hello" /*asdf*/ }}, aren't handled well,
     " although I don't think they're implemented yet in Yag either.
     " To not highlight the braces in the future, add hs and he parameters with
@@ -21,10 +21,10 @@ highlight link yagpdbccComment Comment
 
 " Constants: String, Character, Number, Boolean, Float
 " String
-syntax region yagpdbccString start=#\v"# skip=#\v\\.# end=#\v"|$# contains=yagpdbccEscaped,yagpdbccFormat
+syntax region yagpdbccString start=#\v"# skip=#\v\\.# end=#\v"|$# contains=yagpdbccEscaped,yagpdbccFormat,@Spell
     " We stop strings at EOL. The Error catgeory will match there as well, to
     " draw further attention to the issue.
-syntax region yagpdbccString start=#\v`# end=#\v`# contains=yagpdbccFormat
+syntax region yagpdbccString start=#\v`# end=#\v`# contains=yagpdbccFormat,@Spell
     " Does *not* contain `yagpdbccEscaped`, since escapes aren't valid in
     " backtick blocks.
 highlight link yagpdbccString String
@@ -135,7 +135,7 @@ syntax match yagpdbccFormat "\v\%\d?[dfsu\%]" contained
 highlight link yagpdbccFormat Special
 
 " Ignore
-syntax region yagpdbccIgnore start=#\v%^(\{\{)@!# end=#\v\{\{#me=s-1 start=#\v\}\}#ms=e+1 end=#\v%$#
+syntax region yagpdbccIgnore start=#\v%^(\{\{)@!# end=#\v\{\{#me=s-1 start=#\v\}\}#ms=e+1 end=#\v%$# contains=@Spell
 highlight link yagpdbccIgnore Normal
     " Instead of using the actual Ignore group, which is normally invisible,
     " we just link to the Normal highlight.
