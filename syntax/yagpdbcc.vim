@@ -135,7 +135,7 @@ syntax match yagpdbccFormat "\v\%\d?[dfsu\%]" contained
 highlight link yagpdbccFormat Special
 
 " Ignore
-syntax region yagpdbccIgnore start=#\v%^# end=#\v\{\{#me=s-1 start=#\v\}\}#ms=e+1 end=#\v%$#
+syntax region yagpdbccIgnore start=#\v%^(\{\{)@!# end=#\v\{\{#me=s-1 start=#\v\}\}#ms=e+1 end=#\v%$#
 highlight link yagpdbccIgnore Normal
     " Instead of using the actual Ignore group, which is normally invisible,
     " we just link to the Normal highlight.
