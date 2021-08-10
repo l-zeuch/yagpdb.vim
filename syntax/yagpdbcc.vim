@@ -12,10 +12,11 @@ endif
 
 
 " Comment
-syntax region yagpdbccComment start=#\v\{\{(-\s+)?\s*\/\*#ms=e-1 end=#\v\*\/\s*(\s+-)?\}\}#me=s+1
+syntax region yagpdbccComment start=#\v\{\{(-\_s+)?\_s*\/\*#ms=e-1 end=#\v\*\/\_s*(\_s+-)?\}\}#me=s+1
+  " Start notwork with line breaks
     " Inline comments, like {{ print "Hello" /*asdf*/ }}, aren't supported,
     " although I don't think they're implemented yet in Yag either.
-highlight link yagpdbccComment Comment
+highlight link yagpdbccComment Todo
 
 " Constants: String, Character, Number, Boolean, Float
 " String
