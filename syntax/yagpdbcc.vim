@@ -13,9 +13,10 @@ endif
 
 " Comment
 syntax region yagpdbccComment start=#\v\{\{(-\_s+)?\_s*\/\*#rs=e-1 end=#\v\*\/\_s*(\_s+-)?\}\}#re=s+1
-  " Start notwork with line breaks
-    " Inline comments, like {{ print "Hello" /*asdf*/ }}, aren't supported,
+    " Inline comments, like {{ print "Hello" /*asdf*/ }}, aren't handled well,
     " although I don't think they're implemented yet in Yag either.
+    " To not highlight the braces in the future, add hs and he parameters with
+    " the same values as the rs and re ones.
 highlight link yagpdbccComment Comment
 
 " Constants: String, Character, Number, Boolean, Float
@@ -134,7 +135,7 @@ syntax match yagpdbccFormat "\v\%\d?[dfsu\%]" contained
 highlight link yagpdbccFormat Special
 
 " Ignore
-syntax region yagpdbccIgnore start=#\v%^# end=#\v\{\{#me=s-1 start=#\v\}\}#ms=e end=#\v%$#
+syntax region yagpdbccIgnore start=#\v%^# end=#\v\{\{#me=s-1 start=#\v\}\}#ms=e+1 end=#\v%$#
 highlight link yagpdbccIgnore Normal
     " Instead of using the actual Ignore group, which is normally invisible,
     " we just link to the Normal highlight.
