@@ -39,7 +39,7 @@ syntax keyword yagpdbccBoolean true false
 highlight link yagpdbccBoolean Boolean
 
 " Identifier: Function (functions include methods of classes)
-syntax match yagpdbccIdentifier "\v>@!\$([A-Za-z][A-Za-z0-9]*)?"
+syntax match yagpdbccIdentifier "\v>@!\$\.?([A-Za-z][A-Za-z0-9]*)?"
     " Match any varible
 highlight link yagpdbccIdentifier Identifier
 " Functions, defined by <https://docs.yagpdb.xyz/reference/templates#functions>
