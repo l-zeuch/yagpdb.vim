@@ -12,11 +12,8 @@ endif
 
 
 " Comment
-syntax region yagpdbccComment start=#\v\{\{(-\_s)?\_s*\/\*#hs=e-1 end=#\v\*\/\_s*(\_s-)?\}\}#me=s+1
+syntax region yagpdbccComment start=#\v\{\{(- +)?\/\*#ms=e-1 end=#\v\*\/( +-)?\}\}#me=s+1
             \ contains=@Spell fold
-    " We aren't allowed to do "ms=e-1" - for whatever reason, Vim doesn't like
-    " it when matches start on lines other than where the regex actually
-    " matches. As a result, this region "eats" the leading {{ on comments.
     " Inline comments, like {{ print "Hello" /*asdf*/ }}, aren't handled,
     " although I don't think they're implemented yet in Yag either.
 highlight link yagpdbccComment Comment
@@ -26,7 +23,7 @@ highlight link yagpdbccComment Comment
 syntax region yagpdbccString start=#\v"# skip=#\v\\.# end=#\v"|$# contains=yagpdbccEscaped,yagpdbccFormat,@Spell
     " We stop strings at EOL. The Error catgeory will match there as well, to
     " draw further attention to the issue.
-syntax region yagpdbccString start=#\v`# end=#\v`# contains=yagpdbccFormat,@Spell
+syntax region yagpdbccString start=#\v`# end=#\v`# contains=yagpdbccFormat,@Spell fold
     " Does *not* contain `yagpdbccEscaped`, since escapes aren't valid in
     " backtick blocks.
 highlight link yagpdbccString String
