@@ -8,7 +8,7 @@ This is still a work in progress and shouldn't be used if you  don't know what y
 
 ## Other Contributions
 
-Some of the regex in this plugin was developed by @DZ-TM (GitHub). If you like it, feel free to give him cookies as a reward.
+Some of the regex in this plugin was developed by [@DZ-TM](https://github.com/DZ-TM). If you like it, feel free to give him cookies as a reward.
 
 ## License
 
