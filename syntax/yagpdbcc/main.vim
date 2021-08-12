@@ -64,7 +64,7 @@ highlight link yagpdbccKeyword Keyword
 syntax match yagpdbccDot "\v(\{\{|\s)\."ms=e
     " Order is key here. If you do the dot later, it takes priority over the
     " generic field and top-level object syntaxes, breaking them.
-syntax match yagpdbccObject "\v(\{\{|\_s)\zs\.[[:alnum:]\_]+" nextgroup=yagpdbccField
+syntax match yagpdbccObject "\v>@!\.[[:alnum:]\_]+" nextgroup=yagpdbccField
 syntax match yagpdbccField "\v>\)?\zs\.[[:alnum:]\_]+" nextgroup=yagpdbccField
     " We use \zs here to start the match region, because we can't use a
     " constant offset from either end to do so.
