@@ -13,7 +13,7 @@ endif
 
 
 " Comment
-syntax region yagpdbccComment start=#\v\{\{(- +)?\/\*#ms=e-1 end=#\v\*\/( +-)?\}\}#me=s+1
+syntax region yagpdbccComment start=#\v\{\{%(- +)?\/\*#ms=e-1 end=#\v\*\/%( +-)?\}\}#me=s+1
             \ contains=@Spell fold
     " Inline comments, like {{ print "Hello" /*asdf*/ }}, aren't handled,
     " although I don't think they're implemented yet in Yag either.
@@ -29,18 +29,18 @@ syntax region yagpdbccString start=#\v`# end=#\v`# contains=yagpdbccFormat,@Spel
     " backtick blocks.
 highlight default link yagpdbccString String
 " Number
-syntax match yagpdbccNumber "\v[+-]?\d+([eE]\d+)?i?"
+syntax match yagpdbccNumber "\v[+-]?\d+%([eE]\d+)?i?"
 syntax match yagpdbccNumber "\v[+-]?0x[\dA-Fa-f]+"
 highlight default link yagpdbccNumber Number
 " Float
-syntax match yagpdbccFloat "\v[+-]?\d+\.\d+([eE]\d+)?i?"
+syntax match yagpdbccFloat "\v[+-]?\d+\.\d+%([eE]\d+)?i?"
 highlight default link yagpdbccFloat Float
 " Boolean
 syntax keyword yagpdbccBoolean true false
 highlight default link yagpdbccBoolean Boolean
 
 " Identifier: Function (functions include methods of classes)
-syntax match yagpdbccIdentifier "\v>@!\$\.?([A-Za-z][A-Za-z0-9]*)?" nextgroup=yagpdbccField
+syntax match yagpdbccIdentifier "\v>@!\$\.?%([A-Za-z][A-Za-z0-9]*)?" nextgroup=yagpdbccField
     " Match any varible
 highlight default link yagpdbccIdentifier Identifier
 
@@ -61,7 +61,7 @@ highlight default link yagpdbccOperator Operator
 highlight default link yagpdbccKeyword Keyword
 
 " Type
-syntax match yagpdbccDot "\v(\{\{|\s)\."ms=e
+syntax match yagpdbccDot "\v%(\{\{|\s)\."ms=e
     " Order is key here. If you do the dot later, it takes priority over the
     " generic field and top-level object syntaxes, breaking them.
 syntax match yagpdbccObject "\v>@!\.[[:alnum:]\_]+" nextgroup=yagpdbccField
@@ -81,7 +81,7 @@ syntax match yagpdbccFormat "\v\%\d?[dfsu\%]" contained
 highlight default link yagpdbccFormat Special
 
 " Ignore
-syntax region yagpdbccIgnore start=#\v%^(\{\{)@!# end=#\v\{\{#me=s-1 start=#\v\}\}#ms=e+1 end=#\v%$# contains=@Spell
+syntax region yagpdbccIgnore start=#\v%^%(\{\{)@!# end=#\v\{\{#me=s-1 start=#\v\}\}#ms=e+1 end=#\v%$# contains=@Spell
 highlight default link yagpdbccIgnore Normal
     " Instead of using the actual Ignore group, which is normally invisible,
     " we just link to the Normal highlight.
