@@ -17,7 +17,7 @@ syntax region yagpdbccComment start=#\v\{\{(- +)?\/\*#ms=e-1 end=#\v\*\/( +-)?\}
             \ contains=@Spell fold
     " Inline comments, like {{ print "Hello" /*asdf*/ }}, aren't handled,
     " although I don't think they're implemented yet in Yag either.
-highlight link yagpdbccComment Comment
+highlight default link yagpdbccComment Comment
 
 " Constants: String, Character, Number, Boolean, Float
 " String
@@ -27,22 +27,22 @@ syntax region yagpdbccString start=#\v"# skip=#\v\\.# end=#\v"|$# contains=yagpd
 syntax region yagpdbccString start=#\v`# end=#\v`# contains=yagpdbccFormat,@Spell fold
     " Does *not* contain `yagpdbccEscaped`, since escapes aren't valid in
     " backtick blocks.
-highlight link yagpdbccString String
+highlight default link yagpdbccString String
 " Number
 syntax match yagpdbccNumber "\v[+-]?\d+([eE]\d+)?i?"
 syntax match yagpdbccNumber "\v[+-]?0x[\dA-Fa-f]+"
-highlight link yagpdbccNumber Number
+highlight default link yagpdbccNumber Number
 " Float
 syntax match yagpdbccFloat "\v[+-]?\d+\.\d+([eE]\d+)?i?"
-highlight link yagpdbccFloat Float
+highlight default link yagpdbccFloat Float
 " Boolean
 syntax keyword yagpdbccBoolean true false
-highlight link yagpdbccBoolean Boolean
+highlight default link yagpdbccBoolean Boolean
 
 " Identifier: Function (functions include methods of classes)
 syntax match yagpdbccIdentifier "\v>@!\$\.?([A-Za-z][A-Za-z0-9]*)?" nextgroup=yagpdbccField
     " Match any varible
-highlight link yagpdbccIdentifier Identifier
+highlight default link yagpdbccIdentifier Identifier
 
 " Statement: Conditional, Repeat, Label, Operator, Keyword, Exception
 " Keywords, as per <https://pkg.go.dev/text/template#hdr-Actions>
@@ -54,11 +54,11 @@ syntax keyword yagpdbccOperator add sub mult div fdiv log mod pow sqrt
 syntax match yagpdbccOperator "\v\:\="
 syntax match yagpdbccOperator "\v\="
 syntax keyword yagpdbccKeyword nil end
-highlight link yagpdbccConditional Conditional
-highlight link yagpdbccRepeat Repeat
-highlight link yagpdbccLabel Label
-highlight link yagpdbccOperator Operator
-highlight link yagpdbccKeyword Keyword
+highlight default link yagpdbccConditional Conditional
+highlight default link yagpdbccRepeat Repeat
+highlight default link yagpdbccLabel Label
+highlight default link yagpdbccOperator Operator
+highlight default link yagpdbccKeyword Keyword
 
 " Type
 syntax match yagpdbccDot "\v(\{\{|\s)\."ms=e
@@ -68,21 +68,21 @@ syntax match yagpdbccObject "\v>@!\.[[:alnum:]\_]+" nextgroup=yagpdbccField
 syntax match yagpdbccField "\v>\)?\zs\.[[:alnum:]\_]+" nextgroup=yagpdbccField
     " We use \zs here to start the match region, because we can't use a
     " constant offset from either end to do so.
-highlight link yagpdbccDot Type
-highlight link yagpdbccObject Type
-highlight link yagpdbccField Type
+highlight default link yagpdbccDot Type
+highlight default link yagpdbccObject Type
+highlight default link yagpdbccField Type
 
 " Special
 "   Any special symbol
 syntax match yagpdbccEscaped "\v\\[nt\"\\]" contained
-highlight link yagpdbccEscaped Special
+highlight default link yagpdbccEscaped Special
 syntax match yagpdbccFormat "\v\%\d?[dfsu\%]" contained
     " This is *mostly* accurate, for now. Should probably be improved later.
-highlight link yagpdbccFormat Special
+highlight default link yagpdbccFormat Special
 
 " Ignore
 syntax region yagpdbccIgnore start=#\v%^(\{\{)@!# end=#\v\{\{#me=s-1 start=#\v\}\}#ms=e+1 end=#\v%$# contains=@Spell
-highlight link yagpdbccIgnore Normal
+highlight default link yagpdbccIgnore Normal
     " Instead of using the actual Ignore group, which is normally invisible,
     " we just link to the Normal highlight.
 
@@ -96,7 +96,7 @@ highlight link yagpdbccIgnore Normal
 
 " Todo
 syntax keyword yagpdbccTodo TODO FIXME XXX
-highlight link yagpdbccTodo Todo
+highlight default link yagpdbccTodo Todo
 
 
 let b:current_syntax = "yagpdbcc"

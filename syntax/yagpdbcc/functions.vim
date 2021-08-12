@@ -61,11 +61,11 @@ syntax keyword yagpdbccFunction dbDel dbDelByID dbDelMultiple
 syntax keyword yagpdbccFunction dbGet dbGetPattern dbGetPatternReverse
 syntax keyword yagpdbccFunction dbCount dbIncr dbRank dbSetExpire
     " Finalization
-highlight link yagpdbccFunction Function
+highlight default link yagpdbccFunction Function
 
 " Time functions, defined by <https://docs.yagpdb.xyz/reference/templates#time>
 syntax keyword yagpdbccTime currentTime formatTime newDate
 syntax keyword yagpdbccTime humanizeDurationHours humanizeDurationMinutes humanizeDurationSeconds
 syntax keyword yagpdbccTime humanizeTimeSinceDays
     " Finalization
-highlight yagpdbccTime ctermfg=172 guifg=#d78700
+highlight default yagpdbccTime ctermfg=172 guifg=#d78700
