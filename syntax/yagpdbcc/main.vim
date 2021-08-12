@@ -89,10 +89,12 @@ highlight default link yagpdbccIgnore Normal
 " Error
 "   Error highlighting should apply to:
 "   - Nested double braces
-"   - Any dollar sign preceded by non-whitespace
 "   - Unclosed parens, brackets, double quotes (must close before the ending `{{`)
 "   - Everything after 2K characters
 "   Use regex for this. Will need DZ.
+syntax match yagpdbccError "\v>\$\w*"
+    " Dollar signs directly after end-of-words, like if$myvar.
+highlight default link yagpdbccError Error
 
 " Todo
 syntax keyword yagpdbccTodo TODO FIXME XXX
