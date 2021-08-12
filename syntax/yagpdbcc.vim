@@ -39,7 +39,7 @@ syntax keyword yagpdbccBoolean true false
 highlight link yagpdbccBoolean Boolean
 
 " Identifier: Function (functions include methods of classes)
-syntax match yagpdbccIdentifier "\v>@!\$\.?([A-Za-z][A-Za-z0-9]*)?"
+syntax match yagpdbccIdentifier "\v>@!\$\.?([A-Za-z][A-Za-z0-9]*)?" nextgroup=yagpdbccField
     " Match any varible
 highlight link yagpdbccIdentifier Identifier
 " Functions, defined by <https://docs.yagpdb.xyz/reference/templates#functions>
@@ -119,11 +119,15 @@ highlight link yagpdbccKeyword Keyword
 
 " Type
 syntax match yagpdbccDot "\v(\{\{|\s)\."ms=e
-syntax match yagpdbccStruct "\v(\.[[:alnum:]\_]+)+"
-    " Order is key here. If you do the dot second, it takes priority over the
-    " generic struct/attribute syntax, breaking it.
+    " Order is key here. If you do the dot later, it takes priority over the
+    " generic field and top-level object syntaxes, breaking them.
+syntax match yagpdbccObject "\v(\{\{|\_s)\zs\.[[:alnum:]\_]+" nextgroup=yagpdbccField
+syntax match yagpdbccField "\v>\)?\zs\.[[:alnum:]\_]+" nextgroup=yagpdbccField
+    " We use \zs here to start the match region, because we can't use a
+    " constant offset from either end to do so.
 highlight link yagpdbccDot Type
-highlight link yagpdbccStruct Type
+highlight link yagpdbccObject Type
+highlight link yagpdbccField Type
 
 " Special
 "   Any special symbol
