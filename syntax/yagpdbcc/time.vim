@@ -6,8 +6,8 @@
 
 " Time functions, defined by <https://docs.yagpdb.xyz/reference/templates#time>
     " Time functions
-syntax keyword yagpdbccFunction newDate currentTime
-syntax keyword yagpdbccFunction formatTime
-syntax keyword yagpdbccFunction humanizeDurationHours  " others?
+syntax keyword yagpdbccTime newDate currentTime
+syntax keyword yagpdbccTime formatTime
+syntax keyword yagpdbccTime humanizeDurationHours  " others?
     " Finalization
-highlight yagpdbccTime ctermfg=58 guifg=#5f5f00
+highlight yagpdbccTime ctermfg=172 guifg=#d78700
