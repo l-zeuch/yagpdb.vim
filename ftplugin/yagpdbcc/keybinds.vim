@@ -8,11 +8,10 @@ function! s:NextSection(type, backwards, visual)
         normal! gv
     endif
 
-    if a:type == 1
-        let pattern = '\v(\n\n^\S|%^)'
+    if a:type == 1        let pattern = '\v%(\n\n^\S|%^)'
         let flags = 'e'
     elseif a:type == 2
-        let pattern = '\v(\n\n^\S|%$)'
+        let pattern = '\v%(\n\n^\S|%$)'
         let flags = ''
     endif
 
