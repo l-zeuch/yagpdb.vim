@@ -1,3 +1,8 @@
+" Automatically insert closing double braces
+inoremap {{ {{<space><space>}}<left><left><left>
+
+
+" Make jumping between sections work nicely
 function! s:NextSection(type, backwards, visual)
     if a:visual
         normal! gv
@@ -20,12 +25,10 @@ function! s:NextSection(type, backwards, visual)
     execute 'silent normal! ' . dir . pattern . dir . flags . "\r"
 endfunction
 
-
 noremap <script> <buffer> <silent> ]] :call <SID>NextSection(1, 0, 0)<cr>
 noremap <script> <buffer> <silent> [[ :call <SID>NextSection(1, 1, 0)<cr>
 noremap <script> <buffer> <silent> ][ :call <SID>NextSection(2, 0, 0)<cr>
 noremap <script> <buffer> <silent> [] :call <SID>NextSection(2, 1, 0)<cr>
-
 vnoremap <script> <buffer> <silent> ]] :<c-u>call <SID>NextSection(1, 0, 1)<cr>
 vnoremap <script> <buffer> <silent> [[ :<c-u>call <SID>NextSection(1, 1, 1)<cr>
 vnoremap <script> <buffer> <silent> ][ :<c-u>call <SID>NextSection(2, 0, 1)<cr>
