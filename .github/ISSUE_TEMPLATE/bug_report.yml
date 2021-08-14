@@ -1,0 +1,55 @@
+name: Bug Report
+description: Something isn't working right
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please make sure to [search for existing issues](https://github.com/l-zeuch/yagpdb-cc-vim/issues) before creating a new one!
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behaviour
+      description: What were you expecting to see?
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Behaviour
+      description: What happened instead?
+    validations:
+      required: true
+  - type: markdown
+    attributes:
+      value: |
+        Bugs are reproducible - to make it easier for us to troubleshoot, please provide a way to reproduce your bug.
+        Include as much information as possible, e.g. uncommon flags set via your `vimrc`, different paths, etc.
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to Reproduce
+      description: Explain how you got the observed error.
+      placeholder: |
+        1.
+        2.
+        3.
+        ...
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional Context
+      placeholder: Provide additional context.
+    validations:
+      required: false
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: By submitting this issue, you agree to follow our [Code of Conduct](../CODE_OF_CONDUCT.md)
+      options:
+        - label: I agree to follow this project's Code of Conduct.
+          required: true
