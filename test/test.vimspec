@@ -1,0 +1,8 @@
+" this is just a placeholder for now.
+call themis#helper('command').with(themis#helper('assert'))
+
+Describe test
+    It should pass
+        Assert 1
+    End
+End
