@@ -12,4 +12,4 @@ Some of the regex in this plugin was developed by [@DZ-TM](https://github.com/DZ
 
 ## License
 
-This project is licensed under the terms of BSD-3-Clause.
+This project is licensed under the terms of the GPL-2.0.
