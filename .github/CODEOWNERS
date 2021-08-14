@@ -1,9 +1,0 @@
-# All pull requests need to be reviewed by one of the maintainers.
-# Unless a later match is found, these two will be notified.
-*           @l-zeuch @LRitzdorf
-
-# The general setup of this repository
-/.github/   @l-zeuch
-
-# Folding + Keybinds, etc.
-/ftplugin/  @LRitzdorf
