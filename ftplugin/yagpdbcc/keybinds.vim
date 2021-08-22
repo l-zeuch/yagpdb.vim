@@ -1,5 +1,5 @@
 " Automatically insert closing double braces
-inoremap {{ {{<space><space>}}<left><left><left>
+inoremap {{ {{}}<left><left>
 
 
 " Make jumping between sections work nicely
