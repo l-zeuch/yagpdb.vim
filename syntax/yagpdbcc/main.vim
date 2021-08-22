@@ -13,10 +13,13 @@ endif
 
 
 " Comment
-syntax region yagpdbccComment start=#\v\{\{%(- +)?\/\*# end=#\v\*\/%( +-)?\}\}#
+syntax region yagpdbccComment start=#\v\{\{%(- +)?\/\*#hs=e-1 end=#\v\*\/%( +-)?\}\}#me=s+1
             \ contains=@Spell fold
     " Inline comments, like {{ print "Hello" /*asdf*/ }}, aren't handled,
     " although I don't think they're implemented yet in Yag either.
+	" Also, this consumes the opening braces (to prevent the yagpdbccExpr
+	" group from matching first), but not the closing braces (to allow the
+	" yagpdbccIgnore group to match).
 highlight default link yagpdbccComment Comment
 
 " Constants: String, Character, Number, Boolean, Float
@@ -87,10 +90,6 @@ highlight default link yagpdbccIgnore Normal
     " we just link to the Normal highlight.
 
 " Error
-"	Ideas for error highlighting:
-"   - Unclosed parens, brackets, double quotes (must close before the ending `{{`)
-"   - Everything after 2K characters
-"   Use regex for this. Will need DZ.
 syntax match yagpdbccError "\v>\$\w*"
     " Dollar signs directly after end-of-words, like if$myvar.
 syntax region yagpdbccExpr start=#\v\{\{#ms=e+1 end=#\v\}\}#me=s-1 contains=ALL
