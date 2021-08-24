@@ -76,7 +76,6 @@ highlight default link yagpdbccObject Type
 highlight default link yagpdbccField Type
 
 " Special
-"   Any special symbol
 syntax match yagpdbccEscaped "\v\\[nt\"\\]" contained
 highlight default link yagpdbccEscaped Special
 syntax match yagpdbccFormat "\v\%\d?[dfsu\%]" contained
@@ -99,7 +98,6 @@ syntax region yagpdbccNestedBraces start=#\v\{\{# end=#\v\}\}# contained
 	" {{"{{"}}.
 highlight default link yagpdbccError Error
 highlight default link yagpdbccNestedBraces Error
-    " Nested double braces
 
 " Todo
 syntax keyword yagpdbccTodo TODO FIXME XXX
