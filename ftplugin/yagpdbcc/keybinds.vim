@@ -1,6 +1,6 @@
 " Automatically insert closing double braces
-inoremap {{ {{}}<left><left>
-
+inoremap         {{  {{}}<left><left>
+inoremap <expr>  }}  strpart(getline('.'), col('.')-1, 2) == "}}" ? "\<right>\<right>" : "}}"
 
 " Make jumping between sections work nicely
 function! s:NextSection(type, backwards, visual)
