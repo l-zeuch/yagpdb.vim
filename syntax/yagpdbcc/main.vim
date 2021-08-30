@@ -13,10 +13,13 @@ endif
 
 
 " Comment
-syntax region yagpdbccComment start=#\v\{\{%(- +)?\/\*#ms=e-1 end=#\v\*\/%( +-)?\}\}#me=s+1
+syntax region yagpdbccComment start=#\v\{\{%(- +)?\/\*#hs=e-1 end=#\v\*\/%( +-)?\}\}#me=s+1
             \ contains=@Spell fold
     " Inline comments, like {{ print "Hello" /*asdf*/ }}, aren't handled,
     " although I don't think they're implemented yet in Yag either.
+	" Also, this consumes the opening braces (to prevent the yagpdbccExpr
+	" group from matching first), but not the closing braces (to allow the
+	" yagpdbccIgnore group to match).
 highlight default link yagpdbccComment Comment
 
 " Constants: String, Character, Number, Boolean, Float
@@ -73,7 +76,6 @@ highlight default link yagpdbccObject Type
 highlight default link yagpdbccField Type
 
 " Special
-"   Any special symbol
 syntax match yagpdbccEscaped "\v\\[nt\"\\]" contained
 highlight default link yagpdbccEscaped Special
 syntax match yagpdbccFormat "\v\%\d?[dfsu\%]" contained
@@ -87,12 +89,15 @@ highlight default link yagpdbccIgnore Normal
     " we just link to the Normal highlight.
 
 " Error
-"   Error highlighting should apply to:
-"   - Nested double braces
-"   - Any dollar sign preceded by non-whitespace
-"   - Unclosed parens, brackets, double quotes (must close before the ending `{{`)
-"   - Everything after 2K characters
-"   Use regex for this. Will need DZ.
+syntax match yagpdbccError "\v>\$\w*"
+    " Dollar signs directly after end-of-words, like if$myvar.
+syntax region yagpdbccExpr start=#\v\{\{#ms=e+1 end=#\v\}\}#me=s-1 contains=ALL
+syntax region yagpdbccNestedBraces start=#\v\{\{# end=#\v\}\}# contained
+	" This region only matches inside of the Expr region, ensuring we don't
+	" interfere with other groups, or get false matches on things like
+	" {{"{{"}}.
+highlight default link yagpdbccError Error
+highlight default link yagpdbccNestedBraces Error
 
 " Todo
 syntax keyword yagpdbccTodo TODO FIXME XXX
