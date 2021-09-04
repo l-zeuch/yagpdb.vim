@@ -68,4 +68,4 @@ syntax keyword yagpdbccTime currentTime formatTime newDate
 syntax keyword yagpdbccTime humanizeDurationHours humanizeDurationMinutes humanizeDurationSeconds
 syntax keyword yagpdbccTime humanizeTimeSinceDays
     " Finalization
-highlight default yagpdbccTime ctermfg=172 guifg=#d78700
+highlight default link yagpdbccTime Function
