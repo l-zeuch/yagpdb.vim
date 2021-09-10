@@ -14,7 +14,7 @@ endif
 
 " Comment
 syntax region yagpdbccComment start=#\v\{\{%(- +)?\/\*#hs=e-1 end=#\v\*\/%( +-)?\}\}#me=s+1
-            \ contains=@Spell fold
+            \ contains=@Spell,yagpdbccTodo fold
     " Inline comments, like {{ print "Hello" /*asdf*/ }}, aren't handled,
     " although I don't think they're implemented yet in Yag either.
 	" Also, this consumes the opening braces (to prevent the yagpdbccExpr
@@ -100,7 +100,7 @@ highlight default link yagpdbccError Error
 highlight default link yagpdbccNestedBraces Error
 
 " Todo
-syntax keyword yagpdbccTodo TODO FIXME XXX
+syntax match yagpdbccTodo "\v<%(TODO|FIXME|XXX)>" contained
 highlight default link yagpdbccTodo Todo
 
 
