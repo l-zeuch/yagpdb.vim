@@ -43,7 +43,7 @@ syntax keyword yagpdbccBoolean true false
 highlight default link yagpdbccBoolean Boolean
 
 " Identifier: Function (functions include methods of classes)
-syntax match yagpdbccIdentifier "\v>@!\$\.?%([A-Za-z][A-Za-z0-9]*)?" nextgroup=yagpdbccField
+syntax match yagpdbccIdentifier "\v>@!\$\.?%(\w\w*)?" nextgroup=yagpdbccField
     " Match any varible
 highlight default link yagpdbccIdentifier Identifier
 
