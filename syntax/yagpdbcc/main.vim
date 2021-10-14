@@ -17,9 +17,9 @@ syntax region yagpdbccComment start=#\v\{\{%(- +)?\/\*#hs=e-1 end=#\v\*\/%( +-)?
             \ contains=@Spell,yagpdbccTodo fold
     " Inline comments, like {{ print "Hello" /*asdf*/ }}, aren't handled,
     " although I don't think they're implemented yet in Yag either.
-	" Also, this consumes the opening braces (to prevent the yagpdbccExpr
-	" group from matching first), but not the closing braces (to allow the
-	" yagpdbccIgnore group to match).
+    " Also, this consumes the opening braces (to prevent the yagpdbccExpr
+    " group from matching first), but not the closing braces (to allow the
+    " yagpdbccIgnore group to match).
 highlight default link yagpdbccComment Comment
 
 " Constants: String, Character, Number, Boolean, Float
@@ -93,9 +93,9 @@ syntax match yagpdbccError "\v>\$\w*"
     " Dollar signs directly after end-of-words, like if$myvar.
 syntax region yagpdbccExpr start=#\v\{\{#ms=e+1 end=#\v\}\}#me=s-1 contains=ALL
 syntax region yagpdbccNestedBraces start=#\v\{\{# end=#\v\}\}# contained
-	" This region only matches inside of the Expr region, ensuring we don't
-	" interfere with other groups, or get false matches on things like
-	" {{"{{"}}.
+    " This region only matches inside of the Expr region, ensuring we don't
+    " interfere with other groups, or get false matches on things like
+    " {{"{{"}}.
 highlight default link yagpdbccError Error
 highlight default link yagpdbccNestedBraces Error
 
