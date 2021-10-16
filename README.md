@@ -15,7 +15,7 @@ Pathogen is more of a runtime path manager than a plugin manager. You must clone
 
 1. In the terminal,
     ```bash
-    git clone https://github.com/preservim/nerdtree.git ~/.vim/bundle/nerdtree
+    git clone https://github.com/l-zeuch/yagpdb-cc-vim.git ~/.vim/bundle/yagpdb-cc-vim
     ```
 1. In your `vimrc`,
     ```vim
@@ -23,7 +23,6 @@ Pathogen is more of a runtime path manager than a plugin manager. You must clone
     syntax on
     filetype plugin indent on
     ```
-1. Restart Vim, and run `:helptags ~/.vim/bundle/nerdtree/doc/` or `:Helptags`.
 </details>
 
 <details>
@@ -33,7 +32,7 @@ Pathogen is more of a runtime path manager than a plugin manager. You must clone
 1. Add the following text to your `vimrc`.
     ```vim
     call vundle#begin()
-      Plugin 'preservim/nerdtree'
+      Plugin 'l-zeuch/yagpdb-cc-vim'
     call vundle#end()
     ```
 1. Restart Vim, and run the `:PluginInstall` statement to install your plugins.
@@ -46,7 +45,7 @@ Pathogen is more of a runtime path manager than a plugin manager. You must clone
 1. Add the following text to your `vimrc`.
 ```vim
 call plug#begin()
-  Plug 'preservim/nerdtree'
+  Plug 'l-zeuch/yagpdb-cc-vim'
 call plug#end()
 ```
 1. Restart Vim, and run the `:PlugInstall` statement to install your plugins.
@@ -59,21 +58,10 @@ call plug#end()
 1. Add the following text to your `vimrc`.
     ```vim
     call dein#begin()
-      call dein#add('preservim/nerdtree')
+      call dein#add('l-zeuch/yagpdb-cc-vim')
     call dein#end()
     ```
 1. Restart Vim, and run the `:call dein#install()` statement to install your plugins.
-</details>
-
-<details>
-<summary>Vim 8+ packages</summary>
-
-If you are using Vim version 8 or higher you can use its built-in package management; see `:help packages` for more information. Just run these commands in your terminal:
-
-```bash
-git clone https://github.com/preservim/nerdtree.git ~/.vim/pack/vendor/start/nerdtree
-vim -u NONE -c "helptags ~/.vim/pack/vendor/start/nerdtree/doc" -c q
-```
 </details>
 
 ## Other Contributions
