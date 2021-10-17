@@ -117,7 +117,7 @@ highlight default link yagpdbccError Error
 highlight default link yagpdbccNestedBraces Error
 
 " Todo
-syntax match yagpdbccTodo "\v<%(TODO|FIXME|XXX)>" contained
+syntax match yagpdbccTodo "\v<%(TODO|FIXME|HACK|XXX)>" contained
 highlight default link yagpdbccTodo Todo
 
 
