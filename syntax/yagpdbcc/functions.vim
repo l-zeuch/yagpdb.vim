@@ -57,8 +57,7 @@ syntax keyword yagpdbccFunction editNickname
     " Miscellaneous
 syntax keyword yagpdbccFunction getMember userArg
 syntax keyword yagpdbccFunction onlineCount onlineCountBots
-syntax keyword yagpdbccFunction adjective noun cembed
-syntax keyword yagpdbccFunction slice cslice dict sdict index
+syntax keyword yagpdbccFunction adjective noun index slice
 syntax keyword yagpdbccFunction exec execAdmin
 syntax keyword yagpdbccFunction hasPrefix hasSuffix
 syntax keyword yagpdbccFunction humanizeThousands

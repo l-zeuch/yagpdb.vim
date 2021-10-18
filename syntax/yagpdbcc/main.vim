@@ -81,6 +81,7 @@ highlight default link yagpdbccOperator Operator
 highlight default link yagpdbccKeyword Keyword
 
 " Type
+syntax keyword yagpdbccType cslice dict sdict cembed
 syntax match yagpdbccDot "\v%(\{\{|\s)\."ms=e
     " Order is key here. If you do the dot later, it takes priority over the
     " generic field and top-level object syntaxes, breaking them.
@@ -89,6 +90,7 @@ syntax match yagpdbccField "\v>\)?\zs\.[[:alnum:]\_]+" nextgroup=yagpdbccField
     " We use \zs here to start the match region, because we can't use a
     " constant offset from either end to do so.
 highlight default link yagpdbccDot Type
+highlight default link yagpdbccType Type
 highlight default link yagpdbccObject Type
 highlight default link yagpdbccField Type
 
