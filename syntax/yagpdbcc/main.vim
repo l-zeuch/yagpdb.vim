@@ -69,14 +69,15 @@ highlight default link yagpdbccIdentifier Identifier
 syntax keyword yagpdbccConditional if else
 syntax keyword yagpdbccRepeat range with
 syntax keyword yagpdbccLabel define template block
-syntax keyword yagpdbccOperator not and or ne eq lt le gt ge
-syntax keyword yagpdbccOperator add sub mult div fdiv log mod pow sqrt
+syntax keyword yagpdbccFunction not and or ne eq lt le gt ge
+syntax keyword yagpdbccFunction add sub mult div fdiv log mod pow sqrt
 syntax match yagpdbccOperator "\v\:\="
 syntax match yagpdbccOperator "\v\="
 syntax keyword yagpdbccKeyword nil end
 highlight default link yagpdbccConditional Conditional
 highlight default link yagpdbccRepeat Repeat
 highlight default link yagpdbccLabel Label
+highlight default link yagpdbccFunction Function
 highlight default link yagpdbccOperator Operator
 highlight default link yagpdbccKeyword Keyword
 
