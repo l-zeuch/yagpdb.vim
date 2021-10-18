@@ -76,7 +76,7 @@ syntax keyword yagpdbccFunction createTicket
 syntax keyword yagpdbccFunction dbBottomEntries dbTopEntries
 syntax keyword yagpdbccFunction dbDel dbDelByID dbDelMultiple
 syntax keyword yagpdbccFunction dbGet dbGetPattern dbGetPatternReverse
-syntax keyword yagpdbccFunction dbCount dbIncr dbRank dbSetExpire
+syntax keyword yagpdbccFunction dbCount dbIncr dbRank dbSetExpire dbSet
     " Finalization
 highlight default link yagpdbccFunction Function
 
