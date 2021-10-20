@@ -44,19 +44,19 @@ Often, developers find coding problems themselves while preparing a minimal repr
 
 Unfortunately, we are not able to investigate / fix bugs without a minimal reproduction, so if we don't hear back from you, we are going to close an issue that doesn't have enough info to be reproduced.
 
-You can file new issues by selecting from our [new issue templates](https://github.com/l-zeuch/yagpdb.nvim/issues/new/choose) and filling out the issue template.
+You can file new issues by selecting from our [new issue templates](https://github.com/l-zeuch/yagpdb.vim/issues/new/choose) and filling out the issue template.
 
 ### <a name="submit-pr"></a> Submitting a Pull Request (PR)
 
 Before you submit your Pull Request, follow these steps:
 
-1. Search [GitHub](https://github.com/l-zeuch/yagpdb.nvim/pulls) for an open or closed PR that relates to your submission.
+1. Search [GitHub](https://github.com/l-zeuch/yagpdb.vim/pulls) for an open or closed PR that relates to your submission.
    You wouldn't want to duplicate existing efforts.
 
 2. Be sure that an issue describes the problem you're fixing, or documents the design for the feature you're adding.
    Discussing the design upfront helps to ensure that we're ready to accept your work.
 
-3. [Fork](https://github.com/l-zeuch/yagpdb.nvim/fork) and then clone your fork.
+3. [Fork](https://github.com/l-zeuch/yagpdb.vim/fork) and then clone your fork.
 
 4. Load in the clone of your fork via the pluigin loader of your choice.
 
