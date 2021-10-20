@@ -15,7 +15,7 @@ Pathogen is more of a runtime path manager than a plugin manager. You must clone
 
 1. In the terminal,
     ```bash
-    git clone https://github.com/l-zeuch/yagpdb-cc-vim.git ~/.vim/bundle/yagpdb-cc-vim
+    git clone https://github.com/l-zeuch/yagpdb.nvim.git ~/.vim/bundle/yagpdb.nvim
     ```
 1. In your `vimrc`,
     ```vim
@@ -32,7 +32,7 @@ Pathogen is more of a runtime path manager than a plugin manager. You must clone
 1. Add the following text to your `vimrc`.
     ```vim
     call vundle#begin()
-      Plugin 'l-zeuch/yagpdb-cc-vim'
+      Plugin 'l-zeuch/yagpdb.nvim'
     call vundle#end()
     ```
 1. Restart Vim, and run the `:PluginInstall` statement to install your plugins.
@@ -45,7 +45,7 @@ Pathogen is more of a runtime path manager than a plugin manager. You must clone
 1. Add the following text to your `vimrc`.
 ```vim
 call plug#begin()
-  Plug 'l-zeuch/yagpdb-cc-vim'
+  Plug 'l-zeuch/yagpdb.nvim'
 call plug#end()
 ```
 1. Restart Vim, and run the `:PlugInstall` statement to install your plugins.
@@ -58,7 +58,7 @@ call plug#end()
 1. Add the following text to your `vimrc`.
     ```vim
     call dein#begin()
-      call dein#add('l-zeuch/yagpdb-cc-vim')
+      call dein#add('l-zeuch/yagpdb.nvim')
     call dein#end()
     ```
 1. Restart Vim, and run the `:call dein#install()` statement to install your plugins.
