@@ -64,10 +64,34 @@ call plug#end()
 1. Restart Vim, and run the `:call dein#install()` statement to install your plugins.
 </details>
 
-## Other Contributions
+## Documentation
+
+Currently, this plugin does not implement features which need documentation, as it is solely a syntax highlighting plugin. If this changes in the future, documentation will be provided in this repository's wiki.
+
+For documentation on YAGPDB's template language please refer to their documentation found at <https://docs.yagpdb.xyz>.
+
+## Contributing
+
+If you spot an error, or want to contribute new features, feel free open a pull request! Please refer to [CONTRIBUTING](CONTRIBUTING.md) for our guidelines on how to contribute.
+
+### Other Contributions
 
 Some of the regex in this plugin was developed by [@DZ-TM](https://github.com/DZ-TM). If you like it, feel free to give him cookies as a reward.
 
-## License
+## Legal Mumbo Jumbo
 
-This project is licensed under the terms of the GPL-2.0.
+### Disclaimer
+
+1) The YAGPDB developers, staff, and/or suport are not responsible for any difficulties caused by this plugin.
+
+2) This plugin is provided as-is, without the intention to cause offense of any kind.
+
+3) YAGPDB is a service provided by [botlabs](https://botlabs.gg) and is in no way associated with this plugin.
+
+4) The developers of this plugin have been granted permission to use the brand name YAGPDB in this plugin. Please view the [permission](permission.md) for details.
+
+### License
+
+This project is licensed under the terms of the GNU General Public License, version 2.0 (SPDX-Identifier GPL-2.0). Please refer to the [LICENSE](LICENSE.md) file for more details.
+
+
