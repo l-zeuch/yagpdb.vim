@@ -82,7 +82,6 @@ highlight default link yagpdbccOperator Operator
 highlight default link yagpdbccKeyword Keyword
 
 " Type
-syntax keyword yagpdbccType cslice dict sdict cembed
 syntax match yagpdbccDot "\v%(\{\{|\s)\."ms=e
     " Order is key here. If you do the dot later, it takes priority over the
     " generic field and top-level object syntaxes, breaking them.

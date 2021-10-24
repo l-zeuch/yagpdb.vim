@@ -55,6 +55,7 @@ syntax keyword yagpdbccFunction targetHasRoleID targetHasRoleName
 syntax keyword yagpdbccFunction currentUserCreated currentUserAgeHuman currentUserAgeMinutes
 syntax keyword yagpdbccFunction editNickname
     " Miscellaneous
+syntax keyword yagpdbccFunction cslice dict sdict cembed
 syntax keyword yagpdbccFunction getMember userArg
 syntax keyword yagpdbccFunction onlineCount onlineCountBots
 syntax keyword yagpdbccFunction adjective noun index slice
