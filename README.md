@@ -88,7 +88,7 @@ Some of the regex in this plugin was developed by [@DZ-TM](https://github.com/DZ
 
 3) YAGPDB is a service provided by [botlabs](https://botlabs.gg) and is in no way associated with this plugin.
 
-4) The developers of this plugin have been granted permission to use the brand name YAGPDB in this plugin. Please view the [permission](permission.md) for details.
+4) The developers of this plugin have been granted permission to use the brand name YAGPDB in this plugin. Please view the [permission](permission.md) file for details.
 
 ### License
 
