@@ -9,7 +9,7 @@ Thank you for considering a contribution to the yagpdb-cc plugin for Vim. To get
 
 ## <a name="coc"></a> Code of Conduct
 
-By participating within this project and its repositories, you agree to abide by our [Code of Conduct](.github/CODE_OF_CONDUCT.md)
+By participating within this project and its repositories, you agree to abide by our [Code of Conduct](.github/CODE_OF_CONDUCT.md).
 
 ## <a name="question"></a> Got a Question?
 
@@ -27,7 +27,7 @@ You can request a new feature by [submitting an issue](#submit-issue) to the iss
 
 * For a major impact affecting multiple files, adding wholly new topics and sections to the documentation, etc., please open an issue first, outlining your proposal so that it can be discussed. This allows us to better coordinate our resources around your proposal and help you in crafting your contribution.
 
-* Small features can be put together and directly [sumitted as a Pull Request](#submit-pr).
+* Small features can be put together and directly [submitted as a Pull Request](#submit-pr).
 
 ## <a name="submit"></a> Submission Guidelines
 
