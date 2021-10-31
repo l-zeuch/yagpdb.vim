@@ -43,11 +43,21 @@ function! s:NextSection(type, backwards, visual)
     execute 'silent normal! ' . dir . pattern . dir . flags . "\r"
 endfunction
 
-noremap <script> <buffer> <silent> ]] :call <SID>NextSection(1, 0, 0)<cr>
-noremap <script> <buffer> <silent> [[ :call <SID>NextSection(1, 1, 0)<cr>
-noremap <script> <buffer> <silent> ][ :call <SID>NextSection(2, 0, 0)<cr>
-noremap <script> <buffer> <silent> [] :call <SID>NextSection(2, 1, 0)<cr>
+noremap  <script> <buffer> <silent> ]] :call      <SID>NextSection(1, 0, 0)<cr>
+noremap  <script> <buffer> <silent> [[ :call      <SID>NextSection(1, 1, 0)<cr>
+noremap  <script> <buffer> <silent> ][ :call      <SID>NextSection(2, 0, 0)<cr>
+noremap  <script> <buffer> <silent> [] :call      <SID>NextSection(2, 1, 0)<cr>
 vnoremap <script> <buffer> <silent> ]] :<c-u>call <SID>NextSection(1, 0, 1)<cr>
 vnoremap <script> <buffer> <silent> [[ :<c-u>call <SID>NextSection(1, 1, 1)<cr>
 vnoremap <script> <buffer> <silent> ][ :<c-u>call <SID>NextSection(2, 0, 1)<cr>
 vnoremap <script> <buffer> <silent> [] :<c-u>call <SID>NextSection(2, 1, 1)<cr>
+
+" Quick function and command to copy the whole file to the system clipboard
+function! YagCopy()
+    if has('clipboard')
+        execute '%y *'
+    else
+        echo "Your vim doesn't appear to have clipboard support."
+    endif
+endfunction
+command! YagCopy :call YagCopy()
