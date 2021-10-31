@@ -85,14 +85,22 @@ highlight default link yagpdbccKeyword Keyword
 syntax match yagpdbccDot "\v%(\{\{|\s)\."ms=e
     " Order is key here. If you do the dot later, it takes priority over the
     " generic field and top-level object syntaxes, breaking them.
-syntax match yagpdbccObject "\v>@!\.[[:alnum:]\_]+" nextgroup=yagpdbccField
-syntax match yagpdbccField "\v>\)?\zs\.[[:alnum:]\_]+" nextgroup=yagpdbccField
-    " We use \zs here to start the match region, because we can't use a
-    " constant offset from either end to do so.
+syntax match yagpdbccObject "\v[\$\)]@<!>@<!\.[[:alnum:]\_]+"
+    " Regex Explanation:
+    " - [\$\)]@<!  Negative lookbehind for the character class given (literal
+    "   dollar sign or closing parenthesis). Any expression that directly
+    "   follows these, even if it starts with a dot, is not a top-level
+    "   object.
+    " - >@<!  Negative lookbehind for the right edge of a word (i.e.
+    "   end-of-word). Any expression directly following one of these is a
+    "   second-level (or deeper) field of an object, which we don't highlight.
+    " - \.[[:alnum:]\_]+  Normal match expression, searching for a dot
+    "   followed by one or more alphanumeric characters or an underscore. This
+    "   is the actual text of the object -- e.g. `.User` (an object provided
+    "   by the YAGPDB custom command system).
 highlight default link yagpdbccDot Type
 highlight default link yagpdbccType Type
 highlight default link yagpdbccObject Type
-highlight default link yagpdbccField Type
 
 " Special
 syntax match yagpdbccEscaped "\v\\[nt\"\\]" contained
