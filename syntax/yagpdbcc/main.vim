@@ -85,7 +85,7 @@ highlight default link yagpdbccKeyword Keyword
 syntax match yagpdbccDot "\v%(\{\{|\s)\."ms=e
     " Order is key here. If you do the dot later, it takes priority over the
     " generic field and top-level object syntaxes, breaking them.
-syntax match yagpdbccObject "\v[\$\)]@<!>@<!\.[[:alnum:]\_]+"
+syntax match yagpdbccObject "\v%(>|[\$\)])@<!\.[[:alnum:]\_]+"
     " Regex Explanation:
     " - [\$\)]@<!  Negative lookbehind for the character class given (literal
     "   dollar sign or closing parenthesis). Any expression that directly
