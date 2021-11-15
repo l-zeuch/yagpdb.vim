@@ -33,7 +33,7 @@ You can request a new feature by [submitting an issue](#submit-issue) to the iss
 
 ### <a name="submit-issue"></a> Submitting an Issue
 
-Before you submit a new issue, please search the issue tracker, maybe an issue relating to your problem already exists and the discussion might inform you of fixes readily available.
+Before you submit a new issue, please search the issue tracker, maybe an issue relating to your problem already exists, and the discussion might inform you of fixes readily available.
 
 We want to fix all the issues as soon as possible, but before fixing a bug we need to reproduce and confirm it.
 In order to reproduce bugs, we require that you provide a minimal reproduction.
@@ -58,7 +58,7 @@ Before you submit your Pull Request, follow these steps:
 
 3. [Fork](https://github.com/l-zeuch/yagpdb.vim/fork) and then clone your fork.
 
-4. Load in the clone of your fork via the pluigin loader of your choice.
+4. Load in the clone of your fork via the plugin loader of your choice.
 
 5. In your cloned repository, make your changes in a new branch:
 
@@ -82,7 +82,7 @@ Before you submit your Pull Request, follow these steps:
 
 ### Reviewing a Pull Request
 
-We reserve the right not to accept pull requests from community members who hane't been good citizens of the community; such behaviour includes not following the [Code of Conduct](.github/CODE_OF_CONDUCT.md) and applies within or outside of this project's scope.
+We reserve the right not to accept pull requests from community members who haven't been good citizens of the community; such behaviour includes not following the [Code of Conduct](.github/CODE_OF_CONDUCT.md) and applies within or outside this project's scope.
 
 #### Addressing review feedback
 
@@ -128,12 +128,12 @@ The `footer` is optional. The [commit footer](#commit-footer) format describes w
    |           └─> Summary in present tense. Not capitalized. No period at the end.
    |
    └─> Commit Scope: Where did this commit happen?
-         e.g. docs, syntax, folding, keybinds, github, legal,...
+         e.g. docs, syntax, folding, keybinds, github, legal, ...
 ```
 
 ##### Scope
 
-The scope should be descriptive. If your commit would contain multiple scopes, split them up appropriately and consider individual pull requests should they not depend on each other.
+The scope should be descriptive. If your commit contained multiple scopes, split them up appropriately and consider individual pull requests should they not depend on each other.
 
 ##### Summary
 
