@@ -18,6 +18,10 @@
 " 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 " commonly used extesions are: .go.tmpl .gotmpl .yag .yagpdb .yagcc .yagpdbcc
-autocmd BufNewFile,BufRead *.go.tmpl,*.gotmpl setfiletype yagpdbcc
-autocmd BufNewFile,BufRead *.yag,*.yagpdb,*.yagcc setfiletype yagpdbcc
-autocmd BufNewFile,BufRead *.yag-cc,*.yagpdbcc,*.yagpdb-cc setfiletype yagpdbcc
+augroup yagpdbcc_set_ft
+    autocmd!
+    autocmd BufNewFile,BufRead
+                \ *.go.tmpl,*.gotmpl,*.yag,*.yagpdb,
+                \*.yagcc,*.yag-cc,*.yagpdbcc,*.yagpdb-cc
+                \ setfiletype yagpdbcc
+augroup end
