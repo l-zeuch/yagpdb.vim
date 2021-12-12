@@ -1,3 +1,4 @@
+---
 name: CI
 
 on:
@@ -7,26 +8,16 @@ on:
   pull_request:
     branches:
       - master
-  workflow_dispatch:
 
 jobs:
-  vim:
-    runs-on: ubuntu-20.04
-    name: Vim CI
+  test:
+    runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
-      - name: Checkout vim-themis
-        uses: actions/checkout@v2
-        with:
-          repository: thinca/vim-themis
-          path: vim-themis
-
-      - name: Setup Vim
-        id: vim
-        uses: rhysd/action-setup-vim@v1.2.7
-      - name: Run unit tests
-        env:
-          THEMIS_VIM: ${{ steps.vim.outputs.executable }}
+        uses: actions/checkout/@v2
+      - name: Install Vim
         run: |
-          ./vim-themis/bin/themis ./test
+          sudo apt install vim
+      - name: Run tests
+        run: make test
