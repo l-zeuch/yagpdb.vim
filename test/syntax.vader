@@ -1,0 +1,177 @@
+# Test case file for syntax matching
+# vim: set ft=vader
+
+# Copyright (C) 2021    Lucas Ritzdorf, Luca Zeuch
+
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License along
+# with this program; if not, write to the Free Software Foundation, Inc.,
+# 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+# Language: YAGPDB Custom Commands
+# Maintainer: Luca Zeuch <l-zeuch@email.de>,
+#   LRitzdorf <42657792+LRitzdorf@users.noreply.github.com>
+
+
+# Available syntax functions are:
+#   SyntaxAt(): current cursor position
+#   SyntaxAt(col): current cursor line, at given column
+#   SyntaxAt(lnum, col): line and column
+#   SyntaxOf(pattern[, nth=1]): return a string with the name of the syntax
+#     group at the first character of the nth match of the given pattern. Return
+#     '' if there was no match.
+# Our syntax groups are named based on the built-in group names, prefixed with
+# "yagpdbcc" - for example, "yagpdbccFunction".
+
+Before:
+  source ../syntax/yagpdbcc/main.vim
+  source ../syntax/yagpdbcc/functions.vim
+
+After:
+  Restore
+
+Given (code with comments):
+  {{-   /*Initial $comment.test.asdf*/}}
+  Normal text here
+  {{/* How about {{ braces in }} comments? Looks good! */}}
+  {{/* TODO: Here's a thing! */}}
+  TODO: Testing, this shouldn't highlight
+  {{/* FIXME: Just kidding! We're all good */}}
+  $asdf.abcd{{/*
+      Multiple lines
+      Here's a neat comment!
+      More lines
+  */ -}}
+  {{ print "This isn't valid syntax in the first place" /* asdf */}}
+
+Execute (syntax check):
+# Opening brace
+  AssertEqual 'yagpdbccComment', SyntaxAt(1, 7)
+# Closing brace and following line
+  AssertEqual '', SyntaxAt(1, 37)
+  AssertEqual '', SyntaxAt(2, 1)
+# Ensure text inside and after the extra braces is still a comment
+  AssertEqual 'yagpdbccComment', SyntaxAt(3, 19)
+  AssertEqual 'yagpdbccComment', SyntaxAt(3, 32)
+# TODOs and FIXMEs, but only inside comments
+  AssertEqual 'yagpdbccTodo', SyntaxAt(4, 6)
+  AssertEqual 'yagpdbccComment', SyntaxAt(4, 12)
+  AssertEqual '', SyntaxAt(5, 1)
+  AssertEqual 'yagpdbccTodo', SyntaxAt(6, 6)
+  AssertEqual 'yagpdbccComment', SyntaxAt(6, 13)
+# FIXME: This is wrong - the variable there shouldn't be caught, since it's in
+# a plain text area
+  AssertEqual 'yagpdbccIdentifier', SyntaxAt(7, 1)
+# Multiline comments
+  AssertEqual 'yagpdbccComment', SyntaxAt(7, 13)
+  AssertEqual 'yagpdbccComment', SyntaxAt(8, 1)
+  AssertEqual 'yagpdbccComment', SyntaxAt(10, 1)
+  AssertEqual 'yagpdbccComment', SyntaxAt(11, 2)
+  AssertEqual '', SyntaxAt(11, 5)
+# Don't match the invalid embedded comment syntax
+  AssertEqual 'yagpdbccExpr', SyntaxAt(12, 58)
+
+Given (normal code sample):
+  {{ $args := parseArgs 0 "Please run this command with a user (mention or ID), or without any arguemnts (in which case it will run on you)."
+      (carg "userid" "User to analyze") }}
+  {{ $member := 0 }} {{ $user := 0 }} range 5 "asdf" {{/* Comments, woo! */}}
+  {{ if $args.Get 0 }}
+      {{ $user = userArg ($args.Get 0) }}
+      {{ $member = getMember $user.ID }}
+  {{ else }}
+      {{ $user = .User }}
+      {{ $member = .Member }}
+  {{ end }}
+
+Execute (syntax check):
+# Validate syntax elements in the first and second lines
+  AssertEqual 'yagpdbccIdentifier', SyntaxAt(1, 4)
+  AssertEqual 'yagpdbccOperator', SyntaxAt(1, 10)
+  AssertEqual 'yagpdbccFunction', SyntaxAt(1, 13)
+  AssertEqual 'yagpdbccNumber', SyntaxAt(1, 23)
+  AssertEqual 'yagpdbccString', SyntaxAt(1, 27)
+  AssertEqual 'yagpdbccFunction', SyntaxAt(2, 6)
+  AssertEqual 'yagpdbccString', SyntaxAt(2, 11)
+  AssertEqual 'yagpdbccString', SyntaxAt(2, 20)
+  AssertEqual '', SyntaxAt(2, 39)
+# Validate the third line, with its non-standard format
+  AssertEqual 'yagpdbccIdentifier', SyntaxAt(3, 4)
+  AssertEqual 'yagpdbccIgnore', SyntaxAt(3, 19)
+  AssertEqual 'yagpdbccIgnore', SyntaxAt(3, 37)
+  AssertEqual 'yagpdbccIgnore', SyntaxAt(3, 43)
+  AssertEqual 'yagpdbccIgnore', SyntaxAt(3, 45)
+  AssertEqual 'yagpdbccComment', SyntaxAt(3, 57)
+# Check the new syntax elements in the following lines (no need to re-check
+# variable matching, for example - that's already been validated)
+# ifs and elses are part of the conditional group
+  AssertEqual 'yagpdbccConditional', SyntaxAt(4, 4)
+# The .Get method on line 5 isn't matched, so it's just part of a basic
+# expression region
+  AssertEqual 'yagpdbccFunction', SyntaxAt(5, 16)
+  AssertEqual 'yagpdbccExpr', SyntaxAt(5, 30)
+  AssertEqual 'yagpdbccFunction', SyntaxAt(6, 18)
+  AssertEqual 'yagpdbccConditional', SyntaxAt(7, 4)
+  AssertEqual 'yagpdbccOperator', SyntaxAt(8, 14)
+# Objects, like .User and .Member, are matched as types
+  AssertEqual 'yagpdbccObject', SyntaxAt(8, 16)
+  AssertEqual 'yagpdbccObject', SyntaxAt(9, 18)
+# end is just a general keyword
+  AssertEqual 'yagpdbccKeyword', SyntaxAt(10, 4)
+
+Given (code with errors):
+  {{ print "This is a common syntax mistake: " {{.User.Username}} }}
+  {{ print "This variable is invalid: " $abc$def.RandomAttribute }}
+  This {{"{{"}} is valid
+
+Execute (syntax check):
+# TODO (just pass for now)
+  AssertEqual 1, 1
+
+Given (a variety of syntax elements):
+  Even with weird variables, {{ print "like " $.Name }}, and the empty variable!
+  {{.Asdf.Append . }}
+  {{ $5_asdf := $ }}
+  {{- print "Hello\nWorld" . .Example. -}}
+  {{ joinStr "\"" "hello" "there" }}
+  {{ printf "My favorite number is %d" 0xA1 }}
+  {{ print "This example is " true }}
+  {{- printf `Long string with
+  line breaks and
+  formatting %d%%` 100 -}}
+  {{ add 1 -5e6 | mult (3e7i add 5E2) | printf "%s %d" ($args.Get 0).Username }}
+  {{.Message.Mentions.Asdf.Jkl}}
+  {{ $created := div $user.ID 4194304 | add 1420070400000 | mult 1000000 | toDuration | (newDate 1970 1 1 0 0 0).Add }}
+
+Execute (syntax check):
+# TODO (just pass for now)
+# Don't forget to check time functions and printf formatting
+  AssertEqual 1, 1
+
+Given (custom embed with lots of nested syntax elements):
+  {{ $embed := cembed
+      "title" (printf "User info: `%s`" $user.Username)
+      "description" "See below for details on this user."
+      "color" $color
+      "fields" (cslice
+          (sdict "name" "User ID" "value" (toString $user.ID) "inline" false)
+          (sdict "name" "Server nickname" "value" $nick "inline" false)
+          (sdict "name" "Server join info" "value" (printf "Joined on %s, %s ago" (formatTime $member.JoinedAt.Parse) (humanizeDurationHours (currentTime.Sub $member.JoinedAt.Parse))) "inline" false)
+      )
+      "thumbnail" (sdict "url" ($user.AvatarURL "256"))
+      "footer" (sdict "text" (printf "Account created %s, %s ago" (formatTime $created) (humanizeDurationHours (currentTime.Sub $created))))
+  }}
+  {{ sendMessage nil $embed }}
+
+Execute (syntax check):
+# TODO (just pass for now)
+  AssertEqual 1, 1
+

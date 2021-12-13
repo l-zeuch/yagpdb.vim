@@ -99,7 +99,6 @@ syntax match yagpdbccObject "\v%(>|[\$\)])@<!\.[[:alnum:]\_]+"
     "   is the actual text of the object -- e.g. `.User` (an object provided
     "   by the YAGPDB custom command system).
 highlight default link yagpdbccDot Type
-highlight default link yagpdbccType Type
 highlight default link yagpdbccObject Type
 
 " Special
