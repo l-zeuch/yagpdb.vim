@@ -1,9 +1,15 @@
 # All pull requests need to be reviewed by one of the maintainers.
 # Unless a later match is found, these two will be notified.
-*           @l-zeuch @LRitzdorf
+*						@l-zeuch @LRitzdorf
 
-# The general setup of this repository
-/.github/   @l-zeuch
+# Folding + Functions
+/ftplugin/				@LRitzdorf
 
-# Folding + Keybinds, etc.
-/ftplugin/  @LRitzdorf
+# CI / CD, etc.
+/.github/				@l-zeuch
+/Makefile				@l-zeuch
+
+# Test cases and test environment
+/test/clipboard.vader	@l-zeuch
+/test/syntax.vader		@LRitzdorf
+/test/vimrc				@l-zeuch
