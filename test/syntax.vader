@@ -55,9 +55,9 @@ Given (code with comments):
 
 Execute (syntax check):
 # Opening brace
-  AssertEqual 'yagpdbccComment', SyntaxAt(1, 7)
+  AssertEqual 'yagpdbccComment', SyntaxAt(1, 1)
 # Closing brace and following line
-  AssertEqual '', SyntaxAt(1, 37)
+  AssertEqual 'yagpdbccComment', SyntaxAt(1, 37)
   AssertEqual '', SyntaxAt(2, 1)
 # Ensure text inside and after the extra braces is still a comment
   AssertEqual 'yagpdbccComment', SyntaxAt(3, 19)
@@ -68,15 +68,14 @@ Execute (syntax check):
   AssertEqual '', SyntaxAt(5, 1)
   AssertEqual 'yagpdbccTodo', SyntaxAt(6, 6)
   AssertEqual 'yagpdbccComment', SyntaxAt(6, 13)
-# FIXME: This is wrong - the variable there shouldn't be caught, since it's in
 # a plain text area
-  AssertEqual 'yagpdbccIdentifier', SyntaxAt(7, 1)
+  AssertEqual '', SyntaxAt(7, 1)
 # Multiline comments
   AssertEqual 'yagpdbccComment', SyntaxAt(7, 13)
   AssertEqual 'yagpdbccComment', SyntaxAt(8, 1)
   AssertEqual 'yagpdbccComment', SyntaxAt(10, 1)
   AssertEqual 'yagpdbccComment', SyntaxAt(11, 2)
-  AssertEqual '', SyntaxAt(11, 5)
+  AssertEqual 'yagpdbccComment', SyntaxAt(11, 5)
 # Don't match the invalid embedded comment syntax
   AssertEqual 'yagpdbccExpr', SyntaxAt(12, 58)
 
@@ -105,10 +104,10 @@ Execute (syntax check):
   AssertEqual '', SyntaxAt(2, 39)
 # Validate the third line, with its non-standard format
   AssertEqual 'yagpdbccIdentifier', SyntaxAt(3, 4)
-  AssertEqual 'yagpdbccIgnore', SyntaxAt(3, 19)
-  AssertEqual 'yagpdbccIgnore', SyntaxAt(3, 37)
-  AssertEqual 'yagpdbccIgnore', SyntaxAt(3, 43)
-  AssertEqual 'yagpdbccIgnore', SyntaxAt(3, 45)
+  AssertEqual '', SyntaxAt(3, 19)
+  AssertEqual '', SyntaxAt(3, 37)
+  AssertEqual '', SyntaxAt(3, 43)
+  AssertEqual '', SyntaxAt(3, 45)
   AssertEqual 'yagpdbccComment', SyntaxAt(3, 57)
 # Check the new syntax elements in the following lines (no need to re-check
 # variable matching, for example - that's already been validated)

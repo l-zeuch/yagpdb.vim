@@ -29,51 +29,67 @@ endif
 " For category information, see :h group-name
 
 
+" Error
+syntax match yagpdbccError "\v>\$\w*" contained
+    " Dollar signs directly after end-of-words, like if$myvar.
+syntax region yagpdbccNestedBraces start=#\v\{\{# end=#\v\}\}# contained
+    " This region only matches inside of the Expr region, ensuring we don't
+    " interfere with other groups, or get false matches on things like
+    " {{"{{"}}.
+highlight default link yagpdbccError Error
+highlight default link yagpdbccNestedBraces Error
+
+" Expression
+syntax region yagpdbccExpr start=#\v\{\{#ms=e+1 end=#\v\}\}#me=s-1
+            \ contains=ALLBUT,yagpdbccComment,yagpdbccEscaped,yagpdbccFormat,
+            \ yagpdbccTodo
+    " Normal template expressions - where the real code is
+
 " Comment
-syntax region yagpdbccComment start=#\v\{\{%(- +)?\/\*#hs=e-1 end=#\v\*\/%( +-)?\}\}#me=s+1
+syntax region yagpdbccComment
+            \ start=#\v\{\{%(- +)?/\*# end=#\v\*/%( +-)?\}\}#
             \ contains=@Spell,yagpdbccTodo fold
     " Inline comments, like {{ print "Hello" /*asdf*/ }}, aren't handled,
     " although I don't think they're implemented yet in Yag either.
-    " Also, this consumes the opening braces (to prevent the yagpdbccExpr
-    " group from matching first), but not the closing braces (to allow the
-    " yagpdbccIgnore group to match).
 highlight default link yagpdbccComment Comment
 
 " Constants: String, Character, Number, Boolean, Float
 " String
-syntax region yagpdbccString start=#\v"# skip=#\v\\.# end=#\v"|$# contains=yagpdbccEscaped,yagpdbccFormat,@Spell
+syntax region yagpdbccString start=#\v"# skip=#\v\\.# end=#\v"|$#
+            \ contains=yagpdbccEscaped,yagpdbccFormat,@Spell contained
     " We stop strings at EOL. The Error catgeory will match there as well, to
     " draw further attention to the issue.
-syntax region yagpdbccString start=#\v`# end=#\v`# contains=yagpdbccFormat,@Spell fold
+syntax region yagpdbccString start=#\v`# end=#\v`#
+            \ contains=yagpdbccFormat,@Spell fold contained
     " Does *not* contain `yagpdbccEscaped`, since escapes aren't valid in
     " backtick blocks.
 highlight default link yagpdbccString String
 " Number
-syntax match yagpdbccNumber "\v[+-]?\d+%([eE]\d+)?i?"
-syntax match yagpdbccNumber "\v[+-]?0x[\dA-Fa-f]+"
+syntax match yagpdbccNumber "\v[+-]?\d+%([eE]\d+)?i?" contained
+syntax match yagpdbccNumber "\v[+-]?0x[\dA-Fa-f]+" contained
 highlight default link yagpdbccNumber Number
 " Float
-syntax match yagpdbccFloat "\v[+-]?\d+\.\d+%([eE]\d+)?i?"
+syntax match yagpdbccFloat "\v[+-]?\d+\.\d+%([eE]\d+)?i?" contained
 highlight default link yagpdbccFloat Float
 " Boolean
-syntax keyword yagpdbccBoolean true false
+syntax keyword yagpdbccBoolean true false contained
 highlight default link yagpdbccBoolean Boolean
 
 " Identifier: Function (functions include methods of classes)
-syntax match yagpdbccIdentifier "\v>@!\$[A-Za-z0-9_]*" nextgroup=yagpdbccField
+syntax match yagpdbccIdentifier "\v>@!\$[A-Za-z0-9_]*" contained
     " Match any variable
 highlight default link yagpdbccIdentifier Identifier
 
 " Statement: Conditional, Repeat, Label, Operator, Keyword, Exception
 " Keywords, as per <https://pkg.go.dev/text/template#hdr-Actions>
-syntax keyword yagpdbccConditional if else
-syntax keyword yagpdbccRepeat range with
-syntax keyword yagpdbccLabel define template block
-syntax keyword yagpdbccFunction not and or ne eq lt le gt ge
-syntax keyword yagpdbccFunction add sub mult div fdiv log mod pow sqrt
-syntax match yagpdbccOperator "\v\:\="
-syntax match yagpdbccOperator "\v\="
-syntax keyword yagpdbccKeyword nil end
+syntax keyword yagpdbccConditional if else contained
+syntax keyword yagpdbccRepeat range with contained
+syntax keyword yagpdbccLabel define template block contained
+syntax keyword yagpdbccFunction not and or ne eq lt le gt ge contained
+syntax keyword yagpdbccFunction add sub mult div fdiv log mod pow sqrt contained
+syntax match yagpdbccOperator "\v\:\=" contained
+syntax match yagpdbccOperator "\v\=" contained
+syntax keyword yagpdbccKeyword nil end contained
 highlight default link yagpdbccConditional Conditional
 highlight default link yagpdbccRepeat Repeat
 highlight default link yagpdbccLabel Label
@@ -82,10 +98,10 @@ highlight default link yagpdbccOperator Operator
 highlight default link yagpdbccKeyword Keyword
 
 " Type
-syntax match yagpdbccDot "\v%(\{\{|\s)\."ms=e
+syntax match yagpdbccDot "\v%(\{\{|\s)\."ms=e contained
     " Order is key here. If you do the dot later, it takes priority over the
     " generic field and top-level object syntaxes, breaking them.
-syntax match yagpdbccObject "\v%(>|[\$\)])@<!\.[[:alnum:]\_]+"
+syntax match yagpdbccObject "\v%(>|[\$\)])@<!\.[[:alnum:]\_]+" contained
     " Regex Explanation:
     " - [\$\)]@<!  Negative lookbehind for the character class given (literal
     "   dollar sign or closing parenthesis). Any expression that directly
@@ -107,23 +123,6 @@ highlight default link yagpdbccEscaped Special
 syntax match yagpdbccFormat "\v\%\d?[dfsu\%]" contained
     " This is *mostly* accurate, for now. Should probably be improved later.
 highlight default link yagpdbccFormat Special
-
-" Ignore
-syntax region yagpdbccIgnore start=#\v%^%(\{\{)@!# end=#\v\{\{#me=s-1 start=#\v\}\}#ms=e+1 end=#\v%$# contains=@Spell
-highlight default link yagpdbccIgnore Normal
-    " Instead of using the actual Ignore group, which is normally invisible,
-    " we just link to the Normal highlight.
-
-" Error
-syntax match yagpdbccError "\v>\$\w*"
-    " Dollar signs directly after end-of-words, like if$myvar.
-syntax region yagpdbccExpr start=#\v\{\{#ms=e+1 end=#\v\}\}#me=s-1 contains=ALL
-syntax region yagpdbccNestedBraces start=#\v\{\{# end=#\v\}\}# contained
-    " This region only matches inside of the Expr region, ensuring we don't
-    " interfere with other groups, or get false matches on things like
-    " {{"{{"}}.
-highlight default link yagpdbccError Error
-highlight default link yagpdbccNestedBraces Error
 
 " Todo
 syntax match yagpdbccTodo "\v<%(TODO|FIXME|HACK|XXX)>" contained
