@@ -1,5 +1,5 @@
 # Test case file for syntax matching
-# vim: set ft=vader
+# vim: set ft=vader expandtab tabstop=2 softtabstop=2 shiftwidth=2
 
 # Copyright (C) 2021    Lucas Ritzdorf, Luca Zeuch
 
