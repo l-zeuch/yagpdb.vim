@@ -74,6 +74,8 @@ For documentation on YAGPDB's template language please refer to their documentat
 
 If you spot an error, or want to contribute new features, feel free open a pull request! Please refer to [CONTRIBUTING](CONTRIBUTING.md) for our guidelines on how to contribute.
 
+We ask you to ensure tests are passing locally. As for the framework in use, please install [vader.vim](https://github.com/junegunn/vader.vim) and run the tests using `make test`.
+
 ### Other Contributions
 
 Some of the regex in this plugin was developed by [@DZ-TM](https://github.com/DZ-TM). If you like it, feel free to give him cookies as a reward.

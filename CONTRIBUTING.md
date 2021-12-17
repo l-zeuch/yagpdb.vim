@@ -68,17 +68,19 @@ Before you submit your Pull Request, follow these steps:
 
 6. Make your changes, including tests when appropriate.
 
-7. Follow the current coding style as close as possible. Simply take a look at other files and stick to their styling.
+7. Make sure the tests are still passing locally. We use [vader.vim](https:/github.com/junegunn/vader.vim) as our testing framework. Run the tests using `make test`.
 
-8. Commit your changes using a descriptive commit message following our [commit message conventions](#commit).
+8. Follow the current coding style as close as possible. Simply take a look at other files and stick to their styling.
 
-9. Push your branch to GitHub:
+9. Commit your changes using a descriptive commit message following our [commit message conventions](#commit).
+
+10. Push your branch to GitHub:
 
    ```shell
    git push origin my-branch
    ```
 
-10. On GitHub, send a pull request to `l-zeuch:master`.
+11. On GitHub, send a pull request to `l-zeuch:master`.
 
 ### Reviewing a Pull Request
 
