@@ -1,3 +1,5 @@
+.PHONY: clean
+
 test: .bundle/vader.vim
 	cd test && vim -EsNu vimrc --not-a-term -c 'Vader! * */*'
 
