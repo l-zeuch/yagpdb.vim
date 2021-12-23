@@ -56,26 +56,32 @@ Given (code with comments):
 Execute (syntax check):
 # Opening brace
   AssertEqual 'yagpdbccComment', SyntaxAt(1, 1)
+
 # Closing brace and following line
   AssertEqual 'yagpdbccComment', SyntaxAt(1, 37)
   AssertEqual '', SyntaxAt(2, 1)
+
 # Ensure text inside and after the extra braces is still a comment
   AssertEqual 'yagpdbccComment', SyntaxAt(3, 19)
   AssertEqual 'yagpdbccComment', SyntaxAt(3, 32)
+
 # TODOs and FIXMEs, but only inside comments
   AssertEqual 'yagpdbccTodo', SyntaxAt(4, 6)
   AssertEqual 'yagpdbccComment', SyntaxAt(4, 12)
   AssertEqual '', SyntaxAt(5, 1)
   AssertEqual 'yagpdbccTodo', SyntaxAt(6, 6)
   AssertEqual 'yagpdbccComment', SyntaxAt(6, 13)
+
 # a plain text area
   AssertEqual '', SyntaxAt(7, 1)
+
 # Multiline comments
   AssertEqual 'yagpdbccComment', SyntaxAt(7, 13)
   AssertEqual 'yagpdbccComment', SyntaxAt(8, 1)
   AssertEqual 'yagpdbccComment', SyntaxAt(10, 1)
   AssertEqual 'yagpdbccComment', SyntaxAt(11, 2)
   AssertEqual 'yagpdbccComment', SyntaxAt(11, 5)
+
 # Don't match the invalid embedded comment syntax
   AssertEqual 'yagpdbccExpr', SyntaxAt(12, 58)
 
@@ -90,6 +96,9 @@ Given (normal code sample):
       {{ $user = .User }}
       {{ $member = .Member }}
   {{ end }}
+  {{ $single_const := 'h' }}
+  {{ $escape_const := '\n' }}
+  {{ $single_quote := '"' }}
 
 Execute (syntax check):
 # Validate syntax elements in the first and second lines
@@ -99,9 +108,7 @@ Execute (syntax check):
   AssertEqual 'yagpdbccNumber', SyntaxAt(1, 23)
   AssertEqual 'yagpdbccString', SyntaxAt(1, 27)
   AssertEqual 'yagpdbccFunction', SyntaxAt(2, 6)
-  AssertEqual 'yagpdbccString', SyntaxAt(2, 11)
-  AssertEqual 'yagpdbccString', SyntaxAt(2, 20)
-  AssertEqual '', SyntaxAt(2, 39)
+
 # Validate the third line, with its non-standard format
   AssertEqual 'yagpdbccIdentifier', SyntaxAt(3, 4)
   AssertEqual '', SyntaxAt(3, 19)
@@ -109,10 +116,17 @@ Execute (syntax check):
   AssertEqual '', SyntaxAt(3, 43)
   AssertEqual '', SyntaxAt(3, 45)
   AssertEqual 'yagpdbccComment', SyntaxAt(3, 57)
+
+# Strings
+  AssertEqual 'yagpdbccString', SyntaxAt(2, 11)
+  AssertEqual 'yagpdbccString', SyntaxAt(2, 20)
+  AssertEqual '', SyntaxAt(2, 39)
+
 # Check the new syntax elements in the following lines (no need to re-check
 # variable matching, for example - that's already been validated)
 # ifs and elses are part of the conditional group
   AssertEqual 'yagpdbccConditional', SyntaxAt(4, 4)
+
 # The .Get method on line 5 isn't matched, so it's just part of a basic
 # expression region
   AssertEqual 'yagpdbccFunction', SyntaxAt(5, 16)
@@ -120,20 +134,59 @@ Execute (syntax check):
   AssertEqual 'yagpdbccFunction', SyntaxAt(6, 18)
   AssertEqual 'yagpdbccConditional', SyntaxAt(7, 4)
   AssertEqual 'yagpdbccOperator', SyntaxAt(8, 14)
+
 # Objects, like .User and .Member, are matched as types
   AssertEqual 'yagpdbccObject', SyntaxAt(8, 16)
   AssertEqual 'yagpdbccObject', SyntaxAt(9, 18)
+
 # end is just a general keyword
   AssertEqual 'yagpdbccKeyword', SyntaxAt(10, 4)
+
+# Single character constants
+  AssertEqual 'yagpdbccCharacter', SyntaxAt(11, 21)
+  AssertEqual 'yagpdbccCharacter', SyntaxAt(11, 22)
+  AssertEqual '', SyntaxAt(11, 26)
+
+# Escape character constant
+  AssertEqual 'yagpdbccCharacter', SyntaxAt(12, 21)
+  AssertEqual 'yagpdbccCharacter', SyntaxAt(12, 23)
+  AssertEqual '', SyntaxAt(12, 27)
+
+# This will be fun, '"' is really weird.
+  AssertEqual 'yagpdbccCharacter', SyntaxAt(13, 21)
+  AssertEqual 'yagpdbccCharacter', SyntaxAt(13, 22)
+  AssertEqual '', SyntaxAt(13, 26)
+
 
 Given (code with errors):
   {{ print "This is a common syntax mistake: " {{.User.Username}} }}
   {{ print "This variable is invalid: " $abc$def.RandomAttribute }}
   This {{"{{"}} is valid
+  {{ $invalid_const := 'hello' }}
+  {{ $funky_escape := '\n hmm' }}
 
 Execute (syntax check):
-# TODO (just pass for now)
-  AssertEqual 1, 1
+# The classic beginner syntax mistake
+  AssertEqual 'yagpdbccNestedBraces', SyntaxAt(1, 46)
+  AssertEqual '', SyntaxAt(1, 66)
+
+# Invalid Variable naming
+  AssertEqual 'yagpdbccError', SyntaxAt(2, 43)
+  AssertEqual '', SyntaxAt(2, 65)
+
+# Weird, but valid edge case
+  AssertEqual 'yagpdbccString', SyntaxAt(3, 9)
+  AssertEqual '', SyntaxAt(3, 22)
+
+# Invalid character constant
+  AssertEqual 'yagpdbccCharacterError', SyntaxAt(4, 22)
+  AssertEqual 'yagpdbccCharacterError', SyntaxAt(4, 23)
+  AssertEqual '', SyntaxAt(4, 31)
+
+# Strange character constant edge case (just why)
+  AssertEqual 'yagpdbccCharacterError', SyntaxAt(5, 21)
+  AssertEqual 'yagpdbccCharacterError', SyntaxAt(4, 27)
+  AssertEqual '', SyntaxAt(4, 31)
 
 Given (a variety of syntax elements):
   Even with weird variables, {{ print "like " $.Name }}, and the empty variable!

@@ -57,13 +57,20 @@ highlight default link yagpdbccComment Comment
 " String
 syntax region yagpdbccString start=#\v"# skip=#\v\\.# end=#\v"|$#
             \ contains=yagpdbccEscaped,yagpdbccFormat,@Spell contained
-    " We stop strings at EOL. The Error catgeory will match there as well, to
+    " We stop strings at EOL. The Error category will match there as well, to
     " draw further attention to the issue.
 syntax region yagpdbccString start=#\v`# end=#\v`#
             \ contains=yagpdbccFormat,@Spell fold contained
     " Does *not* contain `yagpdbccEscaped`, since escapes aren't valid in
     " backtick blocks.
 highlight default link yagpdbccString String
+syntax match yagpdbccCharacterError "\v'.{-}'" contained
+	" work like a catch-all match -- if a valid match is found below,
+	" that match will take precedence.
+highlight default link yagpdbccCharacterError Error
+syntax match yagpdbccCharacter "\v'%([^\\]|\\[abefnrtv\\'])'" contained
+	" Single Character constants - no need for @Spell, newlines are not allowed.
+highlight default link yagpdbccCharacter Character
 " Number
 syntax match yagpdbccNumber "\v[+-]?\d+%([eE]\d+)?i?" contained
 syntax match yagpdbccNumber "\v[+-]?0x[\dA-Fa-f]+" contained
