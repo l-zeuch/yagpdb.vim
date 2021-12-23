@@ -64,6 +64,10 @@ syntax region yagpdbccString start=#\v`# end=#\v`#
     " Does *not* contain `yagpdbccEscaped`, since escapes aren't valid in
     " backtick blocks.
 highlight default link yagpdbccString String
+syntax match yagpdbccCharacterError "\v'.{-}'" contained
+	" work like a catch-all match -- if a valid match is found below,
+	" that match will take precedence.
+highlight default link yagpdbccCharacterError Error
 syntax match yagpdbccCharacter "\v'%([^\\]|\\[abefnrtv\\'])'" contained
 	" Single Character constants - no need for @Spell, newlines are not allowed.
 highlight default link yagpdbccCharacter Character
