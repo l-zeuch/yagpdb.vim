@@ -23,66 +23,66 @@
 
 " Functions, defined by <https://docs.yagpdb.xyz/reference/templates#functions>
     " Type conversion
-syntax keyword yagpdbccFunction json structToSdict
-syntax keyword yagpdbccFunction toByte toDuration toFloat toInt toInt64 toRune toString
-syntax keyword yagpdbccFunction str
+syntax keyword yagpdbccFunction json structToSdict contained
+syntax keyword yagpdbccFunction toByte toDuration toFloat toInt toInt64 toRune toString contained
+syntax keyword yagpdbccFunction str contained
     " String manipulation
-syntax keyword yagpdbccFunction joinStr lower upper slice urlescape split title
-syntax keyword yagpdbccFunction reFind reFindAll reFindAllSubmatches reReplace reSplit
-syntax keyword yagpdbccFunction print printf println js html
+syntax keyword yagpdbccFunction joinStr lower upper slice urlescape split title contained
+syntax keyword yagpdbccFunction reFind reFindAll reFindAllSubmatches reReplace reSplit contained
+syntax keyword yagpdbccFunction print printf println js html contained
     " Math functions
-syntax keyword yagpdbccFunction randInt round roundCeil roundFloor roundEven
+syntax keyword yagpdbccFunction randInt round roundCeil roundFloor roundEven contained
     " Message functions
-syntax keyword yagpdbccFunction addMessageReactions addReactions addResponseReactions
-syntax keyword yagpdbccFunction deleteAllMessageReactions deleteMessageReaction
-syntax keyword yagpdbccFunction complexMessage complexMessageEdit
-syntax keyword yagpdbccFunction deleteMessage deleteResponse deleteTrigger
-syntax keyword yagpdbccFunction editMessage editMessageNoEscape
-syntax keyword yagpdbccFunction getMessage
-syntax keyword yagpdbccFunction sendDM sendMessage sendMessageNoEscape
-syntax keyword yagpdbccFunction sendMessageRetID sendMessageNoEscapeRetID
+syntax keyword yagpdbccFunction addMessageReactions addReactions addResponseReactions contained
+syntax keyword yagpdbccFunction deleteAllMessageReactions deleteMessageReaction contained
+syntax keyword yagpdbccFunction complexMessage complexMessageEdit contained
+syntax keyword yagpdbccFunction deleteMessage deleteResponse deleteTrigger contained
+syntax keyword yagpdbccFunction editMessage editMessageNoEscape contained
+syntax keyword yagpdbccFunction getMessage contained
+syntax keyword yagpdbccFunction sendDM sendMessage sendMessageNoEscape contained
+syntax keyword yagpdbccFunction sendMessageRetID sendMessageNoEscapeRetID contained
     " Channel
-syntax keyword yagpdbccFunction getChannel editChannelTopic editChannelName
+syntax keyword yagpdbccFunction getChannel editChannelTopic editChannelName contained
     " Mentions
-syntax keyword yagpdbccFunction mentionEveryone mentionHere mentionRoleName mentionRoleID
+syntax keyword yagpdbccFunction mentionEveryone mentionHere mentionRoleName mentionRoleID contained
     " Role functions
-syntax keyword yagpdbccFunction addRoleID addRoleName removeRoleID removeRoleName
-syntax keyword yagpdbccFunction giveRoleID giveRoleName takeRoleID takeRoleName
-syntax keyword yagpdbccFunction hasRoleID hasRoleName
-syntax keyword yagpdbccFunction getRole setRoles
-syntax keyword yagpdbccFunction targetHasRoleID targetHasRoleName
+syntax keyword yagpdbccFunction addRoleID addRoleName removeRoleID removeRoleName contained
+syntax keyword yagpdbccFunction giveRoleID giveRoleName takeRoleID takeRoleName contained
+syntax keyword yagpdbccFunction hasRoleID hasRoleName contained
+syntax keyword yagpdbccFunction getRole setRoles contained
+syntax keyword yagpdbccFunction targetHasRoleID targetHasRoleName contained
     " Current user
-syntax keyword yagpdbccFunction currentUserCreated currentUserAgeHuman currentUserAgeMinutes
-syntax keyword yagpdbccFunction editNickname
+syntax keyword yagpdbccFunction currentUserCreated currentUserAgeHuman currentUserAgeMinutes contained
+syntax keyword yagpdbccFunction editNickname contained
     " Miscellaneous
-syntax keyword yagpdbccFunction cslice dict sdict cembed
-syntax keyword yagpdbccFunction getMember userArg
-syntax keyword yagpdbccFunction onlineCount onlineCountBots
-syntax keyword yagpdbccFunction adjective noun index slice
-syntax keyword yagpdbccFunction exec execAdmin
-syntax keyword yagpdbccFunction hasPrefix hasSuffix
-syntax keyword yagpdbccFunction humanizeThousands
-syntax keyword yagpdbccFunction in inFold
-syntax keyword yagpdbccFunction kindOf len
-syntax keyword yagpdbccFunction parseArgs carg
-syntax keyword yagpdbccFunction sendTemplate senTemplateDM
-syntax keyword yagpdbccFunction seq sort shuffle
-syntax keyword yagpdbccFunction sleep call urlquery
+syntax keyword yagpdbccFunction cslice dict sdict cembed contained
+syntax keyword yagpdbccFunction getMember userArg contained
+syntax keyword yagpdbccFunction onlineCount onlineCountBots contained
+syntax keyword yagpdbccFunction adjective noun index slice contained
+syntax keyword yagpdbccFunction exec execAdmin contained
+syntax keyword yagpdbccFunction hasPrefix hasSuffix contained
+syntax keyword yagpdbccFunction humanizeThousands contained
+syntax keyword yagpdbccFunction in inFold contained
+syntax keyword yagpdbccFunction kindOf len contained
+syntax keyword yagpdbccFunction parseArgs carg contained
+syntax keyword yagpdbccFunction sendTemplate senTemplateDM contained
+syntax keyword yagpdbccFunction seq sort shuffle contained
+syntax keyword yagpdbccFunction sleep call urlquery contained
     " execCC funcs
-syntax keyword yagpdbccFunction execCC scheduleUniqueCC cancelScheduledUniqueCC
+syntax keyword yagpdbccFunction execCC scheduleUniqueCC cancelScheduledUniqueCC contained
     " Ticket funcs
-syntax keyword yagpdbccFunction createTicket
+syntax keyword yagpdbccFunction createTicket contained
     " Database
-syntax keyword yagpdbccFunction dbBottomEntries dbTopEntries
-syntax keyword yagpdbccFunction dbDel dbDelByID dbDelMultiple
-syntax keyword yagpdbccFunction dbGet dbGetPattern dbGetPatternReverse
-syntax keyword yagpdbccFunction dbCount dbIncr dbRank dbSetExpire dbSet
+syntax keyword yagpdbccFunction dbBottomEntries dbTopEntries contained
+syntax keyword yagpdbccFunction dbDel dbDelByID dbDelMultiple contained
+syntax keyword yagpdbccFunction dbGet dbGetPattern dbGetPatternReverse contained
+syntax keyword yagpdbccFunction dbCount dbIncr dbRank dbSetExpire dbSet contained
     " Finalization
 highlight default link yagpdbccFunction Function
 
 " Time functions, defined by <https://docs.yagpdb.xyz/reference/templates#time>
-syntax keyword yagpdbccTime currentTime formatTime newDate
-syntax keyword yagpdbccTime humanizeDurationHours humanizeDurationMinutes humanizeDurationSeconds
-syntax keyword yagpdbccTime humanizeTimeSinceDays
+syntax keyword yagpdbccTime currentTime formatTime newDate contained
+syntax keyword yagpdbccTime humanizeDurationHours humanizeDurationMinutes humanizeDurationSeconds contained
+syntax keyword yagpdbccTime humanizeTimeSinceDays contained
     " Finalization
 highlight default link yagpdbccTime Function
