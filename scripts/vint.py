@@ -75,6 +75,8 @@ def process_output(output):
         print("Failed loading JSON...")
 
 def generate_github_output(issues):
+    fail =  False
+
     for issue in issues:
         level = issue.get('severity')
         message = f"{issue.get('description')}. See {issue.get('reference')}."
@@ -84,14 +86,16 @@ def generate_github_output(issues):
 
         if level == "error":
             print(f"::error file={path},line={line},col={column}::{message}")
+            fail = True
 
         if level == "warning":
             print(f"::warning file={path},line={line},col={column}::{message}")
+            fail = True
 
         if level == "style_problem":
             print(f"::notice file={path},line={line},col={column}::{message}")
 
-    if issues != None:
+    if fail:
         sys.exit(1)
 
 compile()
