@@ -67,29 +67,31 @@ def process_output(output):
     try:
         issues = json.loads(output)
 
-        for issue in issues:
-            print(generate_github_output(issue))
+        generate_github_output(issues)
 
     except AttributeError:
         print("Failed loading JSON...")
     except ValueError:
         print("Failed loading JSON...")
 
-def generate_github_output(issue):
-    level = issue.get('severity')
-    message = f"{issue.get('description')}. See {issue.get('reference')}."
-    path = issue.get('file_path')
-    line = issue.get('line_number')
-    column = issue.get('column_number')
+def generate_github_output(issues):
+    for issue in issues:
+        level = issue.get('severity')
+        message = f"{issue.get('description')}. See {issue.get('reference')}."
+        path = issue.get('file_path')
+        line = issue.get('line_number')
+        column = issue.get('column_number')
 
+        if level == "error":
+            print(f"::error file={path},line={line},col={column}::{message}")
 
-    if level == ("error"):
-        return f"::error file={path},line={line},col={column}::{message}"
+        if level == "warning":
+            print(f"::warning file={path},line={line},col={column}::{message}")
 
-    if level == ("warning"):
-        return f"::warning file={path},line={line},col={column}::{message}"
+        if level == "style_problem":
+            print(f"::notice file={path},line={line},col={column}::{message}")
 
-    if level == ("style_problem"):
-        return f"::notice file={path},line={line},col={column}::{message}"
+    if issues != None:
+        sys.exit(1)
 
 compile()
