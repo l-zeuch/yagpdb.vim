@@ -23,20 +23,35 @@ import sys
 # Generate our vint command and fail if the executable is not found.
 def generate_command():
     exe = shutil.which("vint")
-    args = [
-        exe,
-        "--json",
-        "."
-        ]
 
-    if exe == None:
+    if not exe:
         print("No vint executable found. Install it with pip install vim-vint.")
         sys.exit(1)
 
-    return ' '.join(args)
+    return f"{exe} --json ."
+
+def generate_github_output(issues):
+    # Map Vint's levels to GitHub's message levels.
+    LEVEL_MAPPING = {"error": "error", "warning": "warning", "style_problem": "notice"}
+
+    for issue in issues:
+        level = issue.get('severity')
+        message = f"{issue.get('description')}. See {issue.get('reference')}."
+        path = issue.get('file_path')
+        line = issue.get('line_number')
+        column = issue.get('column_number')
+
+        if level in LEVEL_MAPPING:
+            print(f"::{LEVEL_MAPPING[level]} file={path},line={line},col={column}::{message}")
+
+        else:
+            print(f"--- INFO: Unknown level {level}")
+
+    if issues:
+        sys.exit(1)
 
 # Run our generated command and give back our output.
-def exec():
+def get_vint_output():
     command = generate_command()
     print("--- COMMAND: ", command)
 
@@ -54,48 +69,23 @@ def exec():
         print("Unexpected error:", sys.exc_info()[0])
         return None
 
-def compile():
-    output = exec()
-
-    if output == None:
-        print("No violations found.")
-        sys.exit(0)
-
-    process_output(output)
-
 def process_output(output):
     try:
         issues = json.loads(output)
 
         generate_github_output(issues)
 
-    except AttributeError:
-        print("Failed loading JSON...")
-    except ValueError:
+    except (AttributeError, ValueError):
         print("Failed loading JSON...")
 
-def generate_github_output(issues):
-    fail =  False
+def main():
+    output = get_vint_output()
 
-    for issue in issues:
-        level = issue.get('severity')
-        message = f"{issue.get('description')}. See {issue.get('reference')}."
-        path = issue.get('file_path')
-        line = issue.get('line_number')
-        column = issue.get('column_number')
+    if not output:
+        print("No violations found.")
+        sys.exit(0)
 
-        if level == "error":
-            print(f"::error file={path},line={line},col={column}::{message}")
-            fail = True
+    process_output(output)
 
-        if level == "warning":
-            print(f"::warning file={path},line={line},col={column}::{message}")
-            fail = True
-
-        if level == "style_problem":
-            print(f"::notice file={path},line={line},col={column}::{message}")
-
-    if fail:
-        sys.exit(1)
-
-compile()
+if __name__ == "__main__":
+    main()
