@@ -28,7 +28,7 @@ def generate_command():
         print("No vint executable found. Install it with pip install vim-vint.")
         sys.exit(1)
 
-    return f"{exe} --json ."
+    return [exe, "--json", "."]
 
 def generate_github_output(issues):
     # Map Vint's levels to GitHub's message levels.
@@ -56,7 +56,7 @@ def get_vint_output():
     print("--- COMMAND: ", command)
 
     try:
-        process = subprocess.Popen(command, stdout = subprocess.PIPE, shell=True)
+        process = subprocess.Popen(command, stdout = subprocess.PIPE)
         output = process.stdout.read()
         process.wait()
 
