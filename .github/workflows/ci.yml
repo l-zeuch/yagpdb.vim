@@ -48,10 +48,6 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - name: set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.6
       - name: Install vim-vint
         run: |
           python -m pip install --upgrade pip
