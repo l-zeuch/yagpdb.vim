@@ -27,20 +27,20 @@ function! s:NextSection(type, backwards, visual)
     endif
 
     if a:type == 1
-        let pattern = '\v%(\n\n^\S|%^)'
-        let flags = 'e'
+        let l:pattern = '\v%(\n\n^\S|%^)'
+        let l:flags = 'e'
     elseif a:type == 2
-        let pattern = '\v%(\n\n^\S|%$)'
-        let flags = ''
+        let l:pattern = '\v%(\n\n^\S|%$)'
+        let l:flags = ''
     endif
 
     if a:backwards
-        let dir = '?'
+        let l:dir = '?'
     else
-        let dir = '/'
+        let l:dir = '/'
     endif
 
-    execute 'silent normal! ' . dir . pattern . dir . flags . "\r"
+    execute 'silent normal! ' . l:dir . l:pattern . l:dir . l:flags . '\r'
 endfunction
 
 noremap  <script> <buffer> <silent> ]] :call      <SID>NextSection(1, 0, 0)<cr>
