@@ -56,9 +56,6 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install vim-vint
-      - name: Install Vim
-        run: |
-          sudo apt install vim
       - name: Checkout repository
         uses: actions/checkout@v2
       - name: run linter
