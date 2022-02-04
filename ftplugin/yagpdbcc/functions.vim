@@ -21,7 +21,13 @@ inoremap         {{  {{}}<left><left>
 inoremap <expr>  }}  strpart(getline('.'), col('.')-1, 2) == "}}" ? "\<right>\<right>" : "}}"
 
 " Make jumping between sections work nicely
+" TODO: This sequence of two vint commands shouldn't be necessary, but their
+" "next-line" syntax is broken. We'll update this when the PyPI version of
+" vint is updated to include their fix. The proper line is:
+" " vint: next-line -ProhibitUnusedVariable
+" vint: -ProhibitUnusedVariable
 function! s:NextSection(type, backwards, visual)
+" vint: +ProhibitUnusedVariable
     if a:visual
         normal! gv
     endif
