@@ -93,6 +93,7 @@ syntax keyword yagpdbccFunction snowflakeToTime weekNumber contained
 " Type conversion
 syntax keyword yagpdbccFunction json structToSdict toByte toDuration contained
 syntax keyword yagpdbccFunction toFloat toInt toInt64 toRune ToString contained
+syntax keyword yagpdbccFunction str contained
 
 " User
 syntax keyword yagpdbccFunction currentUserAgeHuman contained
