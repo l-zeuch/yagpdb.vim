@@ -20,6 +20,9 @@
 " Maintainer: Luca Zeuch <l-zeuch@email.de>,
 "   LRitzdorf <42657792+LRitzdorf@users.noreply.github.com>
 
+" See https://docs.yagpdb.xyz/reference/templates/functions
+" for a list of all functions defined.
+
 " Channel
 syntax keyword yagpdbccFunction editChannelName editChannelTopic contained
 syntax keyword yagpdbccFunction getChannel getChannelOrThread contained
