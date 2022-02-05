@@ -22,7 +22,7 @@
 "   LRitzdorf <42657792+LRitzdorf@users.noreply.github.com>
 
 " Quit when a (custom) syntax file was already loaded
-if exists("b:current_syntax")
+if exists('b:current_syntax')
     finish
 endif
 
@@ -136,4 +136,4 @@ syntax match yagpdbccTodo "\v<%(TODO|FIXME|HACK|XXX)>" contained
 highlight default link yagpdbccTodo Todo
 
 
-let b:current_syntax = "yagpdbcc"
+let b:current_syntax = 'yagpdbcc'
