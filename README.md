@@ -2,6 +2,8 @@
 
 Syntax highlighting for [YAGPDB](https://yagpdb.xyz) custom commands in (N)Vim.
 
+[![CI](https://github.com/l-zeuch/yagpdb.vim/actions/workflows/ci.yml/badge.svg)](https://github.com/l-zeuch/yagpdb.vim/actions/workflows/ci.yml)
+
 ## Installing
 
 Use your favorite plugin manager to install this plugin. [tpope/vim-pathogen](https://github.com/tpope/vim-pathogen), [VundleVim/Vundle.vim](https://github.com/VundleVim/Vundle.vim), [junegunn/vim-plug](https://github.com/junegunn/vim-plug), and [Shougo/dein.vim](https://github.com/Shougo/dein.vim) are some of the more popular ones. A lengthy discussion of these and other managers can be found on [vi.stackexchange.com](https://vi.stackexchange.com/questions/388/what-is-the-difference-between-the-vim-plugin-managers). Basic instructions are provided below, but please **be sure to read, understand, and follow all the safety rules that come with your ~~power tools~~ plugin manager.**
