@@ -61,7 +61,11 @@ vnoremap <script> <buffer> <silent> [] :<c-u>call <SID>NextSection(2, 1, 1)<cr>
 " Quick function and command to copy the whole file to the system clipboard
 function! YagCopy()
     if has('clipboard')
-        execute '%y *'
+        if exists('g:yagpdbcc_use_primary') && g:yagpdbcc_use_primary
+            execute '%y *'
+        else
+            execute '%y +'
+        endif
     else
         echo "Your vim doesn't appear to have clipboard support."
     endif
