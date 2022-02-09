@@ -6,14 +6,22 @@ Syntax highlighting for [YAGPDB](https://yagpdb.xyz) custom commands in (N)Vim.
 
 ## Installing
 
-Use your favorite plugin manager to install this plugin. [tpope/vim-pathogen](https://github.com/tpope/vim-pathogen), [VundleVim/Vundle.vim](https://github.com/VundleVim/Vundle.vim), [junegunn/vim-plug](https://github.com/junegunn/vim-plug), and [Shougo/dein.vim](https://github.com/Shougo/dein.vim) are some of the more popular ones. A lengthy discussion of these and other managers can be found on [vi.stackexchange.com](https://vi.stackexchange.com/questions/388/what-is-the-difference-between-the-vim-plugin-managers). Basic instructions are provided below, but please **be sure to read, understand, and follow all the safety rules that come with your ~~power tools~~ plugin manager.**
+Use your favorite plugin manager to install this plugin. [tpope/vim-pathogen](https://github.com/tpope/vim-pathogen),
+[VundleVim/Vundle.vim](https://github.com/VundleVim/Vundle.vim), [junegunn/vim-plug](https://github.com/junegunn/vim-plug),
+and [Shougo/dein.vim](https://github.com/Shougo/dein.vim) are some of the more popular ones.
+A lengthy discussion of these and other managers can be found on
+[vi.stackexchange.com](https://vi.stackexchange.com/questions/388/what-is-the-difference-between-the-vim-plugin-managers).
+Basic instructions are provided below, but please **be sure to read, understand, and follow all the safety rules that
+come with your ~~power tools~~ plugin manager.**
 
-If you have no favorite, or want to manage your plugins without 3rd-party dependencies, consider using Vim 8+ packages, as described in Greg Hurrell's excellent Youtube video: [Vim screencast #75: Plugin managers](https://www.youtube.com/watch?v=X2_R3uxDN6g).
+If you have no favorite, or want to manage your plugins without 3rd-party dependencies, consider using Vim 8+ packages,
+as described in Greg Hurrell's excellent Youtube video:
+[Vim screencast #75: Plugin managers](https://www.youtube.com/watch?v=X2_R3uxDN6g).
 
 <details>
 <summary>Pathogen</summary>
-Pathogen is more of a runtime path manager than a plugin manager. You must clone the plugins' repositories yourself to a specific location, and Pathogen makes sure they are available in Vim.
-
+Pathogen is more of a runtime path manager than a plugin manager. You must clone the plugins' repositories yourself to
+a specific location, and Pathogen makes sure they are available in Vim.
 
 1. In the terminal,
     ```bash
@@ -66,21 +74,24 @@ call plug#end()
 1. Restart Vim, and run the `:call dein#install()` statement to install your plugins.
 </details>
 
-## Documentation
+## Configuration
 
-Currently, this plugin does not implement features which need documentation, as it is solely a syntax highlighting plugin. If this changes in the future, documentation will be provided in this repository's wiki.
+Use X11 PRIMARY (Mouse middle click) instead of X11 CLIPBOARD (<kbd>Ctrl + V</kbd>):
+You usually don't need this option set, unless you prefer the middle click over <kbd>Ctrl + V</kbd>.
 
-For documentation on YAGPDB's template language please refer to their documentation found at <https://docs.yagpdb.xyz>.
+```vim
+let g:yagpdb_use_primary = 1
+```
 
 ## Contributing
 
-If you spot an error, or want to contribute new features, feel free open a pull request! Please refer to [CONTRIBUTING](CONTRIBUTING.md) for our guidelines on how to contribute.
-
-We ask you to ensure tests are passing locally. As for the framework in use, please install [vader.vim](https://github.com/junegunn/vader.vim) and run the tests using `make test`.
+If you spot an error, or want to contribute new features, feel free open a pull request!
+Please refer to [CONTRIBUTING](CONTRIBUTING.md) for our guidelines on how to contribute.
 
 ### Other Contributions
 
-Some of the regex in this plugin was developed by [@DZ-TM](https://github.com/DZ-TM). If you like it, feel free to give him cookies as a reward.
+Some of the regex in this plugin was developed by [@DZ-TM](https://github.com/DZ-TM).
+If you like it, feel free to give him cookies as a reward.
 
 ## Legal Mumbo Jumbo
 
@@ -92,10 +103,10 @@ Some of the regex in this plugin was developed by [@DZ-TM](https://github.com/DZ
 
 3) YAGPDB is a service provided by [botlabs](https://botlabs.gg) and is in no way associated with this plugin.
 
-4) The developers of this plugin have been granted permission to use the brand name YAGPDB in this plugin. Please view the [permission](permission.md) file for details.
+4) The developers of this plugin have been granted permission to use the brand name YAGPDB in this plugin.
+Please view the [permission](permission.md) file for details.
 
 ### License
 
-This project is licensed under the terms of the GNU General Public License, version 2.0 (SPDX-Identifier GPL-2.0). Please refer to the [LICENSE](LICENSE.md) file for more details.
-
-
+This project is licensed under the terms of the GNU General Public License, version 2.0 (SPDX-Identifier GPL-2.0).
+Please refer to the [LICENSE](LICENSE.md) file for more details.
