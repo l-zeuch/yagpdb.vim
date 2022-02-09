@@ -41,9 +41,6 @@ Given (example yagpdbcc code):
     {{ end }}
   {{ end }}
 
-Execute:
-  Log "Test clipboard"
-
 Do (run YagCopy):
   :YagCopy\<Enter>
   "+p
