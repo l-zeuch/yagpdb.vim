@@ -55,38 +55,38 @@ Given (code with comments):
 
 Execute (syntax check):
 # Opening brace
-  AssertEqual 'yagpdbccComment', SyntaxAt(1, 1)
+  AssertEqual 'yagpdbccComment', SyntaxAt(1, 1), "Match comment region opening brace"
 
 # Closing brace and following line
-  AssertEqual 'yagpdbccComment', SyntaxAt(1, 37)
-  AssertEqual '', SyntaxAt(2, 1)
+  AssertEqual 'yagpdbccComment', SyntaxAt(1, 37), "Comment region last match"
+  AssertEqual '', SyntaxAt(2, 1), "Comment region actually ends"
 
 # Ensure text inside and after the extra braces is still a comment
-  AssertEqual 'yagpdbccComment', SyntaxAt(3, 19)
-  AssertEqual 'yagpdbccComment', SyntaxAt(3, 32)
+  AssertEqual 'yagpdbccComment', SyntaxAt(3, 19), "Comment region continues inside"
+  AssertEqual 'yagpdbccComment', SyntaxAt(3, 32), "Comment region continues inside"
 
 # TODOs and FIXMEs, but only inside comments
-  AssertEqual 'yagpdbccTodo', SyntaxAt(4, 6)
-  AssertEqual 'yagpdbccComment', SyntaxAt(4, 12)
-  AssertEqual '', SyntaxAt(5, 1)
-  AssertEqual 'yagpdbccTodo', SyntaxAt(6, 6)
-  AssertEqual 'yagpdbccComment', SyntaxAt(6, 13)
+  AssertEqual 'yagpdbccTodo', SyntaxAt(4, 6), "Match TODO inside comments"
+  AssertEqual 'yagpdbccComment', SyntaxAt(4, 12), "Don't expand TODO match too far"
+  AssertEqual '', SyntaxAt(5, 1), "Don't match TODO outside of comment"
+  AssertEqual 'yagpdbccTodo', SyntaxAt(6, 6), "Match FIXME inside comment"
+  AssertEqual 'yagpdbccComment', SyntaxAt(6, 13), "Don't expand FIXME match too far"
 
 # a plain text area
-  AssertEqual '', SyntaxAt(7, 1)
+  AssertEqual '', SyntaxAt(7, 1), "Match plain text area with no syntax"
 
 # Multiline comments
-  AssertEqual 'yagpdbccComment', SyntaxAt(7, 13)
-  AssertEqual 'yagpdbccComment', SyntaxAt(8, 1)
-  AssertEqual 'yagpdbccComment', SyntaxAt(10, 1)
-  AssertEqual 'yagpdbccComment', SyntaxAt(11, 2)
-  AssertEqual 'yagpdbccComment', SyntaxAt(11, 5)
+  AssertEqual 'yagpdbccComment', SyntaxAt(7, 13), "Match multiline comment 1/5"
+  AssertEqual 'yagpdbccComment', SyntaxAt(8, 1), "Match multiline comment 2/5"
+  AssertEqual 'yagpdbccComment', SyntaxAt(10, 1), "Match multiline comment 3/5"
+  AssertEqual 'yagpdbccComment', SyntaxAt(11, 2), "Match multiline comment 4/5"
+  AssertEqual 'yagpdbccComment', SyntaxAt(11, 5), "Match multiline comment 5/5"
 
 # Don't match the invalid embedded comment syntax
-  AssertEqual 'yagpdbccExpr', SyntaxAt(12, 58)
+  AssertEqual 'yagpdbccExpr', SyntaxAt(12, 58), "Don't match invalid embedded comment"
 
 Given (normal code sample):
-  {{ $args := parseArgs 0 "Please run this command with a user (mention or ID), or without any arguemnts (in which case it will run on you)."
+  {{ $args := parseArgs 0 "Please run this command with a user (mention or ID), or without any arguments (in which case it will run on you)."
       (carg "userid" "User to analyze") }}
   {{ $member := 0 }} {{ $user := 0 }} range 5 "asdf" {{/* Comments, woo! */}}
   {{ if $args.Get 0 }}
@@ -102,60 +102,60 @@ Given (normal code sample):
 
 Execute (syntax check):
 # Validate syntax elements in the first and second lines
-  AssertEqual 'yagpdbccIdentifier', SyntaxAt(1, 4)
-  AssertEqual 'yagpdbccOperator', SyntaxAt(1, 10)
-  AssertEqual 'yagpdbccFunction', SyntaxAt(1, 13)
-  AssertEqual 'yagpdbccNumber', SyntaxAt(1, 23)
-  AssertEqual 'yagpdbccString', SyntaxAt(1, 27)
-  AssertEqual 'yagpdbccFunction', SyntaxAt(2, 6)
+  AssertEqual 'yagpdbccIdentifier', SyntaxAt(1, 4), "Match identifier"
+  AssertEqual 'yagpdbccOperator', SyntaxAt(1, 10), "Match operator"
+  AssertEqual 'yagpdbccFunction', SyntaxAt(1, 13), "Match inbuilt function name"
+  AssertEqual 'yagpdbccNumber', SyntaxAt(1, 23), "Match number"
+  AssertEqual 'yagpdbccString', SyntaxAt(1, 27), "Match string"
+  AssertEqual 'yagpdbccFunction', SyntaxAt(2, 6), "Match inbuilt function name w/ line continuation inside braces"
 
 # Validate the third line, with its non-standard format
-  AssertEqual 'yagpdbccIdentifier', SyntaxAt(3, 4)
-  AssertEqual '', SyntaxAt(3, 19)
-  AssertEqual '', SyntaxAt(3, 37)
-  AssertEqual '', SyntaxAt(3, 43)
-  AssertEqual '', SyntaxAt(3, 45)
-  AssertEqual 'yagpdbccComment', SyntaxAt(3, 57)
+  AssertEqual 'yagpdbccIdentifier', SyntaxAt(3, 4), "Match identifer inside braces"
+  AssertEqual '', SyntaxAt(3, 19), "Don't match characters after closing brace"
+  AssertEqual '', SyntaxAt(3, 37), "Don't match syntax keywords outside braces"
+  AssertEqual '', SyntaxAt(3, 43), "Don't match numbers outside braces"
+  AssertEqual '', SyntaxAt(3, 45), "Don't match strings outside braces"
+  AssertEqual 'yagpdbccComment', SyntaxAt(3, 57), "Match comments inside braces"
 
 # Strings
-  AssertEqual 'yagpdbccString', SyntaxAt(2, 11)
-  AssertEqual 'yagpdbccString', SyntaxAt(2, 20)
-  AssertEqual '', SyntaxAt(2, 39)
+  AssertEqual 'yagpdbccString', SyntaxAt(2, 11), "Match string delimiter start w/ line continuation inside braces"
+  AssertEqual 'yagpdbccString', SyntaxAt(2, 20), "Match string content w/ line continuation inside braces"
+  AssertEqual '', SyntaxAt(2, 39), "Don't expand string match too far"
 
 # Check the new syntax elements in the following lines (no need to re-check
 # variable matching, for example - that's already been validated)
 # ifs and elses are part of the conditional group
-  AssertEqual 'yagpdbccConditional', SyntaxAt(4, 4)
+  AssertEqual 'yagpdbccConditional', SyntaxAt(4, 4), "Match conditional keyword inside braces"
 
 # The .Get method on line 5 isn't matched, so it's just part of a basic
 # expression region
-  AssertEqual 'yagpdbccFunction', SyntaxAt(5, 16)
-  AssertEqual 'yagpdbccExpr', SyntaxAt(5, 30)
-  AssertEqual 'yagpdbccFunction', SyntaxAt(6, 18)
-  AssertEqual 'yagpdbccConditional', SyntaxAt(7, 4)
-  AssertEqual 'yagpdbccOperator', SyntaxAt(8, 14)
+  AssertEqual 'yagpdbccFunction', SyntaxAt(5, 16), "Match inbuilt function name"
+  AssertEqual 'yagpdbccExpr', SyntaxAt(5, 30), "Don't match methods"
+  AssertEqual 'yagpdbccFunction', SyntaxAt(6, 18), "Match inbuilt function name"
+  AssertEqual 'yagpdbccConditional', SyntaxAt(7, 4), "Match conditional keyword"
+  AssertEqual 'yagpdbccOperator', SyntaxAt(8, 14), "Match operator"
 
 # Objects, like .User and .Member, are matched as types
-  AssertEqual 'yagpdbccObject', SyntaxAt(8, 16)
-  AssertEqual 'yagpdbccObject', SyntaxAt(9, 18)
+  AssertEqual 'yagpdbccObject', SyntaxAt(8, 16), "Match level-1 object"
+  AssertEqual 'yagpdbccObject', SyntaxAt(9, 18), "Match level-1 object"
 
 # end is just a general keyword
-  AssertEqual 'yagpdbccKeyword', SyntaxAt(10, 4)
+  AssertEqual 'yagpdbccKeyword', SyntaxAt(10, 4), "Match `end` keyword"
 
 # Single character constants
-  AssertEqual 'yagpdbccCharacter', SyntaxAt(11, 21)
-  AssertEqual 'yagpdbccCharacter', SyntaxAt(11, 22)
-  AssertEqual '', SyntaxAt(11, 26)
+  AssertEqual 'yagpdbccCharacter', SyntaxAt(11, 21), "Match single character constant"
+  AssertEqual 'yagpdbccCharacter', SyntaxAt(11, 22), "Match single character constant end delimiter"
+  AssertEqual '', SyntaxAt(11, 26), "Don't expand character match too far"
 
 # Escape character constant
-  AssertEqual 'yagpdbccCharacter', SyntaxAt(12, 21)
-  AssertEqual 'yagpdbccCharacter', SyntaxAt(12, 23)
-  AssertEqual '', SyntaxAt(12, 27)
+  AssertEqual 'yagpdbccCharacter', SyntaxAt(12, 21), "Match first character of escape sequence in character constant"
+  AssertEqual 'yagpdbccCharacter', SyntaxAt(12, 23), "Match character constant end delimiter"
+  AssertEqual '', SyntaxAt(12, 27), "Don't expand character match too far"
 
 # This will be fun, '"' is really weird.
-  AssertEqual 'yagpdbccCharacter', SyntaxAt(13, 21)
-  AssertEqual 'yagpdbccCharacter', SyntaxAt(13, 22)
-  AssertEqual '', SyntaxAt(13, 26)
+  AssertEqual 'yagpdbccCharacter', SyntaxAt(13, 21), "Match \" inside character constants"
+  AssertEqual 'yagpdbccCharacter', SyntaxAt(13, 22), "Match character string delimiter"
+  AssertEqual '', SyntaxAt(13, 26), "Don't expand match too far"
 
 
 Given (code with errors):
@@ -167,26 +167,26 @@ Given (code with errors):
 
 Execute (syntax check):
 # The classic beginner syntax mistake
-  AssertEqual 'yagpdbccNestedBraces', SyntaxAt(1, 46)
-  AssertEqual '', SyntaxAt(1, 66)
+  AssertEqual 'yagpdbccNestedBraces', SyntaxAt(1, 46), "Match error on nested braces"
+  AssertEqual '', SyntaxAt(1, 66), "Don't expand error match too far"
 
 # Invalid Variable naming
-  AssertEqual 'yagpdbccError', SyntaxAt(2, 43)
-  AssertEqual '', SyntaxAt(2, 65)
+  AssertEqual 'yagpdbccError', SyntaxAt(2, 43), "Match error on invalid identifier"
+  AssertEqual '', SyntaxAt(2, 65), "Don't expand error too far"
 
 # Weird, but valid edge case
-  AssertEqual 'yagpdbccString', SyntaxAt(3, 9)
-  AssertEqual '', SyntaxAt(3, 22)
+  AssertEqual 'yagpdbccString', SyntaxAt(3, 9), "Don't match \"{{\" as error"
+  AssertEqual '', SyntaxAt(3, 22), "Don't expand string match too far"
 
 # Invalid character constant
-  AssertEqual 'yagpdbccCharacterError', SyntaxAt(4, 22)
-  AssertEqual 'yagpdbccCharacterError', SyntaxAt(4, 23)
-  AssertEqual '', SyntaxAt(4, 31)
+  AssertEqual 'yagpdbccCharacterError', SyntaxAt(4, 22), "Match error for multiple character constants"
+  AssertEqual 'yagpdbccCharacterError', SyntaxAt(4, 23), "Match end delimiter as error as well"
+  AssertEqual '', SyntaxAt(4, 31), "Don't expand error too far"
 
 # Strange character constant edge case (just why)
-  AssertEqual 'yagpdbccCharacterError', SyntaxAt(5, 21)
-  AssertEqual 'yagpdbccCharacterError', SyntaxAt(4, 27)
-  AssertEqual '', SyntaxAt(4, 31)
+  AssertEqual 'yagpdbccCharacterError', SyntaxAt(5, 21), "Match error on things like \'\n something\'"
+  AssertEqual 'yagpdbccCharacterError', SyntaxAt(4, 27), "Match end delimiter as error as well"
+  AssertEqual '', SyntaxAt(4, 31), "Don't expand error too far"
 
 Given (a variety of syntax elements):
   Even with weird variables, {{ print "like " $.Name }}, and the empty variable!
