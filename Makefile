@@ -16,16 +16,20 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-# Targets which do not create an output file
-.PHONY: test clean
+all: generate test
+
+generate:
+	python3 scripts/gen_code_completion.py
 
 test: .bundle/vader.vim
-	cd test && vim -EsNu vimrc --not-a-term -c 'Vader! * */*'
+	cd test/ && \
+	vim -EsNu vimrc --not-a-term -c 'Vader! * */*'
+
+.bundle/vader.vim:
+	git clone --depth 1 https://github.com/junegunn/vader.vim.git \
+		.bundle/vader.vim
 
 clean:
 	rm -rf .bundle/
 
-# Dependencies
-.bundle/vader.vim:
-	git clone --depth 1 https://github.com/junegunn/vader.vim.git \
-		.bundle/vader.vim
+.PHONY: test clean
