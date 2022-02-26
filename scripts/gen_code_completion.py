@@ -35,12 +35,13 @@ class StringBuilder:
 def gen_keyword_list(file) -> list:
     p = re.compile(r'(?<=keyword yagpdbcc)\w+\s+(.*?)(?=\s+contained$)', re.MULTILINE)
     with open(file) as f:
-        matches = [p.findall(line) for line in f]
-        matches[:] = [match.split() for matches in matches[:] for match in matches]
-        keywords = list()
+        matches = [match for line in f if (match := p.findall(line))]
+        keywords = []
         for sublist in matches:
             for item in sublist:
-                keywords.append(item)
+                tmp = item.split()
+                for keyw in tmp:
+                    keywords.append(keyw)
 
     return keywords
 
@@ -58,12 +59,24 @@ callback({
         string_builder.Add(f"\t\u007b label = '{keyword}' \u007d,\n")
 
     string_builder.Add("""})
-end
-""")
+end""")
 
     return string_builder.__str__()
 
+def write_file(code):
+    if not os.listdir().__contains__('lua'):
+        try:
+            os.mkdir('lua')
+        except OSError as error:
+            print(error)
+
+    boilerplate = open('scripts/boilerplate.lua', "rt")
+    with open('lua/yagpdbcc.lua', "wt") as fout:
+        for line in boilerplate:
+            fout.write(line.replace('---@@cmp-src@@', code))
+
 def main():
+    print("Generating sources...")
     path = r'syntax/yagpdbcc/'
     keywords = list()
     with os.scandir(path) as dirs:
@@ -74,7 +87,9 @@ def main():
     # Flatten the keyword list again because calling the above twice causes a
     # nested list, which is undesirable.
     keywords = [keyword for keywords in keywords for keyword in keywords]
-    print(gen_completion(keywords))
+    write_file(gen_completion(keywords))
+
+    print("Done!")
 
 
 if __name__ == "__main__":
