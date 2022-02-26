@@ -1,4 +1,28 @@
+-- Source completion file for use with https://github.com/hrsh7th/nvim-cmp.
+-- Automatically generated. DO NOT EDIT.
+--
+-- Copyright (C) 2021    Lucas Ritzdorf, Luca Zeuch
+--
+-- This program is free software; you can redistribute it and/or modify
+-- it under the terms of the GNU General Public License as published by
+-- the Free Software Foundation; either version 2 of the License, or
+-- (at your option) any later version.
+--
+-- This program is distributed in the hope that it will be useful,
+-- but WITHOUT ANY WARRANTY; without even the implied warranty of
+-- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+-- GNU General Public License for more details.
+--
+-- You should have received a copy of the GNU General Public License along
+-- with this program; if not, write to the Free Software Foundation, Inc.,
+-- 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
 local source = {}
+
+source.new = function()
+    local self = setmetatable({}, { __index = source })
+    return self
+end
 
 ---Return this source is available in current context or not.
 ---@return boolean
@@ -10,12 +34,6 @@ end
 ---@return string
 function source:get_debug_name()
     return 'yagpdb-cc'
-end
-
----Return keyword pattern for triggering completion.
----@return string
-function source:get_keyword_pattern()
-    return [[{{.*}}]]
 end
 
 ---Invoke completion. (Required)
