@@ -70,10 +70,10 @@ def write_file(code):
         except OSError as error:
             print(error)
 
-    boilerplate = open('scripts/boilerplate.lua', "rt")
-    with open('lua/yagpdbcc.lua', "wt") as fout:
-        for line in boilerplate:
-            fout.write(line.replace('---@@cmp-src@@', code))
+    with open('scripts/boilerplate.lua', "rt") as boilerplate:
+        with open('lua/yagpdbcc.lua', "wt") as fout:
+            for line in boilerplate:
+                fout.write(line.replace('---@@cmp-src@@', code))
 
 def main():
     print("Generating sources...")

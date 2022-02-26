@@ -236,4 +236,4 @@ function source:execute(completion_item, callback)
 end
 
 ---Register custom source to nvim-cmp.
-require('cmp').register_source('yagpdbcc', source.new())
+require('cmp').register_source('yagpdb-cc', source.new())
