@@ -48,18 +48,8 @@ def gen_keyword_list(file) -> list:
 def gen_completion(keywords) -> str:
     string_builder = StringBuilder()
 
-    string_builder.Add("""---Invoke completion. (Required)
----@param params cmp.SourceCompletionApiParams
----@param callback fun(response: lsp.CompletionResponse|nil)
-function source:complete(params, callback)
-callback({
-""")
-
     for keyword in keywords:
-        string_builder.Add(f"\t\u007b label = '{keyword}' \u007d,\n")
-
-    string_builder.Add("""})
-end""")
+        string_builder.Add(f"\t\t\u007b label = '{keyword}' \u007d,\n")
 
     return string_builder.__str__()
 
@@ -77,8 +67,10 @@ def write_file(code):
 
 def main():
     print("Generating sources...")
+
     path = r'syntax/yagpdbcc/'
     keywords = list()
+
     with os.scandir(path) as dirs:
         for entry in dirs:
             if entry.name.endswith('.vim'):
@@ -90,7 +82,6 @@ def main():
     write_file(gen_completion(keywords))
 
     print("Done!")
-
 
 if __name__ == "__main__":
     main()

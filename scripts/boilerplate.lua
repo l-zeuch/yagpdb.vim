@@ -36,7 +36,14 @@ function source:get_debug_name()
     return 'yagpdb-cc'
 end
 
+---Invoke completion. (Required)
+---@param params cmp.SourceCompletionApiParams
+---@param callback fun(response: lsp.CompletionResponse|nil)
+function source:complete(params, callback)
+    callback({
 ---@@cmp-src@@
+    })
+end
 
 ---Resolve completion item.
 ---@param completion_item lsp.CompletionItem
