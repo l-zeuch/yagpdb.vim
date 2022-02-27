@@ -18,47 +18,27 @@
 
 import re
 import os
-from io import StringIO
+from typing import Iterable
 
-class StringBuilder:
-    _file_str = None
-
-    def __init__(self):
-        self.file_str = StringIO()
-
-    def Add(self, str):
-        self.file_str.write(str)
-
-    def __str__(self):
-        return self.file_str.getvalue()
-
-def gen_keyword_list(file) -> list:
+def gen_keyword_list(file) -> Iterable:
     p = re.compile(r'(?<=keyword yagpdbcc)\w+\s+(.*?)(?=\s+contained$)', re.MULTILINE)
     with open(file) as f:
         matches = [match for line in f if (match := p.findall(line))]
-        keywords = []
         for sublist in matches:
             for item in sublist:
-                tmp = item.split()
-                for keyw in tmp:
-                    keywords.append(keyw)
-
-    return keywords
+                yield from item.split()
 
 def gen_completion(keywords) -> str:
-    string_builder = StringBuilder()
-
-    for keyword in keywords:
-        string_builder.Add(f"\t\t\u007b label = '{keyword}' \u007d,\n")
-
-    return string_builder.__str__()
+        list = [f"\t\t\u007b label = '{keyword}' \u007d" for keyword in keywords]
+        return "\n".join(list)
 
 def write_file(code):
-    if not os.listdir().__contains__('lua'):
+    if "lua" not in os.listdir():
         try:
             os.mkdir('lua')
         except OSError as error:
             print(error)
+            os._exit(1)
 
     with open('scripts/boilerplate.lua', "rt") as boilerplate:
         with open('lua/yagpdbcc.lua', "wt") as fout:
@@ -69,17 +49,12 @@ def main():
     print("Generating sources...")
 
     path = r'syntax/yagpdbcc/'
-    keywords = list()
+    keywords = []
 
     with os.scandir(path) as dirs:
         for entry in dirs:
             if entry.name.endswith('.vim'):
-                keywords.append(gen_keyword_list(path + entry.name))
-
-    # Flatten the keyword list again because calling the above twice causes a
-    # nested list, which is undesirable.
-    keywords = [keyword for keywords in keywords for keyword in keywords]
-    write_file(gen_completion(keywords))
+                keywords.extend(gen_keyword_list(path + entry.name))
 
     print("Done!")
 
