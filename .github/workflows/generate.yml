@@ -25,11 +25,8 @@ on:
       - 'syntax/'
       - 'scripts/boilerplate.lua'
       - 'scripts/gen_code_completion.py'
-  pull_request:
-    paths:
-      - 'syntax/'
-      - 'scripts/boilerplate.lua'
-      - 'scripts/gen_code_completion.py'
+    branches:
+      - 'master'
 
 jobs:
   generate:
@@ -39,6 +36,10 @@ jobs:
         uses: actions/checkout@v2
       - name: Regenerate completion Sources
         run: make generate
+      - name: Setup git
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
       - name: Commit regenerated files
         run: |
           if [[ -n "$(git status -s lua/)" ]]; then
