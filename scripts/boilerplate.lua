@@ -27,7 +27,11 @@ end
 ---Return this source is available in current context or not.
 ---@return boolean
 function source:is_available()
-    return true
+    if (vim.bo.filetype == 'yagpdbcc') then
+        return true
+    else
+        return false
+    end
 end
 
 ---Return the debug name of this source.
