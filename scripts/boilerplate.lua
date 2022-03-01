@@ -64,4 +64,6 @@ function source:execute(completion_item, callback)
 end
 
 ---Register custom source to nvim-cmp.
-require('cmp').register_source('yagpdb-cc', source.new())
+if (require('cmp')) then
+    require('cmp').register_source('yagpdb-cc', source.new())
+end
