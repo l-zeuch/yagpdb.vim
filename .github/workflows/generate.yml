@@ -23,11 +23,13 @@ on:
   push:
     paths:
       - 'syntax/'
-      - 'scripts/{boilerplate.lua,gen_code_completion.py}'
+      - 'scripts/boilerplate.lua'
+      - 'scripts/gen_code_completion.py'
   pull_request:
     paths:
       - 'syntax/'
-      - 'scripts/{boilerplate.lua,gen_code_completion.py}'
+      - 'scripts/boilerplate.lua'
+      - 'scripts/gen_code_completion.py'
 
 jobs:
   generate:
@@ -42,4 +44,6 @@ jobs:
           if [[ -n "$(git status -s lua/)" ]]; then
             git commit lua/ -m "completion: regenerate sources"
             git push
+          else
+            echo "Nothing to commit."
           fi
