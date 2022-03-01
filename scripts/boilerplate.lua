@@ -19,7 +19,6 @@
 
 local source = {}
 
----Define the constructor.
 source.new = function()
     local self = setmetatable({}, { __index = source })
     return self
