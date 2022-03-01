@@ -25,11 +25,8 @@ on:
       - 'syntax/'
       - 'scripts/boilerplate.lua'
       - 'scripts/gen_code_completion.py'
-  pull_request:
-    paths:
-      - 'syntax/'
-      - 'scripts/boilerplate.lua'
-      - 'scripts/gen_code_completion.py'
+    branches:
+      - 'master'
 
 jobs:
   generate:
