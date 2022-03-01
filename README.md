@@ -76,11 +76,26 @@ call plug#end()
 
 ## Configuration
 
+### Clipboard
+
 Use X11 PRIMARY (Mouse middle click) instead of X11 CLIPBOARD (<kbd>Ctrl + V</kbd>):
 You usually don't need this option set, unless you prefer the middle click over <kbd>Ctrl + V</kbd>.
 
 ```vim
 let g:yagpdb_use_primary = 1
+```
+
+### Code Completion (Neovim >0.5 ONLY)
+
+We provide bundled sources for code-completion to be used with https://github.com/hrsh7th/nvim-cmp.
+Follow the installation instructions there and enable the source as follows:
+
+```lua
+sources = cmp.config.sources({
+    ...
+    { name = 'yagpdb-cc' },
+    ...
+})
 ```
 
 ## Contributing

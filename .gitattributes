@@ -1,0 +1,5 @@
+# Automatically normalize line-endings
+* text=auto
+
+# Ignore lua/ from language statistics
+lua/ linguist-generated=true
