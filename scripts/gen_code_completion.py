@@ -30,7 +30,7 @@ def gen_keyword_list(file) -> Iterable:
 
 def gen_completion(keywords) -> str:
         list = [f"\t\t\u007b label = '{keyword}' \u007d" for keyword in keywords]
-        return "\n".join(list)
+        return ",\n".join(list)
 
 def write_file(code):
     if "lua" not in os.listdir():
@@ -40,10 +40,9 @@ def write_file(code):
             print(error)
             os._exit(1)
 
-    with open('scripts/boilerplate.lua', "rt") as boilerplate:
-        with open('lua/yagpdbcc.lua', "wt") as fout:
-            for line in boilerplate:
-                fout.write(line.replace('---@@cmp-src@@', code))
+    with open('scripts/boilerplate.lua', "rt") as boilerplate, open('lua/yagpdbcc.lua', "wt") as fout:
+        for line in boilerplate:
+            fout.write(line.replace('---@@cmp-src@@', code))
 
 def main():
     print("Generating sources...")
@@ -55,6 +54,8 @@ def main():
         for entry in dirs:
             if entry.name.endswith('.vim'):
                 keywords.extend(gen_keyword_list(path + entry.name))
+
+    write_file(gen_completion(keywords))
 
     print("Done!")
 
