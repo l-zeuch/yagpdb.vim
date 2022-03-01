@@ -3,3 +3,4 @@
 
 # Ignore lua/ from language statistics
 lua/ linguist-generated=true
+scripts/*.lua linguist-generated=true
