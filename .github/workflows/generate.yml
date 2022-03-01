@@ -1,4 +1,4 @@
-# GitHub workflow configuration file: Continuous Integration
+# GitHub workflow configuration file: Completion source (re)generation
 #
 # Copyright (C) 2021    Lucas Ritzdorf, Luca Zeuch
 #
@@ -17,42 +17,29 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 ---
-name: CI
+name: Generate Sources
 
 on:
   push:
-    paths-ignore:
-      - '*.md'
-      - '*.txt'
+    paths:
+      - 'syntax/'
+      - 'scripts/{boilerplate.lua,gen_code_completion.py}'
   pull_request:
-    paths-ignore:
-      - '*.md'
-      - '*.txt'
-  workflow_dispatch:
+    paths:
+      - 'syntax/'
+      - 'scripts/{boilerplate.lua,gen_code_completion.py}'
 
 jobs:
-  # Run Unit Tests via vader.vim
-  test:
+  generate:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      - name: Install Vim
+      - name: Regenerate completion Sources
+        run: make generate
+      - name: Commit regenerated files
         run: |
-          sudo apt install vim
-      - name: Run tests
-        run: make test
-
-  # Vim script linting
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Install vim-vint
-        run: |
-          python -m pip install --upgrade pip
-          pip install vim-vint
-      - name: Checkout repository
-        uses: actions/checkout@v2
-      - name: run linter
-        run: |
-          python scripts/vint.py
+          if [[ -n "$(git status -s lua/)" ]]; then
+            git commit lua/ -m "completion: regenerate sources"
+            git push
+          fi
