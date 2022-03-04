@@ -4,3 +4,6 @@
 # Ignore lua/ from language statistics
 lua/ linguist-generated=true
 scripts/*.lua linguist-generated=true
+
+# Detect vader test files as Vim script
+*.vader linguist-language=viml
