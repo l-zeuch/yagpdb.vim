@@ -42,7 +42,8 @@ Given (example yagpdbcc code):
 
 Do (run YagCopy):
   :YagCopy\<Enter>
-  "+p
+  :%d\<Enter>
+  "+P
 
 Expect:
   {{/* Let $int be the integer. */}}
