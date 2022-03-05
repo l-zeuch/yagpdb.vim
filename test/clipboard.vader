@@ -20,12 +20,6 @@
 # Maintainer: Luca Zeuch <l-zeuch@email.de>,
 #   LRitzdorf <42657792+LRitzdorf@users.noreply.github.com>
 
-Before:
-  source ../ftplugin/yagpdbcc/functions.vim
-
-After:
-  Restore
-
 Given (example yagpdbcc code):
   {{/* Let $int be the integer. */}}
   {{ $int := 123 }}
@@ -40,9 +34,12 @@ Given (example yagpdbcc code):
     {{ end }}
   {{ end }}
 
-Do (run YagCopy):
-  :YagCopy\<Enter>
-  :%d\<Enter>
+Do:
+  :if has('clipboard')\<Enter>
+    :source ../ftplugin/yagpdbcc/functions.vim\<Enter>
+    :YagCopy\<Enter>
+    :%d\<Enter>
+  :endif\<Enter>
   "+P
 
 Expect:
@@ -58,3 +55,6 @@ Expect:
     {{ else if eq $dec 3 }} {{ $ord = "rd" }}
     {{ end }}
   {{ end }}
+
+After:
+  Restore

@@ -21,9 +21,15 @@ all: generate test
 generate:
 	python3 scripts/gen_code_completion.py
 
-test: .bundle/vader.vim
+test: test-vim test-nvim
+
+test-vim: .bundle/vader.vim
 	cd test/ && \
 	vim -EsNu vimrc --not-a-term -c 'Vader! * */*'
+
+test-nvim: .bundle/vader.vim
+	cd test/ && \
+		nvim -EsNu vimrc --headless -c 'Vader! * */*'
 
 .bundle/vader.vim:
 	git clone --depth 1 https://github.com/junegunn/vader.vim.git \
@@ -32,4 +38,4 @@ test: .bundle/vader.vim
 clean:
 	rm -rf .bundle/
 
-.PHONY: test clean
+.PHONY: test test-vim test-nvim clean
