@@ -63,8 +63,11 @@ function! YagCopy()
     if has('clipboard')
         if exists('g:yagpdbcc_use_primary') && g:yagpdbcc_use_primary
             execute '%y *'
+            " Fancy regex to remove the trailing newline that Vim copies
+            let @*=substitute(@*,'\n$','','')
         else
             execute '%y +'
+            let @+=substitute(@+,'\n$','','')
         endif
     else
         echo "Your vim doesn't appear to have clipboard support."

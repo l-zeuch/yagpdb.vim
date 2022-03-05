@@ -37,11 +37,16 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      - name: Install Vim
-        run: |
-          sudo apt install vim
-      - name: Run tests
+      - name: Install latest Vim stable
+        uses: rhysd/action-setup-vim@v1
+      - name: Install latest Neovim
+        uses: rhysd/action-setup-vim@v1
+        with:
+          neovim: true
+          version: v0.5.0
+      - name: Run Tests
         run: make test
+
 
   # Vim script linting
   lint:
