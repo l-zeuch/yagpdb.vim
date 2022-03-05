@@ -29,7 +29,7 @@ test-vim: .bundle/vader.vim
 
 test-nvim: .bundle/vader.vim
 	cd test/ && \
-		nvim -EsNu vimrc --headless -c 'Vader! * */*'
+	nvim -EsNu vimrc --headless -c 'Vader! * */*'
 
 .bundle/vader.vim:
 	git clone --depth 1 https://github.com/junegunn/vader.vim.git \
