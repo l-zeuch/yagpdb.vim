@@ -78,11 +78,20 @@ call plug#end()
 
 ### Clipboard
 
-Use X11 PRIMARY (Mouse middle click) instead of X11 CLIPBOARD (<kbd>Ctrl + V</kbd>):
-You usually don't need this option set, unless you prefer the middle click over <kbd>Ctrl + V</kbd>.
+If you prefer to insert text on a middle click with your mouse instead of <kbd>Ctrl + V</kbd>, change the register
+used as follows:
 
 ```vim
-let g:yagpdb_use_primary = 1
+let g:yagpdbcc_use_primary = 1
+```
+
+### Overriding Filetypes
+
+Sometimes, you may wish to use a file extension already in use by another language, such as `*.gotmpl`. Enable also
+detecting those extension as follows, if needed:
+
+```vim
+let g:yagpdbcc_override_ft = 1
 ```
 
 ### Code Completion (Neovim >0.5 ONLY)
