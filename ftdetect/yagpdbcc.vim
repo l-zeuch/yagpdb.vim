@@ -17,12 +17,6 @@
 " with this program; if not, write to the Free Software Foundation, Inc.,
 " 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-" Exit early if filetypes are already loaded.
-if exists('did_load_filetypes') &&
-        \ (!exists('g:yagpdbcc_override_ft') || !g:yagpdbcc_override_ft)
-    finish
-endif
-
 " Detect our 'own' extensions, which are usually used by a
 " vast majority of the userbase.
 augroup yagpdbcc_set_ft
