@@ -18,8 +18,8 @@
 " 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 " Exit early if filetypes are already loaded.
-if exists('did_load_filetypes') && (!exists('g:yagpdbcc_override_ft') ||
-    \!g:yagpdbcc_override_ft)
+if exists('did_load_filetypes') &&
+        \ (!exists('g:yagpdbcc_override_ft') || !g:yagpdbcc_override_ft)
     finish
 endif
 
@@ -28,8 +28,8 @@ endif
 augroup yagpdbcc_set_ft
     autocmd!
     autocmd BufNewFile,BufRead
-                \*.yag,*.yagpdb,*.yagcc,*.yag-cc,*.yagpdbcc,*.yagpdb-cc
-                \setfiletype yagpdbcc
+        \ *.yag,*.yagpdb,*.yagcc,*.yag-cc,*.yagpdbcc,*.yagpdb-cc
+        \ setfiletype yagpdbcc
 augroup end
 
 " Also use *.tmpl, *.gotmpl et al., which are originally only Go.
@@ -37,7 +37,7 @@ if exists('g:yagpdbcc_override_ft') && g:yagpdbcc_override_ft
     augroup yagpdbcc_override
         autocmd!
         autocmd BufNewFile,BufRead
-            \*.tmpl,*.gotmpl, *.gotemplate
-            \setfiletype yagpdbcc
+            \ *.tmpl,*.gotmpl,*.gotemplate
+            \ setfiletype yagpdbcc
     augroup end
 endif
