@@ -21,7 +21,7 @@ import os
 from typing import Iterable
 
 def gen_keyword_list(file) -> Iterable:
-    p = re.compile(r'(?<=keyword yagpdbcc)\w+\s+(.*?)(?=\s+contained$)', re.MULTILINE)
+    p = re.compile(r'(?<=keyword yag)\w+\s+(.*?)(?=\s+contained$)', re.MULTILINE)
     with open(file) as f:
         matches = [match for line in f if (match := p.findall(line))]
         for sublist in matches:
@@ -47,13 +47,14 @@ def write_file(code):
 def main():
     print("Generating sources...")
 
-    path = r'syntax/yagpdbcc/'
+    path = r'syntax/'
     keywords = []
 
-    with os.scandir(path) as dirs:
-        for entry in dirs:
-            if entry.name.endswith('.vim'):
-                keywords.extend(gen_keyword_list(path + entry.name))
+    files = [os.path.join(root, name) for root, _, files in os.walk(path)
+            for name in files
+            if name.endswith(".vim")]
+    for f in files:
+        keywords.extend(gen_keyword_list(f))
 
     write_file(gen_completion(keywords))
 
