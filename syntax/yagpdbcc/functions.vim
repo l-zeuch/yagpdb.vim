@@ -16,7 +16,9 @@
 " with this program; if not, write to the Free Software Foundation, Inc.,
 " 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-" Language: YAGPDB Custom Commands Maintainer: Luca Zeuch <l-zeuch@email.de>, LRitzdorf <42657792+LRitzdorf@users.noreply.github.com>
+" Language: YAGPDB Custom Commands
+" Maintainer: Luca Zeuch <l-zeuch@email.de>,
+"   LRitzdorf <42657792+LRitzdorf@users.noreply.github.com>
 
 " See https://docs.yagpdb.xyz/reference/templates/functions
 " for a list of all functions defined.
@@ -120,6 +122,3 @@ hi def link yagRepeat           Repeat
 hi def link yagLabel            Label
 hi def link yagKeyword          Keyword
 hi def link yagOperator         Operator
-
-
-
