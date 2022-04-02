@@ -16,9 +16,7 @@
 " with this program; if not, write to the Free Software Foundation, Inc.,
 " 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-" Language: YAGPDB Custom Commands
-" Maintainer: Luca Zeuch <l-zeuch@email.de>,
-"   LRitzdorf <42657792+LRitzdorf@users.noreply.github.com>
+" Language: YAGPDB Custom Commands Maintainer: Luca Zeuch <l-zeuch@email.de>, LRitzdorf <42657792+LRitzdorf@users.noreply.github.com>
 
 " See https://docs.yagpdb.xyz/reference/templates/functions
 " for a list of all functions defined.
@@ -38,6 +36,9 @@ syn keyword yagFunc dbIncr dbRank dbSetExpire dbTopEntries contained
 syn keyword yagFunc add cbrt div fdiv log mod mult pow contained
 syn keyword yagFunc randInt round roundCeil roundEven contained
 syn keyword yagFunc roundFloor sqrt sub contained
+
+" Logic
+syn keyword yagFunc not and or ne eq lt le gt ge contained
 
 " Member
 syn keyword yagFunc editNickname getMember onlineCount contained
@@ -103,3 +104,22 @@ syn keyword yagFunc pastNicknames pastUsernames userArg contained
 
 " Finally
 highlight link yagFunc Function
+
+" Keywords and such
+syn keyword yagCond             if else with try catch contained
+syn keyword yagBool             true false contained
+syn keyword yagRepeat           range while contained
+syn keyword yagLabel            define template block contained
+syn keyword yagKeyword          nil end contained
+syn match   yagOperator         contained "\v\:\="
+syn match   yagOperator         contained "\v\="
+
+hi def link yagCond             Conditional
+hi def link yagBool             Boolean
+hi def link yagRepeat           Repeat
+hi def link yagLabel            Label
+hi def link yagKeyword          Keyword
+hi def link yagOperator         Operator
+
+
+

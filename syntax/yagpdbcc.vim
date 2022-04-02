@@ -80,23 +80,6 @@ hi def link     yagFloatImg         yagNumber
 hi def link     yagNumber           Number
 
 
-" Keywords and such
-syn keyword     yagCond             contained if else with try catch
-syn keyword     yagBool             contained true false
-syn keyword     yagRepeat           contained range while
-syn keyword     yagLabel            contained define template block
-syn keyword     yagKeyword          contained nil end
-syn match       yagOperator         contained "\v\:\="
-syn match       yagOperator         contained "\v\="
-
-hi def link     yagCond             Conditional
-hi def link     yagBool             Boolean
-hi def link     yagRepeat           Repeat
-hi def link     yagLabel            Label
-hi def link     yagKeyword          Keyword
-hi def link     yagOperator         Operator
-
-
 " Comments; their content
 syn keyword     yagTodo             contained TODO FIXME XXX BUG HACK
 syn cluster     yagCommentGroup     contains=yagTodo
