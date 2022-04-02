@@ -24,82 +24,82 @@
 " for a list of all functions defined.
 
 " Channel
-syntax keyword yagpdbccFunction editChannelName editChannelTopic contained
-syntax keyword yagpdbccFunction getChannel getChannelOrThread contained
-syntax keyword yagpdbccFunction getPinCount getThread contained
+syn keyword yagFunc editChannelName editChannelTopic contained
+syn keyword yagFunc getChannel getChannelOrThread contained
+syn keyword yagFunc getPinCount getThread contained
 
 " Database
-syntax keyword yagpdbccFunction dbBottomEntries dbCount dbDel dbSet contained
-syntax keyword yagpdbccFunction dbDelByID dbDelMultiple dbGet contained
-syntax keyword yagpdbccFunction dbGetPattern dbGetPatternReverse contained
-syntax keyword yagpdbccFunction dbIncr dbRank dbSetExpire dbTopEntries contained
+syn keyword yagFunc dbBottomEntries dbCount dbDel dbSet contained
+syn keyword yagFunc dbDelByID dbDelMultiple dbGet contained
+syn keyword yagFunc dbGetPattern dbGetPatternReverse contained
+syn keyword yagFunc dbIncr dbRank dbSetExpire dbTopEntries contained
 
 " Math
-syntax keyword yagpdbccFunction add cbrt div fdiv log mod mult pow contained
-syntax keyword yagpdbccFunction randInt round roundCeil roundEven contained
-syntax keyword yagpdbccFunction roundFloor sqrt sub contained
+syn keyword yagFunc add cbrt div fdiv log mod mult pow contained
+syn keyword yagFunc randInt round roundCeil roundEven contained
+syn keyword yagFunc roundFloor sqrt sub contained
 
 " Member
-syntax keyword yagpdbccFunction editNickname getMember onlineCount contained
+syn keyword yagFunc editNickname getMember onlineCount contained
 
 " Mentions
-syntax keyword yagpdbccFunction mentionEveryone mentionHere contained
-syntax keyword yagpdbccFunction mentionRoleID mentionRoleName contained
+syn keyword yagFunc mentionEveryone mentionHere contained
+syn keyword yagFunc mentionRoleID mentionRoleName contained
 
 " Message
-syntax keyword yagpdbccFunction addMessageReactions addReactions contained
-syntax keyword yagpdbccFunction addResponseReactions complexMessage contained
-syntax keyword yagpdbccFunction complexMessageEdit deleteMessage contained
-syntax keyword yagpdbccFunction deleteAllMessageReactions editMessage contained
-syntax keyword yagpdbccFunction deleteMessageReaction deleteResponse contained
-syntax keyword yagpdbccFunction deleteTrigger editMessageNoEscape contained
-syntax keyword yagpdbccFunction getMessage pinMessage sendDM contained
-syntax keyword yagpdbccFunction sendMessage sendMessageNoEscape contained
-syntax keyword yagpdbccFunction sendMessageNoEscapeRetID unpinMessage contained
+syn keyword yagFunc addMessageReactions addReactions contained
+syn keyword yagFunc addResponseReactions complexMessage contained
+syn keyword yagFunc complexMessageEdit deleteMessage contained
+syn keyword yagFunc deleteAllMessageReactions editMessage contained
+syn keyword yagFunc deleteMessageReaction deleteResponse contained
+syn keyword yagFunc deleteTrigger editMessageNoEscape contained
+syn keyword yagFunc getMessage pinMessage sendDM contained
+syn keyword yagFunc sendMessage sendMessageNoEscape contained
+syn keyword yagFunc sendMessageNoEscapeRetID unpinMessage contained
 
 " Misc
-syntax keyword yagpdbccFunction adjective carg cembed createTicket contained
-syntax keyword yagpdbccFunction cslice sdict dict exec execAdmin contained
-syntax keyword yagpdbccFunction hasSuffix humanizeThousands in index contained
-syntax keyword yagpdbccFunction inFold kindOf len noun parseArgs contained
-syntax keyword yagpdbccFunction sendTemplate sendTemplateDM seq range contained
-syntax keyword yagpdbccFunction shuffle sleep sort execCC contained
-syntax keyword yagpdbccFunction scheduleUniqueCC hasPrefix contained
+syn keyword yagFunc adjective carg cembed createTicket contained
+syn keyword yagFunc cslice sdict dict exec execAdmin contained
+syn keyword yagFunc hasSuffix humanizeThousands in index contained
+syn keyword yagFunc inFold kindOf len noun parseArgs contained
+syn keyword yagFunc sendTemplate sendTemplateDM seq range contained
+syn keyword yagFunc shuffle sleep sort execCC contained
+syn keyword yagFunc scheduleUniqueCC hasPrefix contained
 
 " Role
-syntax keyword yagpdbccFunction addRoleID addRoleName getRole contained
-syntax keyword yagpdbccFunction giveRoleID giveRoleName hasRoleID contained
-syntax keyword yagpdbccFunction hasRoleName removeRoleID contained
-syntax keyword yagpdbccFunction removeRoleName roleAbove setRoles contained
-syntax keyword yagpdbccFunction setRoles takeRoleID takeRoleName contained
-syntax keyword yagpdbccFunction targetHasRoleID targetHasRoleName contained
+syn keyword yagFunc addRoleID addRoleName getRole contained
+syn keyword yagFunc giveRoleID giveRoleName hasRoleID contained
+syn keyword yagFunc hasRoleName removeRoleID contained
+syn keyword yagFunc removeRoleName roleAbove setRoles contained
+syn keyword yagFunc setRoles takeRoleID takeRoleName contained
+syn keyword yagFunc targetHasRoleID targetHasRoleName contained
 
 " Strings
-syntax keyword yagpdbccFunction joinStr lower print printf println contained
-syntax keyword yagpdbccFunction reFind reFindAll reFindAllSubmatches contained
-syntax keyword yagpdbccFunction reReplace reSplit slice split contained
-syntax keyword yagpdbccFunction title trimSpace upper urlescape contained
-syntax keyword yagpdbccFunction js html contained
+syn keyword yagFunc joinStr lower print printf println contained
+syn keyword yagFunc reFind reFindAll reFindAllSubmatches contained
+syn keyword yagFunc reReplace reSplit slice split contained
+syn keyword yagFunc title trimSpace upper urlescape contained
+syn keyword yagFunc js html contained
 
 " Time
-syntax keyword yagpdbccFunction currentTime formatTime contained
-syntax keyword yagpdbccFunction humanizeDurationHours contained
-syntax keyword yagpdbccFunction humanizeDurationMinutes contained
-syntax keyword yagpdbccFunction humanizeDurationSeconds contained
-syntax keyword yagpdbccFunction humanizeTimeSinceDays contained
-syntax keyword yagpdbccFunction loadLocation newDate contained
-syntax keyword yagpdbccFunction snowflakeToTime weekNumber contained
+syn keyword yagFunc currentTime formatTime contained
+syn keyword yagFunc humanizeDurationHours contained
+syn keyword yagFunc humanizeDurationMinutes contained
+syn keyword yagFunc humanizeDurationSeconds contained
+syn keyword yagFunc humanizeTimeSinceDays contained
+syn keyword yagFunc loadLocation newDate contained
+syn keyword yagFunc snowflakeToTime weekNumber contained
 
 " Type conversion
-syntax keyword yagpdbccFunction json structToSdict toByte toDuration contained
-syntax keyword yagpdbccFunction toFloat toInt toInt64 toRune ToString contained
-syntax keyword yagpdbccFunction str contained
+syn keyword yagFunc json structToSdict toByte toDuration contained
+syn keyword yagFunc toFloat toInt toInt64 toRune ToString contained
+syn keyword yagFunc str contained
 
 " User
-syntax keyword yagpdbccFunction currentUserAgeHuman contained
-syntax keyword yagpdbccFunction currentUserAgeMinutes contained
-syntax keyword yagpdbccFunction currentUserCreated contained
-syntax keyword yagpdbccFunction pastNicknames pastUsernames userArg contained
+syn keyword yagFunc currentUserAgeHuman contained
+syn keyword yagFunc currentUserAgeMinutes contained
+syn keyword yagFunc currentUserCreated contained
+syn keyword yagFunc pastNicknames pastUsernames userArg contained
 
 " Finally
-highlight link yagpdbccFunction Function
+highlight link yagFunc Function
