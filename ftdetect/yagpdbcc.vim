@@ -17,21 +17,25 @@
 " with this program; if not, write to the Free Software Foundation, Inc.,
 " 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
+" vint: -ProhibitAutocmdWithNoGroup
+" should not use augroups in ftdetect, see :help ftdetect
+"
+" [...] there is no "augroup" command, this has already been done when
+" sourcing your file. You could also use the pattern "*" and then check the
+" contents of the file to recognize it.
+
+
 " Detect our 'own' extensions, which are usually used by a
 " vast majority of the userbase.
-augroup yagpdbcc_set_ft
-    autocmd!
-    autocmd BufNewFile,BufRead
-        \ *.yag,*.yagpdb,*.yagcc,*.yag-cc,*.yagpdbcc,*.yagpdb-cc
-        \ setfiletype yagpdbcc
-augroup end
+au BufRead,BufNewFile   *.yag         setfiletype yagpdbcc
+au BufRead,BufNewFile   *.yagpdb      setfiletype yagpdbcc
+au BufRead,BufNewFile   *.yagcc       setfiletype yagpdbcc
+au BufRead,BufNewFile   *.yag-cc      setfiletype yagpdbcc
+au BufRead,BufNewFile   *.yagpdbcc    setfiletype yagpdbcc
+au BufRead,BufNewFile   *.yagpdb-cc   setfiletype yagpdbcc
 
 " Also use *.tmpl, *.gotmpl et al., which are originally only Go.
 if exists('g:yagpdbcc_override_ft') && g:yagpdbcc_override_ft
-    augroup yagpdbcc_override
-        autocmd!
-        autocmd BufNewFile,BufRead
-            \ *.tmpl,*.gotmpl,*.gotemplate
-            \ setfiletype yagpdbcc
-    augroup end
+    au BufRead,BufNewFile   *.tmpl    setfiletype yagpdbcc
+    au BufRead,BufNewFile   *.gotmpl  setfiletype yagpdbcc
 endif
