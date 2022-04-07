@@ -1,4 +1,5 @@
-# Convenience build file for running automated test suite.
+# Convenience build file for running automated test suite,
+# as well as generating completion sources.
 
 # Copyright (C) 2021    Lucas Ritzdorf, Luca Zeuch
 
@@ -16,26 +17,61 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-all: generate test
+PYTHON_PROG ?=
+NVIM_PROG   ?=
+VIM_PROG    ?=
+GIT_PROG    ?=
 
-generate:
-	python3 scripts/gen_code_completion.py
+ifeq ($(OS),WINDOWS_NT)
+PYTHON_PROG := $(shell where python3)
+NVIM_PROG   := $(shell where nvim)
+VIM_PROG    := $(shell where vim)
+GIT_PROG    := $(shell where git)
+else
+PYTHON_PROG := $(shell which python3)
+NVIM_PROG   := $(shell which nvim)
+VIM_PROG    := $(shell which vim)
+GIT_PROG    := $(shell which git)
+endif
+
+all: test generate
 
 test: test-vim test-nvim
 
+generate:
+ifdef PYTHON_PROG
+	$(PYTHON_PROG) scripts/gen_code_completion.py
+else
+	$(error python3 not found, aborting generation.)
+endif
+
 test-vim: .bundle/vader.vim
+ifdef VIM_PROG
+	@echo Found Vim installation, running tests...
 	cd test/ && \
-	vim -EsNu vimrc --not-a-term -c 'Vader! * */*'
+	$(VIM_PROG) -EsNu vimrc --not-a-term -c 'Vader! * */*'
+else
+	@echo Vim not found, skipping tests...
+endif
 
 test-nvim: .bundle/vader.vim
+ifdef NVIM_PROG
+	@echo Found Neovim installation, running tests...
 	cd test/ && \
-	nvim -EsNu vimrc --headless -c 'Vader! * */*'
+	$(NVIM_PROG) -EsNu vimrc --headless -c 'Vader! * */*'
+else
+	@echo Neovim not found, skipping tests...
+endif
 
 .bundle/vader.vim:
-	git clone --depth 1 https://github.com/junegunn/vader.vim.git \
+ifdef GIT_PROG
+	$(GIT_PROG) clone --depth 1 https://github.com/junegunn/vader.vim.git \
 		.bundle/vader.vim
+else
+	$(error git not found, aborting test suites.)
+endif
 
 clean:
 	rm -rf .bundle/
 
-.PHONY: test test-vim test-nvim clean
+.PHONY: clean test test-nvim test-vim
