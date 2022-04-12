@@ -1,15 +1,17 @@
-# All pull requests need to be reviewed by one of the maintainers.
+# All pull requests need to be reviewed by any maintainer.
 # Unless a later match is found, these two will be notified.
 *                       @l-zeuch @LRitzdorf
 
-# Folding + Functions
+# Base and tests
+/ftdetect/              @LRitzdorf
 /ftplugin/              @LRitzdorf
+/test/                  @LRitzdorf
+/syntax/                @LRitzdorf
 
-# CI / CD, etc.
-/.github/               @l-zeuch
+# Code completion
+/lua/                   @l-zeuch
+/plugin/                @l-zeuch
+
+# Build and automation
+/.github/workflows/     @l-zeuch
 /Makefile               @l-zeuch
-
-# Test cases and test environment
-/test/clipboard.vader   @l-zeuch
-/test/syntax.vader      @LRitzdorf
-/test/vimrc             @l-zeuch
