@@ -142,6 +142,7 @@ function source:complete(params, callback)
 		{ label = 'execCC' },
 		{ label = 'scheduleUniqueCC' },
 		{ label = 'hasPrefix' },
+		{ label = 'execTemplate' },
 		{ label = 'addRoleID' },
 		{ label = 'addRoleName' },
 		{ label = 'getRole' },
@@ -174,6 +175,7 @@ function source:complete(params, callback)
 		{ label = 'trimSpace' },
 		{ label = 'upper' },
 		{ label = 'urlescape' },
+		{ label = 'urlunescape' },
 		{ label = 'js' },
 		{ label = 'html' },
 		{ label = 'currentTime' },
@@ -215,7 +217,10 @@ function source:complete(params, callback)
 		{ label = 'template' },
 		{ label = 'block' },
 		{ label = 'nil' },
-		{ label = 'end' }
+		{ label = 'end' },
+		{ label = 'return' },
+		{ label = 'break' },
+		{ label = 'continue' }
     })
 end
 
