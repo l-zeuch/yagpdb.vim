@@ -68,6 +68,7 @@ syn keyword yagFunc inFold kindOf len noun parseArgs contained
 syn keyword yagFunc sendTemplate sendTemplateDM seq range contained
 syn keyword yagFunc shuffle sleep sort execCC contained
 syn keyword yagFunc scheduleUniqueCC hasPrefix contained
+syn keyword yagFunc execTemplate contained
 
 " Role
 syn keyword yagFunc addRoleID addRoleName getRole contained
@@ -82,7 +83,7 @@ syn keyword yagFunc joinStr lower print printf println contained
 syn keyword yagFunc reFind reFindAll reFindAllSubmatches contained
 syn keyword yagFunc reReplace reSplit slice split contained
 syn keyword yagFunc title trimSpace upper urlescape contained
-syn keyword yagFunc js html contained
+syn keyword yagFunc urlunescape js html contained
 
 " Time
 syn keyword yagFunc currentTime formatTime contained
@@ -106,19 +107,3 @@ syn keyword yagFunc pastNicknames pastUsernames userArg contained
 
 " Finally
 highlight link yagFunc Function
-
-" Keywords and such
-syn keyword yagCond             if else with try catch contained
-syn keyword yagBool             true false contained
-syn keyword yagRepeat           range while contained
-syn keyword yagLabel            define template block contained
-syn keyword yagKeyword          nil end contained
-syn match   yagOperator         contained "\v\:\="
-syn match   yagOperator         contained "\v\="
-
-hi def link yagCond             Conditional
-hi def link yagBool             Boolean
-hi def link yagRepeat           Repeat
-hi def link yagLabel            Label
-hi def link yagKeyword          Keyword
-hi def link yagOperator         Operator
