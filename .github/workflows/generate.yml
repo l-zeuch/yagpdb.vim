@@ -22,7 +22,7 @@ name: Generate Sources
 on:
   push:
     paths:
-      - 'syntax/'
+      - 'syntax/**'
       - 'scripts/boilerplate.lua'
       - 'scripts/gen_code_completion.py'
     branches:
@@ -42,6 +42,7 @@ jobs:
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
       - name: Commit regenerated files
         run: |
+          git status
           if [[ -n "$(git status -s lua/)" ]]; then
             git commit lua/ -m "completion: regenerate sources"
             git push
