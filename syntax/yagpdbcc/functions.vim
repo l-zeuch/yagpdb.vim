@@ -37,7 +37,7 @@ syn keyword yagFunc dbIncr dbRank dbSetExpire dbTopEntries contained
 " Math
 syn keyword yagFunc add cbrt div fdiv log mod mult pow contained
 syn keyword yagFunc randInt round roundCeil roundEven contained
-syn keyword yagFunc roundFloor sqrt sub contained
+syn keyword yagFunc roundFloor sqrt sub mathConst contained
 
 " Logic
 syn keyword yagFunc not and or ne eq lt le gt ge contained
@@ -82,6 +82,7 @@ syn keyword yagFunc targetHasRoleID targetHasRoleName contained
 syn keyword yagFunc joinStr lower print printf println contained
 syn keyword yagFunc reFind reFindAll reFindAllSubmatches contained
 syn keyword yagFunc reReplace reSplit slice split contained
+syn keyword yagFunc reQuoteMeta contained
 syn keyword yagFunc title trimSpace upper urlescape contained
 syn keyword yagFunc urlunescape js html contained
 
