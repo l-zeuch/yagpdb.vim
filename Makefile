@@ -59,29 +59,29 @@ endif
 PHONY := help
 help:
 	@echo	'Cleaning:'
-	@echo	'	clean 		- Remove all dependencies located in `.bundle/`.'
-	@echo 	''
-	@echo 	'Development:'
-	@echo 	'	test 		- Run test suite for Neovim and Vim.'
-	@echo 	' 				  This target automatically skips Neovim and/or Vim'
-	@echo 	' 				  if the respective program is not found.'
-	@echo 	'	test-vim 	- Run test suite only for Vim.'
-	@echo 	' 	test-nvim 	- Run test suite only for Neovim.'
-	@echo 	''
-	@echo 	'Code Analysis:'
+	@echo	'	clean		- Remove all dependencies located in `.bundle/`.'
+	@echo	''
+	@echo	'Development:'
+	@echo	'	test		- Run test suite for Neovim and Vim.'
+	@echo	'				  This target automatically skips Neovim and/or Vim'
+	@echo	'				  if the respective program is not found.'
+	@echo	'	test-vim	- Run test suite only for Vim.'
+	@echo	'	test-nvim	- Run test suite only for Neovim.'
+	@echo	''
+	@echo	'Code Analysis:'
 	@echo	'	lint		- Run linter on Vim script codebase,'
-	@echo 	' 				  requires python3 and vim-vint module.'
-	@echo 	'	generate 	- Create completion sources for nvim-cmp.'
-	@echo 	' 				  Requires python3.'
-	@echo   ''
-	@echo 	'General:'
-	@echo 	'	all 		- Run everything: test, lint, generate.'
-	@echo 	' 	install 	- Install this plugin as a manually installed plugin.'
-	@echo 	' 				  Be careful, this target automagically prefers Neovim.'
-	@echo 	' 				  To force Vim, please use `install-vim`.'
+	@echo	'				  requires python3 and vim-vint module.'
+	@echo	'	generate	- Create completion sources for nvim-cmp.'
+	@echo	'				  Requires python3.'
+	@echo	''
+	@echo	'General:'
+	@echo	'	all		- Run everything: test, lint, generate.'
+	@echo	'	install		- Install this plugin as a manually installed plugin.'
+	@echo	'				  Be careful, this target automagically prefers Neovim.'
+	@echo	'				  To force Vim, please use `install-vim`.'
 	@echo	'	install-vim	- Same as above, but ONLY try for Vim.'
-	@echo 	' 	uninstall 	- Uninstall this plugin from both Neovim and Vim.'
-	@echo 	' 	help 		- Print this help message. This is the default.'
+	@echo	'	uninstall	- Uninstall this plugin from both Neovim and Vim.'
+	@echo	'	help		- Print this help message. This is the default.'
 
 PHONY += all
 all: test lint generate
@@ -155,7 +155,7 @@ test-vim: .bundle/vader.vim
 ifdef VIM_PROG
 	@echo Found Vim installation, running tests...
 	cd test/ && \
-	$(VIM_PROG) -EsNu vimrc --not-a-term -c 'Vader! * */*'
+		$(VIM_PROG) -EsNu vimrc --not-a-term -c 'Vader! * */*'
 else
 	@echo Vim not found, skipping tests...
 endif
@@ -165,7 +165,7 @@ test-nvim: .bundle/vader.vim
 ifdef NVIM_PROG
 	@echo Found Neovim installation, running tests...
 	cd test/ && \
-	$(NVIM_PROG) -EsNu vimrc --headless -c 'Vader! * */*'
+		$(NVIM_PROG) -EsNu vimrc --headless -c 'Vader! * */*'
 else
 	@echo Neovim not found, skipping tests...
 endif
