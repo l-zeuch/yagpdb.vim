@@ -6,6 +6,20 @@ Syntax highlighting for [YAGPDB](https://yagpdb.xyz) custom commands in (N)Vim.
 
 ## Installing
 
+### Manually
+
+To install without any external plugin-manager dependencies, simply download the `Makefile` and run `make install`.
+If you wish to install this for your Vim installation, but have Neovim installed as well, make sure to use the
+`install-vim` target.
+
+```shell
+$ wget https://raw.githubusercontent.com/l-zeuch/yagpdb.vim/master/Makefile && make install
+```
+
+See also as Greg Hurrell's excellent Youtube video: [Vim screencast #75: Plugin managers](https://www.youtube.com/watch?v=X2_R3uxDN6g).
+
+### With a Plugin Manager
+
 Use your favorite plugin manager to install this plugin. [tpope/vim-pathogen](https://github.com/tpope/vim-pathogen),
 [VundleVim/Vundle.vim](https://github.com/VundleVim/Vundle.vim), [junegunn/vim-plug](https://github.com/junegunn/vim-plug),
 and [Shougo/dein.vim](https://github.com/Shougo/dein.vim) are some of the more popular ones.
@@ -13,10 +27,6 @@ A lengthy discussion of these and other managers can be found on
 [vi.stackexchange.com](https://vi.stackexchange.com/questions/388/what-is-the-difference-between-the-vim-plugin-managers).
 Basic instructions are provided below, but please **be sure to read, understand, and follow all the safety rules that
 come with your ~~power tools~~ plugin manager.**
-
-If you have no favorite, or want to manage your plugins without 3rd-party dependencies, consider using Vim 8+ packages,
-as described in Greg Hurrell's excellent Youtube video:
-[Vim screencast #75: Plugin managers](https://www.youtube.com/watch?v=X2_R3uxDN6g).
 
 <details>
 <summary>Pathogen</summary>
