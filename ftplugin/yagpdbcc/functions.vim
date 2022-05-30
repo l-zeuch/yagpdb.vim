@@ -61,7 +61,7 @@ vnoremap <script> <buffer> <silent> [] :<c-u>call <SID>NextSection(2, 1, 1)<cr>
 " Quick function and command to copy the whole file to the system clipboard
 function! YagCopy()
     if has('clipboard')
-        if exists('g:yagpdbcc_use_primary') && g:yagpdbcc_use_primary
+        if get(g:, 'yagpdbcc_use_primary')
             execute '%y *'
             " Fancy regex to remove the trailing newline that Vim copies
             let @*=substitute(@*,'\n$','','')

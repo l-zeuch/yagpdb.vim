@@ -35,7 +35,7 @@ au BufRead,BufNewFile   *.yagpdbcc    setfiletype yagpdbcc
 au BufRead,BufNewFile   *.yagpdb-cc   setfiletype yagpdbcc
 
 " Also use *.tmpl, *.gotmpl et al., which are originally only Go.
-if exists('g:yagpdbcc_override_ft') && g:yagpdbcc_override_ft
+if get(g:, 'yagpdbcc_override_ft')
     au BufRead,BufNewFile   *.tmpl    setfiletype yagpdbcc
     au BufRead,BufNewFile   *.gotmpl  setfiletype yagpdbcc
 endif
