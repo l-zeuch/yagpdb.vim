@@ -47,6 +47,9 @@ VIM_PROG    := $(shell which vim)
 GIT_PROG    := $(shell which git)
 endif
 
+DATA_HOME := $(XDG_DATA_HOME)
+DATA_HOME ?= '~/.local/share'
+
 PHONY :=
 
 # ----------------------------------------------------------------------------
@@ -97,10 +100,10 @@ install:
 	@echo 'Installing plugin...'
 	@echo 'Looking for Neovim...'
 ifdef NVIM_PROG
-	@echo 'Found Neovim, installing to ~/.local/share/nvim/site/pack/l-zeuch/start/yagpdb.vim'
-	mkdir -p ~/.local/share/nvim/site/pack/l-zeuch/start/yagpdb.vim
+	@echo 'Found Neovim, installing to $(DATA_HOME)/nvim/site/pack/l-zeuch/start/yagpdb.vim'
+	mkdir -p $(DATA_HOME)/nvim/site/pack/l-zeuch/start/yagpdb.vim
 	git clone https://github.com/l-zeuch/yagpdb.vim.git \
-		~/.local/share/nvim/site/pack/l-zeuch/start/yagpdb.vim
+		$(DATA_HOME)/nvim/site/pack/l-zeuch/start/yagpdb.vim
 	@echo 'Done.'
 else ifdef VIM_PROG
 	@echo 'Falling back to Vim...'
@@ -135,7 +138,7 @@ PHONY += uninstall
 uninstall:
 	@echo 'Uninstalling plugin...'
 	-rm -rf ~/.vim/bundle/yagpb.vim
-	-rm -rf ~/.local/share/nvim/site/pack/l-zeuch/start/yagpdb.vim
+	-rm -rf $(DATA_HOME)/nvim/site/pack/l-zeuch/start/yagpdb.vim
 	@echo 'Done.'
 	@echo 'If you have added this to your runtimepath, remember to remove it again.'
 
