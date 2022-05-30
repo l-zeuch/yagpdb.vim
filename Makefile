@@ -47,6 +47,8 @@ VIM_PROG    := $(shell which vim)
 GIT_PROG    := $(shell which git)
 endif
 
+PHONY :=
+
 # ----------------------------------------------------------------------------
 #
 # General
@@ -56,7 +58,7 @@ endif
 # ----------------------------------------------------------------------------
 # If make is invoked without any target provided, this will be our default
 # target.
-PHONY := help
+PHONY += help
 help:
 	@echo	'Cleaning:'
 	@echo	'	clean		- Remove all dependencies located in `.bundle/`.'
