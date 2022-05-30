@@ -11,7 +11,6 @@
 " but WITHOUT ANY WARRANTY; without even the implied warranty of
 " MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 " GNU General Public License for more details.
-
 " You should have received a copy of the GNU General Public License along
 " with this program; if not, write to the Free Software Foundation, Inc.,
 " 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
@@ -61,7 +60,7 @@ vnoremap <script> <buffer> <silent> [] :<c-u>call <SID>NextSection(2, 1, 1)<cr>
 " Quick function and command to copy the whole file to the system clipboard
 function! YagCopy()
     if has('clipboard')
-        if exists('g:yagpdbcc_use_primary') && g:yagpdbcc_use_primary
+        if get(g:, 'yagpdbcc_use_primary')
             execute '%y *'
             " Fancy regex to remove the trailing newline that Vim copies
             let @*=substitute(@*,'\n$','','')
