@@ -38,6 +38,7 @@ syn keyword yagFunc dbIncr dbRank dbSetExpire dbTopEntries contained
 syn keyword yagFunc add cbrt div fdiv log mod mult pow contained
 syn keyword yagFunc randInt round roundCeil roundEven contained
 syn keyword yagFunc roundFloor sqrt sub mathConst contained
+syn keyword yagFunc min max contained
 
 " Logic
 syn keyword yagFunc not and or ne eq lt le gt ge contained
@@ -68,7 +69,7 @@ syn keyword yagFunc inFold kindOf len noun parseArgs contained
 syn keyword yagFunc sendTemplate sendTemplateDM seq range contained
 syn keyword yagFunc shuffle sleep sort execCC contained
 syn keyword yagFunc scheduleUniqueCC hasPrefix contained
-syn keyword yagFunc execTemplate contained
+syn keyword yagFunc execTemplate verb contained
 
 " Role
 syn keyword yagFunc addRoleID addRoleName getRole contained
