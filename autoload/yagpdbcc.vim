@@ -1,7 +1,6 @@
-" File used to detect the filetype of extensions used for YAGPDB Custom
-" Commands.
+" Autoloading file for various bits of config and such.
 
-" Copyright (C) 2021    Lucas Ritzdorf, Luca Zeuch
+" Copyright (C) 2022    Lucas Ritzdorf, Luca Zeuch
 
 " This program is free software; you can redistribute it and/or modify
 " it under the terms of the GNU General Public License as published by
@@ -21,21 +20,13 @@
 let s:cpo_save = &cpoptions
 set cpoptions&vim
 
-" vint: -ProhibitAutocmdWithNoGroup
-" should not use augroups in ftdetect, see :help ftdetect
-"
-" [...] there is no "augroup" command, this has already been done when
-" sourcing your file. You could also use the pattern "*" and then check the
-" contents of the file to recognize it.
+function! yagpdbcc#OverrideFt() abort
+	return get(g:, 'yagpdbcc_override_ft')
+endfunction
 
-" Detect our 'own' extensions, which are usually used by a
-" vast majority of the userbase.
-au BufRead,BufNewFile   *.yag         setfiletype yagpdbcc
-au BufRead,BufNewFile   *.yagpdb      setfiletype yagpdbcc
-au BufRead,BufNewFile   *.yagcc       setfiletype yagpdbcc
-au BufRead,BufNewFile   *.yag-cc      setfiletype yagpdbcc
-au BufRead,BufNewFile   *.yagpdbcc    setfiletype yagpdbcc
-au BufRead,BufNewFile   *.yagpdb-cc   setfiletype yagpdbcc
+function! yagpdbcc#UsePrimary() abort
+	return get(g:, 'yagpdbcc_use_primary')
+endfunction
 
 " Restore Vi compat
 let &cpoptions = s:cpo_save

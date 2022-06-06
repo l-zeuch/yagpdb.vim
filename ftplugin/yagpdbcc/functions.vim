@@ -16,6 +16,15 @@
 " with this program; if not, write to the Free Software Foundation, Inc.,
 " 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
+if exists('b:did_ftplugin')
+    finish
+endif
+let b:did_ftplugin = 1
+
+" Don't spam the user when Vim is started in Vi compat
+let s:cpo_save = &cpoptions
+set cpoptions&vim
+
 " Automatically insert closing double braces
 inoremap         {{  {{}}<left><left>
 inoremap <expr>  }}  strpart(getline('.'), col('.')-1, 2) == "}}" ? "\<right>\<right>" : "}}"
@@ -61,7 +70,7 @@ vnoremap <script> <buffer> <silent> [] :<c-u>call <SID>NextSection(2, 1, 1)<cr>
 " Quick function and command to copy the whole file to the system clipboard
 function! YagCopy()
     if has('clipboard')
-        if get(g:, 'yagpdbcc_use_primary')
+        if yagpdbcc#UsePrimary() != 0
             execute '%y *'
             " Fancy regex to remove the trailing newline that Vim copies
             let @*=substitute(@*,'\n$','','')
@@ -70,7 +79,13 @@ function! YagCopy()
             let @+=substitute(@+,'\n$','','')
         endif
     else
-        echo "Your vim doesn't appear to have clipboard support."
+        echohl Error
+        echo "Your Vim doesn't appear to have clipboard support."
+        echohl None
     endif
 endfunction
 command! YagCopy :call YagCopy()
+
+" Restore Vi compat
+let &cpoptions = s:cpo_save
+unlet s:cpo_save

@@ -16,6 +16,14 @@
 " with this program; if not, write to the Free Software Foundation, Inc.,
 " 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
+if exists('b:did_ftplugin')
+    finish
+endif
+
+" Don't spam the user when Vim is started in Vi compat
+let s:cpo_save = &cpoptions
+set cpoptions&vim
+
 setlocal commentstring="{{/* %s */}}"
 
 setlocal foldmethod=indent
@@ -25,3 +33,7 @@ setlocal foldignore=
     " The empty right side is correct here
 " For full folding support via `expr` mode, see
 " <https://learnvimscriptthehardway.stevelosh.com/chapters/49.html>
+
+" Restore Vi compat
+let &cpoptions = s:cpo_save
+unlet s:cpo_save

@@ -24,7 +24,9 @@
 if exists('b:current_syntax')
     finish
 endif
+let b:current_syntax = 'yagpdbcc'
 
+" Be case sensitive
 syn case match
 
 " Define the region of the template expressions, where the real code is.
@@ -94,7 +96,6 @@ hi def link     yagComment          Comment
 hi def link     yagTodo             Todo
 
 
-
 " Type
 " Order is key here. If we do this later, it takes precedence over the generic
 " field and top-level object syntaxes, breaking them.
@@ -116,5 +117,3 @@ syn match       yagObject           contained "\v%(>|[\$\)])@<!\.[[:alnum:]\_]+"
 hi def link     yagDot              yagType
 hi def link     yagObject           yagType
 hi def link     yagType             Type
-
-let b:current_syntax = 'yagpdbcc'
