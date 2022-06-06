@@ -1,4 +1,4 @@
-" Autoloading file for various bits of config and such.
+" Autoloading file for the main plugin things.
 
 " Copyright (C) 2022    Lucas Ritzdorf, Luca Zeuch
 
@@ -20,13 +20,8 @@
 let s:cpo_save = &cpoptions
 set cpoptions&vim
 
-function! yagpdbcc#OverrideFt() abort
-	return get(g:, 'yagpdbcc_override_ft')
-endfunction
-
-function! yagpdbcc#UsePrimary() abort
-	return get(g:, 'yagpdbcc_use_primary')
-endfunction
+" This file will be populated with autoload-able global plugin functions.
+" Right now it is empty, because no such functions are needed yet.
 
 " Restore Vi compat
 let &cpoptions = s:cpo_save

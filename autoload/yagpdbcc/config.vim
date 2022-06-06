@@ -1,4 +1,4 @@
-" Main plugin file.
+" Autoloading file for various bits of config.
 
 " Copyright (C) 2022    Lucas Ritzdorf, Luca Zeuch
 
@@ -16,34 +16,19 @@
 " with this program; if not, write to the Free Software Foundation, Inc.,
 " 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-if exists('g:yagpdbcc_loaded')
-	finish
-endif
-let g:yagpdbcc_loaded = 1
-
 " Don't spam the user when Vim is started in Vi compat
 let s:cpo_save = &cpoptions
 set cpoptions&vim
 
-" vint: -ProhibitAutocmdWithNoGroup
-" Also use *.tmpl, *.gotmpl et al., which are originally only Go.
-if yagpdbcc#config#OverrideFt() != 0
-    " Here, we need to explicitly override the default "template" syntax for
-    " .tmpl files:
-    au BufRead,BufNewFile   *.tmpl    setlocal filetype=yagpdbcc
-    au BufRead,BufNewFile   *.gotmpl  setlocal filetype=yagpdbcc
-endif
-" vint: +ProhibitAutocmdWithNoGroup
+function! yagpdbcc#config#OverrideFt() abort
+	return get(g:, 'yagpdbcc_override_ft')
+endfunction
 
-" Load completion sources for nvim-cmp when Lua is supported.
-" This will also be the place for more Lua script, if we decide to add a few
-" more things that need/do Lua magic.
-if has('lua')
-lua << ENDLUA
-	require('yagpdbcc')
-ENDLUA
-endif
+function! yagpdbcc#config#UsePrimary() abort
+	return get(g:, 'yagpdbcc_use_primary')
+endfunction
 
 " Restore Vi compat
 let &cpoptions = s:cpo_save
 unlet s:cpo_save
+
