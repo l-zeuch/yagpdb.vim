@@ -44,6 +44,8 @@ lua << ENDLUA
 ENDLUA
 endif
 
+command! YagCopy :call yagpdbcc#Copy()
+
 " Restore Vi compat
 let &cpoptions = s:cpo_save
 unlet s:cpo_save

@@ -20,8 +20,23 @@
 let s:cpo_save = &cpoptions
 set cpoptions&vim
 
-" This file will be populated with autoload-able global plugin functions.
-" Right now it is empty, because no such functions are needed yet.
+" Quick function and command to copy the whole file to the system clipboard
+function! yagpdbcc#Copy()
+    if has('clipboard')
+        if yagpdbcc#config#UsePrimary() != 0
+            execute '%y *'
+            " Fancy regex to remove the trailing newline that Vim copies
+            let @*=substitute(@*,'\n$','','')
+        else
+            execute '%y +'
+            let @+=substitute(@+,'\n$','','')
+        endif
+    else
+        echohl Error
+        echo "Your Vim doesn't appear to have clipboard support."
+        echohl None
+    endif
+endfunction
 
 " Restore Vi compat
 let &cpoptions = s:cpo_save
