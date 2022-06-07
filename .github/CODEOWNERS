@@ -6,7 +6,7 @@
 /ftdetect/              @LRitzdorf
 /ftplugin/              @LRitzdorf
 /syntax/                @LRitzdorf
-/autoload/				@l-zeuch
+/autoload/              @l-zeuch
 /plugin/                @l-zeuch
 
 # Code completion
