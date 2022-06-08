@@ -37,6 +37,12 @@ au BufRead,BufNewFile   *.yag-cc      setfiletype yagpdbcc
 au BufRead,BufNewFile   *.yagpdbcc    setfiletype yagpdbcc
 au BufRead,BufNewFile   *.yagpdb-cc   setfiletype yagpdbcc
 
+" Also use *.tmpl, *.gotmpl et al., which are originally only Go, if configured.
+" Here, we need to explicitly override the default syntax - "setfiletype"
+" will not override an existing filetype.
+au BufRead,BufNewFile   *.tmpl,*.gotmpl
+    \ if yagpdbcc#config#OverrideFt() | setlocal filetype=yagpdbcc | endif
+
 " Restore Vi compat
 let &cpoptions = s:cpo_save
 unlet s:cpo_save

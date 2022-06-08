@@ -25,16 +25,6 @@ let g:yagpdbcc_loaded = 1
 let s:cpo_save = &cpoptions
 set cpoptions&vim
 
-" vint: -ProhibitAutocmdWithNoGroup
-" Also use *.tmpl, *.gotmpl et al., which are originally only Go.
-if yagpdbcc#config#OverrideFt() != 0
-    " Here, we need to explicitly override the default syntax - "setfiletype"
-    " will not override an existing filetype.
-    au BufRead,BufNewFile *.tmpl,*.gotmpl
-        \ if yagpdbcc#config#OverrideFt() | setlocal filetype=yagpdbcc | endif
-endif
-" vint: +ProhibitAutocmdWithNoGroup
-
 " Load completion sources for nvim-cmp when Lua is supported.
 " This will also be the place for more Lua script, if we decide to add a few
 " more things that need/do Lua magic.
