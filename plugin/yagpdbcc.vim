@@ -28,10 +28,10 @@ set cpoptions&vim
 " vint: -ProhibitAutocmdWithNoGroup
 " Also use *.tmpl, *.gotmpl et al., which are originally only Go.
 if yagpdbcc#config#OverrideFt() != 0
-    " Here, we need to explicitly override the default "template" syntax for
-    " .tmpl files:
-    au BufRead,BufNewFile   *.tmpl    setlocal filetype=yagpdbcc
-    au BufRead,BufNewFile   *.gotmpl  setlocal filetype=yagpdbcc
+    " Here, we need to explicitly override the default syntax - "setfiletype"
+    " will not override an existing filetype.
+    au BufRead,BufNewFile *.tmpl,*.gotmpl
+        \ if yagpdbcc#config#OverrideFt() | setlocal filetype=yagpdbcc | endif
 endif
 " vint: +ProhibitAutocmdWithNoGroup
 
