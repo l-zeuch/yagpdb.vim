@@ -2,16 +2,17 @@
 # Unless a later match is found, these two will be notified.
 *                       @l-zeuch @LRitzdorf
 
-# Base and tests
+# Base
 /ftdetect/              @LRitzdorf
 /ftplugin/              @LRitzdorf
-/test/                  @LRitzdorf
 /syntax/                @LRitzdorf
+/autoload/              @l-zeuch
+/plugin/                @l-zeuch
 
 # Code completion
 /lua/                   @l-zeuch
-/plugin/                @l-zeuch
 
 # Build and automation
+/test/                  @LRitzdorf
 /.github/workflows/     @l-zeuch
 /Makefile               @l-zeuch

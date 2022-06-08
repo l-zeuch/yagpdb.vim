@@ -104,9 +104,6 @@ detecting those extension as follows, if needed:
 let g:yagpdbcc_override_ft = 1
 ```
 
-Note that this particular bit of setup must come **before** the plugin is loaded (probably by your plugin manager),
-since `g:yagpdbcc_override_ft` is read only when the plugin first loads.
-
 ### Code Completion (Neovim >0.5 ONLY)
 
 We provide bundled sources for code-completion to be used with https://github.com/hrsh7th/nvim-cmp.

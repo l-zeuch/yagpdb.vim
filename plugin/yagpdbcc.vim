@@ -1,6 +1,6 @@
-" Script to determine text folding.
+" Main plugin file.
 
-" Copyright (C) 2021    Lucas Ritzdorf
+" Copyright (C) 2022    Lucas Ritzdorf, Luca Zeuch
 
 " This program is free software; you can redistribute it and/or modify
 " it under the terms of the GNU General Public License as published by
@@ -9,30 +9,32 @@
 
 " This program is distributed in the hope that it will be useful,
 " but WITHOUT ANY WARRANTY; without even the implied warranty of
-" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 " GNU General Public License for more details.
 
 " You should have received a copy of the GNU General Public License along
 " with this program; if not, write to the Free Software Foundation, Inc.,
 " 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-if exists('b:did_ftplugin')
-    finish
+if exists('g:yagpdbcc_loaded')
+	finish
 endif
+let g:yagpdbcc_loaded = 1
 
 " Don't spam the user when Vim is started in Vi compat
 let s:cpo_save = &cpoptions
 set cpoptions&vim
 
-setlocal commentstring="{{/* %s */}}"
+" Load completion sources for nvim-cmp when Lua is supported.
+" This will also be the place for more Lua script, if we decide to add a few
+" more things that need/do Lua magic.
+if has('lua')
+lua << ENDLUA
+	require('yagpdbcc')
+ENDLUA
+endif
 
-setlocal foldmethod=indent
-setlocal nofoldenable
-    " Don't fold on startup, but leave enabled
-setlocal foldignore=
-    " The empty right side is correct here
-" For full folding support via `expr` mode, see
-" <https://learnvimscriptthehardway.stevelosh.com/chapters/49.html>
+command! YagCopy :call yagpdbcc#Copy()
 
 " Restore Vi compat
 let &cpoptions = s:cpo_save
