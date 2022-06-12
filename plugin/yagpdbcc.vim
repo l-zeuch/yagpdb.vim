@@ -28,7 +28,7 @@ set cpoptions&vim
 " Load completion sources for nvim-cmp when Lua is supported.
 " This will also be the place for more Lua script, if we decide to add a few
 " more things that need/do Lua magic.
-if has('lua')
+if has('nvim-0.5')
 lua << ENDLUA
 	require('yagpdbcc')
 ENDLUA
