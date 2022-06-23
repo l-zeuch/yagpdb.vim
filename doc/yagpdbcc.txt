@@ -1,0 +1,247 @@
+*yagpdb.vim*    Syntax highlighting for YAGPDB custom commands.
+*yagpdbcc.txt*
+
+								   Version 1.0
+ 			By Luca Zeuch, Lucas Ritzdorf
+
+				       Type |gO| to see the table of contents.
+
+==============================================================================
+0. Contents
+
+    A. Plugin Documentation .............................
+    	01. Intro ........................................ |yagpdbcc-intro|
+    	02. Install ...................................... |yagpdbcc-install|
+    	03. Configuration ................................ |yagpdbcc-config|
+    	04. Commands ..................................... |yagpdbcc-commands|
+    	05. Functions .................................... |yagpdbcc-functions|
+    	06. Syntax Highlighting .......................... |yagpdbcc-syntax|
+    	07. Development .................................. |yagpdbcc-development|
+    	08. Credits ...................................... |yagpdbcc-credits|
+    	09. License ...................................... |yagpdbcc-license|
+
+==============================================================================
+1. Intro						      *yagpdbcc-intro*
+
+YAGPDB custom command support for Vim and Neovim. yagpdb.vim comes with rich
+syntax highlighting specifically tailored to the YAGPDB custom command
+language, code completion via `nvim-cmp`, and quality of life commands.
+
+
+==============================================================================
+2. Install						    *yagpdbcc-install*
+
+yagpdb.vim requires at least Vim 8.2, or Neovim 0.5.
+
+Currently it is safe to use the master branch for a stable experience.
+
+In future, we might switch to tagged releases, or maybe not. Be sure to follow
+the repository's activity somewhat closely.
+
+yagpdb.vim follows the standard runtime path structure and should work with
+any of the major plugin managers.
+
+MANUALLY
+
+For Pathogen or Vim |packages|, just clone the repo. For your convenience, we
+provide an automagic installation which you can run. Simply download the
+Makefile and execute the `install` target.
+That way, you will have a Vim 8 packages compatible installation.
+>
+    $ wget https://raw.githubusercontent.com/l-zeuch/yagpdb.vim/master/Makefile
+    $ make install
+<
+If you have both Neovim and Vim installed, but wish to install this preferably
+for Vim, make sure to use the `install-vim` target instead.
+
+WITH A PLUGIN MANAGER
+
+Use your favourite plugin manager to install this plugin. tpope/vim-pathogen,
+VundleVim/Vundle.vim, junegunn/vim-plug, and Shougo/dein.vim are some of the
+more popular ones.
+
+A lenghty discussion of these and other managers can be found on
+vi.stackexchange:
+https://vi.stackexchange.com/questions/388/what-is-the-difference-between-the-vim-plugin-managers
+
+Basic instructions are provided below, but please be sure to read, understand,
+and follow all the safety rules that come with your power tools.
+
+Pathogen~
+
+(https://github.com/tpope/vim-pathogen)
+
+Pathogen is more of a runtime path manager than a plugin manager.
+You must clone the plugins' repositories yourself to a specific location,
+and Pathogen makes sure they are available in Vim.
+
+In the terminal:
+>
+    git clone https://github.com/l-zeuch/yagpdb.vim.git \
+	~/.vim/bundle/yagpdb.vim
+<
+In your |vimrc|:
+>
+    call pathogen#infect()
+    syntax on
+    filetype plugin indent on
+<
+
+Vundle~
+
+(https://github.com/VundleVim/Vundle.vim)
+
+Install Vundle, according to its instructions. Afterwards, add the following
+text to your |vimrc|:
+>
+    call vundle#begin()
+	Plugin 'l-zeuch/yagpdb.vim'
+    call vundle#end()
+<
+Restart Vim, and run :PluginInstall to install your plugins.
+
+Vim-Plug~
+
+(https://github.com/junegunn/vim-plug)
+
+Install Vim-Plug, according to its instructions. Afterwards, add the following
+text to your |vimrc|:
+>
+    call plug#begin()
+	Plug 'l-zeuch/yagpdb.vim'
+    call plug#end()
+<
+Restart Vim and run the :PlugInstall statement to install your plugins.
+
+Dein~
+
+(https://github.com/Shougo/dein.vim)
+
+Install Dein, according to its instructions. Afterwards, add the following
+text to your |vimrc|:
+>
+    call dein#begin()
+	call dein#add('l-zeuch/yagpdb.vim')
+    call dein#end()
+<
+Restart Vim and run the :call dein#install() statement to install your
+plugins.
+
+==============================================================================
+3. Configuration					     *yagpdbcc-config*
+
+CLIPBOARD
+
+If you prefer to insert text with the middle mouse button instead of Ctrl V,
+change to the PRIMARY register as follows:
+>
+    let g:yagpdbcc_use_primary = 1
+<
+OVERRIDING FILETYPES
+
+Sometimes, you may with to use a file extension already in use by another
+language, such as `*.gotmpl`. If that is the case, also select those
+extensions as follows:
+>
+    let g:yagpdbcc_override_ft = 1
+<
+CODE COMPLETION
+
+Requires Neovim 0.5 or higher, see |Lua|.
+
+We provided bundled sources for code-completion to be used with
+hrsh7th/nvim-cmp. Follow the installation instructions there and enable the
+source as follows:
+>
+    sources = cmp.config.sources({
+	-- ...
+	{ name = 'yagpdb-cc' },
+	-- ...
+    })
+<
+==============================================================================
+4. Commands						   *yagpdbcc-commands*
+
+								    *:YagCopy*
+:YagCopy
+    YagCopy copies the current buffer's content to your clipboard to paste
+    into the YAGPDB control panel.
+
+==============================================================================
+5. Functions					          *yagpdbcc-functions*
+
+Currently, there are no functions available outside of internal use.
+
+==============================================================================
+6. Syntax Highlighting		          *ft-yagpdbcc-syntax* *yagpdbcc-syntax*
+
+yagpdb.vim comes with a fully custom syntax highlighting. It is aimed to be
+easily expandable. Finally, it makes use of the inbuilt |highlight-groups|,
+but links clusters and groups together in internal groups prefaced with `Yag`.
+
+If you want to add your own new functions and/or keywords, because you're
+running a modified version of YAGPDB, or just want to play around, add them to
+the appropriate file located under `syntax/`.
+
+Afterwards, to refresh the completion source, run the `generate` target via
+`make`, if desired.
+
+We recommend you read the currently existing syntax definitions carefully
+before expanding them with your own.
+
+==============================================================================
+7. Development						*yagpdbcc-development*
+
+
+TESTING
+
+yagpdb.vim uses test files written with the vader.vim testing framework. It is
+declarative, thus making it quite easy to write new test-cases.
+
+As of now, we have little to no code-coverage and only test parts of the
+syntax highlighting and pattern matching.
+
+The full test suite is run via the `make test` target, but individual targets
+for Vim and Neovim respectively are available as well.
+
+CONTRIBUTING
+
+All development finds place on the GitHub repository l-zeuch/yagpdb.vim.
+Before submitting a patch, be sure to read CONTRIBUTING.md for a full guide.
+
+
+==============================================================================
+8. Credits						    *yagpdbcc-credits*
+
+* YAGPDB contributors for an awesome Discord bot without which this plugin
+  would never have existed.
+* Steve Losh and his excellent "Learn Vim Script The Hard Way" blog post.
+* Other Vim plugins for inspiration, especially on how to structure
+  plugin documentation (vim-go, vim-pathogen, vim-fugitive)
+* yagpdb.vim contributors:
+  https://github.com/l-zeuch/vim-go/graphs/contributors.
+
+==============================================================================
+9. License						    *yagpdbcc-license*
+
+yagpdb.vim is licensed under the terms of the GNU General Public License,
+version 2.0 (SPDX-Identifier GPL-2.0). Please refer to the `LICENSE.md` file
+for more details.
+
+	       Copyright (C) 2021    Lucas Ritzdorf, Luca Zeuch
+
+     This program is free software; you can redistribute it and/or modify
+     it under the terms of the GNU General Public License as published by
+      the Free Software Foundation; either version 2 of the License, or
+		     (at your option) any later version.
+
+       This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+		 GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License along
+   with this program; if not, write to the Free Software Foundation, Inc.,
+	 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+		      			     vim:tw=78:ts=8:noet:ft=help:norl:
