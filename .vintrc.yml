@@ -22,7 +22,7 @@ cmdargs:
 
 policies:
   ProhibitNoAbortFunction:
-    enabled: false
+    enabled: true
   ProhibitImplicitScopeVariable:
     enabled: true
   ProhibitUnusedVariable:
