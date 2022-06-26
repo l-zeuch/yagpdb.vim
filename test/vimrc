@@ -17,8 +17,13 @@
 " with this program; if not, write to the Free Software Foundation, Inc.,
 " 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
+" Set up the plugin and framework
 set runtimepath+=../.bundle/vader.vim/
 set runtimepath+=../
+
+" Set up the required things for the plugin to run,
+" also get rid of a few annoying things that would only
+" pollute the user directory.
 filetype plugin indent on
 syntax enable
 set nomore
