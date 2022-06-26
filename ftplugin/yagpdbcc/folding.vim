@@ -16,13 +16,13 @@
 " with this program; if not, write to the Free Software Foundation, Inc.,
 " 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-if exists('b:did_ftplugin')
-    finish
-endif
-
 " Don't spam the user when Vim is started in Vi compat
 let s:cpo_save = &cpoptions
 set cpoptions&vim
+
+if exists('b:did_ftplugin')
+    finish
+endif
 
 setlocal commentstring="{{/* %s */}}"
 
