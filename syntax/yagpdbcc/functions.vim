@@ -23,6 +23,10 @@
 " See https://docs.yagpdb.xyz/reference/templates/functions
 " for a list of all functions defined.
 
+" Bitwise ops
+syn keyword yagFunc bitwiseAnd bitwiseOr bitwiseXor bitwiseNot contained
+syn keyword yagFunc bitwiseAndNot bitwiseLeftShift bitwiseRightShift contained
+
 " Channel
 syn keyword yagFunc editChannelName editChannelTopic contained
 syn keyword yagFunc getChannel getChannelOrThread contained
@@ -45,6 +49,10 @@ syn keyword yagFunc not and or ne eq lt le gt ge contained
 
 " Member
 syn keyword yagFunc editNickname getMember onlineCount contained
+
+" Member permissions
+syn keyword yagFunc hasPermissions targetHasPermissions contained
+syn keyword yagFunc getTargetPermissionsInChannel contained
 
 " Mentions
 syn keyword yagFunc mentionEveryone mentionHere contained
