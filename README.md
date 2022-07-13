@@ -94,16 +94,6 @@ used as follows:
 ```vim
 let g:yagpdbcc_use_primary = 1
 ```
-
-### Overriding Filetypes
-
-Sometimes, you may wish to use a file extension already in use by another language, such as `*.gotmpl`. Enable also
-detecting those extension as follows, if needed:
-
-```vim
-let g:yagpdbcc_override_ft = 1
-```
-
 ### Code Completion (Neovim >0.5 ONLY)
 
 We provide bundled sources for code-completion to be used with https://github.com/hrsh7th/nvim-cmp.
@@ -115,6 +105,27 @@ sources = cmp.config.sources({
     { name = 'yagpdb-cc' },
     ...
 })
+```
+
+### Overriding Filetypes
+
+Sometimes, you may wish to use a file extension already in use by another language, such as `*.gotmpl`. Enable also
+detecting those extension as follows, if needed:
+
+```vim
+let g:yagpdbcc_override_ft = 1
+```
+
+### Snippet Engines
+
+We provide snippets for two distinct engines: [UltiSnips](https://github.com/SirVer/ultisnips),
+and [Neosnippet](https://github.com/Shougo/neosnippet.vim).
+
+Select which one to use by setting the `g:yagpdbcc_snippet_engine` variable to either ` ultisnips`, or `neosnippet`,
+like so:
+
+```vim
+let g:yagpdbcc_snippet_engine = "ultisnips"
 ```
 
 ## Contributing
