@@ -130,20 +130,12 @@ plugins.
 ==============================================================================
 3. Configuration					     *yagpdbcc-config*
 
-CLIPBOARD
+CLIPBOARD						*g:yagpdbcc_use_primary*
 
 If you prefer to insert text with the middle mouse button instead of Ctrl V,
 change to the PRIMARY register as follows:
 >
     let g:yagpdbcc_use_primary = 1
-<
-OVERRIDING FILETYPES
-
-Sometimes, you may with to use a file extension already in use by another
-language, such as `*.gotmpl`. If that is the case, also select those
-extensions as follows:
->
-    let g:yagpdbcc_override_ft = 1
 <
 CODE COMPLETION
 
@@ -158,6 +150,24 @@ source as follows:
 	{ name = 'yagpdb-cc' },
 	-- ...
     })
+<
+OVERRIDING FILETYPES					*g:yagpdbcc_override_ft*
+
+Sometimes, you may with to use a file extension already in use by another
+language, such as `*.gotmpl`. If that is the case, also select those
+extensions as follows:
+>
+    let g:yagpdbcc_override_ft = 1
+<
+SNIPPET ENGINES					    *g:yagpdbcc_snippet_engine*
+
+We provide snippets for two distinct engines: SirVer/UltiSnips, and
+Shogo/neosnippet.vim.
+
+Select which one to use by setting the |g:yagpdbcc_snippet_engine| variable to
+either "ultisnips", or "neosnippet, like so:
+>
+    let g:yagpdbcc_snippet_engine = "ultisnips"
 <
 ==============================================================================
 4. Commands						   *yagpdbcc-commands*
