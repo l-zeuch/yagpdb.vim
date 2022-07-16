@@ -1,4 +1,4 @@
-# GitHub workflow configuration file: Completion source (re)generation
+# GitHub workflow configuration file: Linting
 #
 # Copyright (C) 2022    Lucas Ritzdorf, Luca Zeuch
 #
@@ -17,45 +17,49 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 ---
-name: Generate Sources
+name: Lint
 
 on:
+  push:
+    paths-ignore:
+      - '*.txt'
   pull_request:
-    paths:
-      - 'syntax/**'
-      - 'scripts/boilerplate.lua'
-      - 'scripts/gen_code_completion.py'
+    paths-ignore:
+      - '*.txt'
 
 jobs:
 
-  generate:
+  lint-vim:
     runs-on: ubuntu-latest
-
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      GIT_USER: github-actions
-      GIT_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Setup git
+      - name: Install vim-vint
         run: |
-          git config user.name $GIT_USER
-          git config user.email $GIT_EMAIL
+          python -m pip install --upgrade pip
+          pip install vim-vint
 
-      - name: Checkout PR
-        run: gh pr checkout ${{ github.event.pull_request.number }}
+      - name: Run VimL linter
+        run: make lint
 
-      - name: Generate Completion
-        run: make generate
+  lint-python:
+    runs-on: ubuntu-latest
 
-      - name: Commit changes
-        run: |
-          if [[ -n "$(git status -s lua/)" ]]; then
-            git commit lua/ -m "completion: regenerate sources"
-          fi
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-      - name: Push changes
-        run: git push
+      - name: Lint with Pyright
+        uses: jakebailey/pyright-action@v1
+
+  lint-markdown:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Lint with Markdownlint
+        uses: actionshub/markdownlint@main
