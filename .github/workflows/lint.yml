@@ -63,3 +63,5 @@ jobs:
 
       - name: Lint with Markdownlint
         uses: actionshub/markdownlint@main
+        with:
+          filesToIgnoreRegex: "LICENSE.*|permission\\.md"

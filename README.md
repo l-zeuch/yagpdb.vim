@@ -13,7 +13,7 @@ If you wish to install this for your Vim installation, but have Neovim installed
 `install-vim` target.
 
 ```shell
-$ wget https://raw.githubusercontent.com/l-zeuch/yagpdb.vim/master/Makefile && make install
+wget https://raw.githubusercontent.com/l-zeuch/yagpdb.vim/master/Makefile && make install
 ```
 
 See also as Greg Hurrell's excellent Youtube video: [Vim screencast #75: Plugin managers](https://www.youtube.com/watch?v=X2_R3uxDN6g).
@@ -34,15 +34,19 @@ Pathogen is more of a runtime path manager than a plugin manager. You must clone
 a specific location, and Pathogen makes sure they are available in Vim.
 
 1. In the terminal,
+
     ```bash
     git clone https://github.com/l-zeuch/yagpdb.vim.git ~/.vim/bundle/yagpdb.vim
     ```
+
 1. In your `vimrc`,
+
     ```vim
     call pathogen#infect()
     syntax on
     filetype plugin indent on
     ```
+
 </details>
 
 <details>
@@ -50,12 +54,15 @@ a specific location, and Pathogen makes sure they are available in Vim.
 
 1. Install Vundle, according to its instructions.
 1. Add the following text to your `vimrc`.
+
     ```vim
     call vundle#begin()
       Plugin 'l-zeuch/yagpdb.vim'
     call vundle#end()
     ```
+
 1. Restart Vim, and run the `:PluginInstall` statement to install your plugins.
+
 </details>
 
 <details>
@@ -63,12 +70,15 @@ a specific location, and Pathogen makes sure they are available in Vim.
 
 1. Install Vim-Plug, according to its instructions.
 1. Add the following text to your `vimrc`.
-```vim
-call plug#begin()
-  Plug 'l-zeuch/yagpdb.vim'
-call plug#end()
-```
+
+    ```vim
+    call plug#begin()
+      Plug 'l-zeuch/yagpdb.vim'
+    call plug#end()
+    ```
+
 1. Restart Vim, and run the `:PlugInstall` statement to install your plugins.
+
 </details>
 
 <details>
@@ -76,12 +86,15 @@ call plug#end()
 
 1. Install Dein, according to its instructions.
 1. Add the following text to your `vimrc`.
+
     ```vim
     call dein#begin()
       call dein#add('l-zeuch/yagpdb.vim')
     call dein#end()
     ```
+
 1. Restart Vim, and run the `:call dein#install()` statement to install your plugins.
+
 </details>
 
 ## Configuration
@@ -94,9 +107,10 @@ used as follows:
 ```vim
 let g:yagpdbcc_use_primary = 1
 ```
+
 ### Code Completion (Neovim >0.5 ONLY)
 
-We provide bundled sources for code-completion to be used with https://github.com/hrsh7th/nvim-cmp.
+We provide bundled sources for code-completion to be used with [hrsh7th/nvim-cmp](https://github.com/hrsh7th/nvim-cmp).
 Follow the installation instructions there and enable the source as follows:
 
 ```lua
@@ -121,7 +135,7 @@ let g:yagpdbcc_override_ft = 1
 We provide snippets for two distinct engines: [UltiSnips](https://github.com/SirVer/ultisnips),
 and [Neosnippet](https://github.com/Shougo/neosnippet.vim).
 
-Select which one to use by setting the `g:yagpdbcc_snippet_engine` variable to either ` ultisnips`, or `neosnippet`,
+Select which one to use by setting the `g:yagpdbcc_snippet_engine` variable to either `ultisnips`, or `neosnippet`,
 like so:
 
 ```vim
