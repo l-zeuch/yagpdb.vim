@@ -1,6 +1,6 @@
 # GitHub workflow configuration file: Continuous Integration
 #
-# Copyright (C) 2021    Lucas Ritzdorf, Luca Zeuch
+# Copyright (C) 2022    Lucas Ritzdorf, Luca Zeuch
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -31,37 +31,45 @@ on:
   workflow_dispatch:
 
 jobs:
-  # Run Unit Tests via vader.vim
-  test:
+
+  test-vim:
     runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        version: [v8.0.0000, v8.2.0000, v9.0.0000, stable]
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+
       - name: Install latest Vim stable
         uses: rhysd/action-setup-vim@v1
         with:
-          version: v8.2.5046
+          version: ${{ matrix.version }}
+
+      - name: Run Vim Tests
+        run: make test-vim
+
+
+  test-nvim:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        version: [v0.5.0, v0.6.0, v0.7.0, stable]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
       - name: Install latest Neovim
         uses: rhysd/action-setup-vim@v1
         with:
           neovim: true
-          version: v0.5.0
-      - name: Run Vim Tests
-        run: make test-vim
+          version: ${{ matrix.version }}
+
       - name: Run Neovim Tests
-        if: always()
         run: make test-nvim
-
-
-  # Vim script linting
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Install vim-vint
-        run: |
-          python -m pip install --upgrade pip
-          pip install vim-vint
-      - name: Checkout repository
-        uses: actions/checkout@v2
-      - name: run linter
-        run: make lint

@@ -5,5 +5,8 @@
 lua/*           linguist-generated=true
 scripts/*.lua   linguist-generated=true
 
+# Not exactly our code
+.github/*.rb    linguist-vendored=true
+
 # Detect vader test files as Vim script
 *.vader         linguist-language=viml

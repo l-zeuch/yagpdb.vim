@@ -57,7 +57,7 @@ def get_vint_output():
 
     try:
         process = subprocess.Popen(command, stdout = subprocess.PIPE)
-        output = process.stdout.read()
+        output = process.communicate()[0]
         process.wait()
 
         return output
