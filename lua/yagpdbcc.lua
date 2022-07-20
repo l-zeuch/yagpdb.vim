@@ -143,6 +143,7 @@ function source:complete(params, callback)
 		{ label = 'sendMessage' },
 		{ label = 'sendMessageNoEscape' },
 		{ label = 'sendMessageNoEscapeRetID' },
+		{ label = 'sendMessageRetID' },
 		{ label = 'unpinMessage' },
 		{ label = 'adjective' },
 		{ label = 'carg' },
