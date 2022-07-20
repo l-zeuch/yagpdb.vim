@@ -67,7 +67,8 @@ syn keyword yagFunc deleteMessageReaction deleteResponse contained
 syn keyword yagFunc deleteTrigger editMessageNoEscape contained
 syn keyword yagFunc getMessage pinMessage sendDM contained
 syn keyword yagFunc sendMessage sendMessageNoEscape contained
-syn keyword yagFunc sendMessageNoEscapeRetID unpinMessage contained
+syn keyword yagFunc sendMessageNoEscapeRetID sendMessageRetID contained
+syn keyword yagFunc unpinMessage contained
 
 " Misc
 syn keyword yagFunc adjective carg cembed createTicket contained
