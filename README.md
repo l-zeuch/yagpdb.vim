@@ -145,7 +145,7 @@ let g:yagpdbcc_snippet_engine = "ultisnips"
 ## Contributing
 
 If you spot an error, or want to contribute new features, feel free open a pull request!
-Please refer to [CONTRIBUTING](CONTRIBUTING.md) for our guidelines on how to contribute.
+Please refer to [CONTRIBUTING](.github/CONTRIBUTING.md) for our guidelines on how to contribute.
 
 ### Other Contributions
 
@@ -163,7 +163,7 @@ If you like it, feel free to give him cookies as a reward.
 3) YAGPDB is a service provided by [botlabs](https://botlabs.gg) and is in no way associated with this plugin.
 
 4) The developers of this plugin have been granted permission to use the brand name YAGPDB in this plugin.
-Please view the [permission](permission.md) file for details.
+Please view the [permission](doc/permission.txt) file for details.
 
 ### License
 
