@@ -29,10 +29,8 @@ function! yagpdbcc#config#UsePrimary() abort
 endfunction
 
 function! yagpdbcc#config#SnippetEngine() abort
-    return get(g:, 'yagpdbcc_snippet_engine')
+    return get(g:, 'yagpdbcc_snippet_engine', '')
 endfunction
 
 " Restore Vi compat
 let &cpoptions = s:cpo_save
-unlet s:cpo_save
-
