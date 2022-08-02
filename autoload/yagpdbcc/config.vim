@@ -34,5 +34,3 @@ endfunction
 
 " Restore Vi compat
 let &cpoptions = s:cpo_save
-unlet s:cpo_save
-
