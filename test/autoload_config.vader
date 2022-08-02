@@ -1,4 +1,4 @@
-# Test case file for autoloaded functions
+# Test case file for autoloaded config functions
 
 # Copyright (C) 2022    Lucas Ritzdorf, Luca Zeuch
 
@@ -21,14 +21,16 @@
 #   LRitzdorf <42657792+LRitzdorf@users.noreply.github.com>
 
 Before:
-  source ../autoload/yagpdbcc.vim
+  source ../autoload/yagpdbcc/config.vim
 
 After:
   Restore
 
-Execute (yagpdbcc#PathSep()):
-  if has('win32')
-    AssertEqual '\', yagpdbcc#PathSep()
-  else
-    AssertEqual '/', yagpdbcc#PathSep()
-  endif
+Execute (yagpdbcc#config#OverrideFt()):
+  AssertEqual 0, yagpdbcc#config#OverrideFt()
+
+Execute (yagpdbcc#config#UsePrimary()):
+  AssertEqual 0, yagpdbcc#config#UsePrimary()
+
+Execute (yagpdbcc#config#SnippetEngine()):
+  AssertEqual '', yagpdbcc#config#SnippetEngine()
