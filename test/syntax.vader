@@ -285,20 +285,48 @@ Execute (exponents, imaginaries, pipes, format verbs):
 
 Given (custom embed with lots of nested syntax elements):
   {{ $embed := cembed
-      "title" (printf "User info: `%s`" $user.Username)
-      "description" "See below for details on this user."
-      "color" $color
-      "fields" (cslice
-          (sdict "name" "User ID" "value" (toString $user.ID) "inline" false)
-          (sdict "name" "Server nickname" "value" $nick "inline" false)
-          (sdict "name" "Server join info" "value" (printf "Joined on %s, %s ago" (formatTime $member.JoinedAt.Parse) (humanizeDurationHours (currentTime.Sub $member.JoinedAt.Parse))) "inline" false)
-      )
-      "thumbnail" (sdict "url" ($user.AvatarURL "256"))
-      "footer" (sdict "text" (printf "Account created %s, %s ago" (formatTime $created) (humanizeDurationHours (currentTime.Sub $created))))
+  "title" (printf "User info: `%s`" $user.Username)
+  "description" "See below for details on this user."
+  "color" $color
+  "fields" (cslice
+  (sdict "name" "User ID" "value" (toString $user.ID) "inline" false)
+  (sdict "name" "Server nickname" "value" $nick "inline" false)
+  (sdict "name" "Server join info" "value" (printf "Joined on %s, %s ago" (formatTime $member.JoinedAt.Parse) (humanizeDurationHours (currentTime.Sub $member.JoinedAt.Parse))) "inline" false)
+  )
+  "thumbnail" (sdict "url" ($user.AvatarURL "256"))
+  "footer" (sdict "text" (printf "Account created %s, %s ago" (formatTime $created) (humanizeDurationHours (currentTime.Sub $created))))
   }}
   {{ sendMessage nil $embed }}
 
-Execute (syntax check):
-# TODO (just pass for now)
-  AssertEqual 1, 1
+Execute (function match with deep structure):
+  AssertEqual 'yagFunc', SyntaxAt(1, 18), "Match function name in open-ended action"
+  AssertEqual 'yagFunc', SyntaxAt(2, 15), "Match function name on line continuation"
+  AssertEqual 'yagFunc', SyntaxAt(5, 16), "Match function name nested deep down"
+  AssertEqual 'yagFunc', SyntaxAt(6, 6), "Match function name deeply nested"
+  AssertEqual 'yagFunc', SyntaxAt(7, 6), "Match function name deeply nested"
+  AssertEqual 'yagFunc', SyntaxAt(8, 6), "Match function name deeply nested"
+  AssertEqual 'yagFunc', SyntaxAt(8, 136), "Match function name super deeply nested"
+  AssertEqual 'yagFunc', SyntaxAt(11, 114), "Match function name with method attached"
 
+Execute (string matches):
+  AssertEqual 'yagString', SyntaxAt(2, 17), "Match quoted strings"
+  AssertEqual 'yagString', SyntaxAt(2, 29), "Do not match quoted backticks"
+  AssertEqual 'yagFormat', SyntaxAt(2, 30), "Match format verbs identifier"
+  AssertEqual 'yagFormat', SyntaxAt(2, 31), "Match format verbs"
+  AssertEqual 'yagString', SyntaxAt(6, 12), "Match quoted sdict key names"
+  AssertEqual 'yagExpr', SyntaxAt(6, 24), "Do not expand string match followed by another string"
+  AssertEqual 'yagString', SyntaxAt(7, 12), "Match quoted sdict key names"
+  AssertEqual 'yagExpr', SyntaxAt(7, 32), "Do not expand string match followed by another string"
+  AssertEqual 'yagString', SyntaxAt(8, 181), "Match strings after a lot of syntax shenanigans"
+
+Execute (identifiers and objects):
+  AssertEqual 'yagIdentifier', SyntaxAt(2, 39), "Match identifiers with field"
+  AssertEqual 'yagExpr', SyntaxAt(2, 45), "Do not match fields as object"
+  AssertEqual 'yagIdentifier', SyntaxAt(7, 41), "Match identifiers between strings"
+  AssertEqual 'yagIdentifier', SyntaxAt(8, 85), "Match identifiers with fields + methods"
+  AssertEqual 'yagExpr', SyntaxAt(8, 92), "Do not match fields as object"
+  AssertEqual 'yagExpr', SyntaxAt(8, 101), "Do not match methods on fields as object"
+
+Execute (keywords and booleans):
+  AssertEqual 'yagBool', SyntaxAt(7, 56), "Match boolean values (false)"
+  AssertEqual 'yagKeyword', SyntaxAt(13, 16), "Match nil keyword"
