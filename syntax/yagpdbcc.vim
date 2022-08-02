@@ -65,7 +65,7 @@ syn region      yagString           contained start=+"+
                                   \ skip=+\\\\\|\\"+ end=+"\|$+
                                   \ contains=@yagStringGroup,@Spell
 syn region      yagRawStr           contained start=#\v`# end=#\v`#
-                                  \ contains=@Spell fold
+                                  \ contains=yagFormat,@Spell fold
 
 hi def link     yagRawStr           yagString
 hi def link     yagString           String
