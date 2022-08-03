@@ -20,7 +20,9 @@
 let s:cpo_save = &cpoptions
 set cpoptions&vim
 
-" Quick function and command to copy the whole file to the system clipboard
+" yagpdbcc#Copy copies the content of the current buffer to the user clipboard
+" register * or +, minus the trailing newline for each file.
+" It echoes an error if Vim is compiled without clipboard support.
 function! yagpdbcc#Copy() abort
     if has('clipboard')
         if yagpdbcc#config#UsePrimary() != 0
@@ -38,7 +40,15 @@ function! yagpdbcc#Copy() abort
     endif
 endfunction
 
-" Make jumping between sections work nicely
+" yagpdbcc#NextSection eases jumping between sections, i.e. actions.
+" It takes three arguments: type, backwards, visual.
+"
+" type 1 sets the pattern to match the start of line, and jump to beginning of
+" word. type 2 jumps to EOL.
+"
+" backwards is a boolean: 0 for forwards, 1 for backwards.
+"
+" visual is a boolean: 0 if in normal mode, 1 if in visual mode.
 function! yagpdbcc#NextSection(type, backwards, visual) abort
     if a:visual
         normal! gv
@@ -61,6 +71,8 @@ function! yagpdbcc#NextSection(type, backwards, visual) abort
     execute 'silent normal! ' . l:dir . l:pattern . l:dir . l:flags . '\r'
 endfunction
 
+" yagpdbcc#PathSep returns the OSs path separator.
+" For Microsoft Windows, that is \, for UNIX and UNIX-like it is /.
 function! yagpdbcc#PathSep() abort
     if has('win32')
         return '\'

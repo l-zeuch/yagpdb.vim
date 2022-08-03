@@ -20,14 +20,25 @@
 let s:cpo_save = &cpoptions
 set cpoptions&vim
 
+" yagpdbcc#config#OverrideFt returns the value of the global
+" yagpdbcc_override_ft variable used to determine whether to override more
+" filetypes.
+" Its default return value is 0.
 function! yagpdbcc#config#OverrideFt() abort
 	return get(g:, 'yagpdbcc_override_ft')
 endfunction
 
+" yagpdbcc#config#UsePrimary returns the value of the global
+" yagpdbcc_use_primary variable used to determine whether to use the * or +
+" register.
+" Its default return value is 0.
 function! yagpdbcc#config#UsePrimary() abort
 	return get(g:, 'yagpdbcc_use_primary')
 endfunction
 
+" yagpdbcc#config#SnippetEngine returns the value of the global
+" yagpdbcc_snippet_engine variable used to determine what snippet engine to use.
+" Its default return value is an empty string ''.
 function! yagpdbcc#config#SnippetEngine() abort
     return get(g:, 'yagpdbcc_snippet_engine', '')
 endfunction
