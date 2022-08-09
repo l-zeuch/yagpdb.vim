@@ -20,6 +20,9 @@
 let s:cpo_save = &cpoptions
 set cpoptions&vim
 
+" yagpdbcc#snippets#UltiSnips sets up a minimal functioning UltiSnips
+" configuration for use with our snippets.
+" It does not return anything.
 function! yagpdbcc#snippets#UltiSnips() abort
     if get(g:, 'did_plugin_ultisnip') isnot 1
         return
@@ -32,6 +35,9 @@ function! yagpdbcc#snippets#UltiSnips() abort
     endif
 endfunction
 
+" yagpdbcc#snippets#Neosnippet sets up a minimal functioning Neosnippet
+" configuration for use with our snippets.
+" It does not return anything.
 function! yagpdbcc#snippets#Neosnippet() abort
     if get(g:, 'loaded_neosnippet') isnot 1
         return
