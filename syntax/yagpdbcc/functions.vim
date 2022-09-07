@@ -30,7 +30,7 @@ syn keyword yagFunc bitwiseAndNot bitwiseLeftShift bitwiseRightShift contained
 " Channel
 syn keyword yagFunc editChannelName editChannelTopic contained
 syn keyword yagFunc getChannel getChannelOrThread contained
-syn keyword yagFunc getPinCount getThread contained
+syn keyword yagFunc getPinCount getThread getChannelPins contained
 
 " Database
 syn keyword yagFunc dbBottomEntries dbCount dbDel dbSet contained
@@ -108,7 +108,7 @@ syn keyword yagFunc snowflakeToTime weekNumber contained
 " Type conversion
 syn keyword yagFunc json structToSdict toByte toDuration contained
 syn keyword yagFunc toFloat toInt toInt64 toRune ToString contained
-syn keyword yagFunc str contained
+syn keyword yagFunc str jsonToSdict contained
 
 " User
 syn keyword yagFunc currentUserAgeHuman contained
