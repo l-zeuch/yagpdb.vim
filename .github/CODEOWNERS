@@ -8,6 +8,7 @@
 /syntax/                @LRitzdorf
 /autoload/              @l-zeuch
 /plugin/                @l-zeuch
+/indent/                @l-zeuch
 
 # Code completion
 /lua/                   @l-zeuch
