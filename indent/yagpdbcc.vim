@@ -47,7 +47,8 @@ set cpoptions&vim
 " Though functions should usually go into autoload/, this one is an exception.
 function! GetYagIndent(lnum) abort
 
-    let l:indent = 0
+    " If nothing needs indenting, keep current indent
+    let l:indent = -1
 
     if exists('*HtmlIndent')
         let l:indent = HtmlIndent()
