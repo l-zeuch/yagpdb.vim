@@ -58,7 +58,7 @@ function! GetYagIndent(lnum) abort
 
     " These keywords indent the next lines.
     let l:last_line = getline(a:lnum-1)
-    if l:last_line =~# '^\s*{{-\=\s*\%(if\|else\|with\|try\|range\|while\|define\|template\|block\).*}}'
+    if l:last_line =~# '^\s*{{-\=\s*\%(if\|else\|with\|try\|catch\|range\|while\|define\|block\).*}}'
         let l:indent += shiftwidth()
     endif
 
