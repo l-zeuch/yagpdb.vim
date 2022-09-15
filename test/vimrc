@@ -29,3 +29,6 @@ syntax enable
 set nomore
 set noswapfile
 set viminfo=
+
+set shiftwidth=2
+set expandtab

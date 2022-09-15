@@ -1,0 +1,157 @@
+# Test case file for indentation
+
+# Copyright (C) 2022 Lucas Ritzdorf, Luca Zeuch
+
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License along
+# with this program; if not, write to the Free Software Foundation, Inc.,
+# 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+# Language: YAGPDB Custom Commands
+# Maintainer: Luca Zeuch <l-zeuch@email.de>,
+#   LRitzdorf <42657792+LRitzdorf@users.noreply.github.com>
+
+Before:
+  source ../indent/yagpdbcc.vim
+
+After:
+  Restore
+
+Given (simple code with no indents):
+  {{ if true }}
+  {{ print "hello" }}
+  {{ else }}
+  {{ print "bye" }}
+  {{ end }}
+
+Do (apply indents):
+  gg=G
+
+Expect (indented code):
+  {{ if true }}
+    {{ print "hello" }}
+  {{ else }}
+    {{ print "bye" }}
+  {{ end }}
+
+Given (code with indents all over the place):
+  {{ if false }}
+          {{/* do stuff */}}
+          {{ template "my_template" }}
+          {{ return }}
+        {{ else }}
+    {{ sendMessage nil "something broke :(" }}
+    {{ dbSet 2000 "key" "value" }}
+      {{ end }}
+
+Do (apply indents):
+  gg=G
+
+Expect (fixed indents):
+  {{ if false }}
+    {{/* do stuff */}}
+    {{ template "my_template" }}
+    {{ return }}
+  {{ else }}
+    {{ sendMessage nil "something broke :(" }}
+    {{ dbSet 2000 "key" "value" }}
+  {{ end }}
+
+Given (code with raw strings):
+  {{ if $something }}
+  do stuff
+  {{/* hello */}}
+  {{ $r := `
+  eeee
+  e
+  e
+  e
+  e
+  e
+  e
+  `}}
+  {{ else }}
+  {{ if yes }}
+  epic
+  {{ else }}
+  also epic
+  {{ end }}
+  {{ end }}
+  {{ range }}
+  k
+  {{ end }}
+
+Do (apply indents):
+  gg=G
+
+Expect (neat indentation):
+  {{ if $something }}
+    do stuff
+    {{/* hello */}}
+    {{ $r := `
+    eeee
+    e
+    e
+    e
+    e
+    e
+    e
+    `}}
+  {{ else }}
+    {{ if yes }}
+      epic
+    {{ else }}
+      also epic
+    {{ end }}
+  {{ end }}
+  {{ range }}
+    k
+  {{ end }}
+
+Given (deep nests all over the place):
+  {{ try }}
+  {{ sendmessage 12345 "this might fail" }}
+  {{ catch }}
+  {{ sendmessage nil "stuff failed :/" }}
+  {{ end }}
+  {{ define "my_stuff" }}
+  {{ range $some_slice }}
+  {{ if eq . $something_else }}
+  {{ return }}
+  {{ else }}
+  {{ while true }}
+  {{ return }}
+  {{ end }}
+  {{ end }}
+  {{ end }}
+  {{ end }}
+
+Do (apply indents):
+  gg=G
+
+Expect (readable code):
+  {{ try }}
+    {{ sendmessage 12345 "this might fail" }}
+  {{ catch }}
+    {{ sendmessage nil "stuff failed :/" }}
+  {{ end }}
+  {{ define "my_stuff" }}
+    {{ range $some_slice }}
+      {{ if eq . $something_else }}
+        {{ return }}
+      {{ else }}
+        {{ while true }}
+          {{ return }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
