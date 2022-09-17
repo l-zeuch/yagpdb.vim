@@ -104,6 +104,7 @@ syn keyword yagFunc humanizeDurationSeconds contained
 syn keyword yagFunc humanizeTimeSinceDays contained
 syn keyword yagFunc loadLocation newDate contained
 syn keyword yagFunc snowflakeToTime weekNumber contained
+syn keyword yagFunc timestampToTime contained
 
 " Type conversion
 syn keyword yagFunc json structToSdict toByte toDuration contained
