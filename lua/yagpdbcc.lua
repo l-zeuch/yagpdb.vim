@@ -205,6 +205,7 @@ function source:complete(params, callback)
 		{ label = 'newDate' },
 		{ label = 'snowflakeToTime' },
 		{ label = 'weekNumber' },
+		{ label = 'timestampToTime' },
 		{ label = 'json' },
 		{ label = 'structToSdict' },
 		{ label = 'toByte' },
