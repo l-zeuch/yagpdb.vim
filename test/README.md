@@ -7,7 +7,7 @@ This directory contains all test files for this project.
 Tests are automatically run via CI/CD setup on GitHub actions, and can always be invoked via `make test` from the root of
 this repository.
 
-For targeting Neovim, or Vim specifically, the `make test-nvim`, or `make test-vim` respectively is invoked instead,
+To target specifically Vim or Neovim, the `test-vim` and `test-nvim` target is called instead.
 
 You'll need Vim and/or Neovim installed. The Makefile will automatically detect whether they're installed, and run the tests
 in the respective environment.
@@ -24,11 +24,12 @@ Afterwards, `Include` your newly added test file in `test.vader` and make sure a
 
 ### Sourcing Plugin Files
 
-You'll need to source the Vim Script files in order to test them. However, theres a few things to keep in mind:
+You'll need to source the Vim Script files in order to test them. However, there are a few things to keep in mind:
 
 The CWD is set to the directory from which the `Vader` command is invoked. When you use the given Makefile (as you should),
 this is set to `test/`, respective to the root of the repository. This means that relative paths only ever have one level of
 nesting, at most.
+
 
 This means that the following directive for a theoretical file in `test/syntax/` **will not work**:
 
@@ -43,6 +44,8 @@ Instead, you must do it this way:
 Before:
   source: ../syntax/yagpdbcc.vim
 ```
+
+With that in mind, you can infer how to invoke specific Vader files, however it's always recommended to run the full suite.
 
 ## Structure
 
