@@ -30,7 +30,6 @@ The CWD is set to the directory from which the `Vader` command is invoked. When 
 this is set to `test/`, respective to the root of the repository. This means that relative paths only ever have one level of
 nesting, at most.
 
-
 This means that the following directive for a theoretical file in `test/syntax/` **will not work**:
 
 ```vim
