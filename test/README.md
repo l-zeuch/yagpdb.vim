@@ -20,7 +20,7 @@ tests, it's definitely recommended to read its documentation.
 When adding new tests, only one specific feature should be tested within one test file. This is to avoid hard-to-read,
 hard-to-debug test files as well pipeline output. It furthermore makes it simpler to expand already existing tests.
 
-Afterwards, `Include` your newly added test file in `test.vader` and make sure all tests are passing.
+Afterwards, make sure all tests are still passing via the targets described above.
 
 ### Sourcing Plugin Files
 
