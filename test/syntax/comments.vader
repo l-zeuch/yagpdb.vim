@@ -1,0 +1,95 @@
+# Syntax tests: Comments
+
+# Copyright (C) 2021    Lucas Ritzdorf, Luca Zeuch
+
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License along
+# with this program; if not, write to the Free Software Foundation, Inc.,
+# 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+# Language: YAGPDB Custom Commands
+# Maintainer: Luca Zeuch <l-zeuch@email.de>,
+#   LRitzdorf <42657792+LRitzdorf@users.noreply.github.com>
+
+# Available syntax functions are:
+#   SyntaxAt(): current cursor position
+#   SyntaxAt(col): current cursor line, at given column
+#   SyntaxAt(lnum, col): line and column
+#   SyntaxOf(pattern[, nth=1]): return a string with the name of the syntax
+#     group at the first character of the nth match of the given pattern. Return
+#     '' if there was no match.
+
+Before:
+  source ../syntax/yagpdbcc.vim
+  source ../syntax/yagpdbcc/keywords.vim
+
+Given (valid comments):
+  {{/* This is a normal comment */}}
+  {{/* what about $variables inside? */}}
+  {{/* How about {{ braces }} in comments? */}}
+
+
+Execute (Test line 1 (normal comment)):
+  AssertEqual 'yagComment', SyntaxOf('{{'), "Match comment's opening braces"
+  AssertEqual 'yagComment', SyntaxOf('/*'), "Match comment start delimiter"
+  AssertEqual 'yagComment', SyntaxOf('\w'), "Match comment content"
+  AssertEqual 'yagComment', SyntaxOf('*/'), "Match comment end delimiter"
+  AssertEqual 'yagComment', SyntaxOf('}}'), "Match comment's closing braces"
+
+Execute (Test line 2 (comment with variable)):
+  AssertEqual 'yagComment', SyntaxOf('{{', 2), "Match comment's opening braces"
+  AssertEqual 'yagComment', SyntaxOf('/*', 2), "Match comment start delimiter"
+  AssertEqual 'yagComment', SyntaxOf('\w', 2), "Match comment content"
+  AssertEqual 'yagComment', SyntaxOf('$\w'), "Match variable inside comment"
+  AssertEqual 'yagComment', SyntaxOf('*/', 2), "Match comment end delimiter"
+  AssertEqual 'yagComment', SyntaxOf('}}', 2), "Match comment's closing braces"
+
+Execute (Test line 3 (comment with braces inside)):
+  AssertEqual 'yagComment', SyntaxOf('{{', 3), "Match comment's opening braces"
+  AssertEqual 'yagComment', SyntaxOf('/*', 3), "Match comment start delimiter"
+  AssertEqual 'yagComment', SyntaxOf('\w', 3), "Match comment content"
+  AssertEqual 'yagComment', SyntaxOf('{{', 4), "Match braces inside comments"
+  AssertEqual 'yagComment', SyntaxOf('}}', 3), "Match braces inside comments"
+  AssertEqual 'yagComment', SyntaxOf('*/', 3), "Match comment end delimiter"
+  AssertEqual 'yagComment', SyntaxOf('}}', 4), "Match comment's closing braces"
+
+Given (invalid comments):
+  {{$t := "hello" /* this is not a real comment */}}
+  /* neither is this */
+
+Execute (Test line 1 (comment inside normal expression)):
+  AssertEqual 'yagIdentifier', SyntaxOf('$\w'), "Should match identifier"
+  AssertEqual 'yagOperator', SyntaxOf(':='), "Should match operator"
+  AssertEqual 'yagExpr', SyntaxOf('/*\w*/'), "Should not match comment"
+
+Execute (Test line 2 (comment in raw response)):
+  AssertEqual '', SyntaxAt(2, 1), "Should not match comment outside braces"
+  AssertEqual '', SyntaxAt(2, 15), "Should not match comment outside braces"
+  AssertEqual '', SyntaxAt(2, 21), "Should not match comment outside braces"
+
+Given (multiline comment):
+  {{/*
+    This is a comment spanning multiple lines,
+    such as a large, overly verbose comment that
+    explains the entirety of the custom command,
+    going into detail of the implementation rather
+    than providing documentation.
+    Oh, and there are also $variables and {{ braces }} inside.
+  */}}
+
+Execute (Test multiline comment):
+  AssertEqual 'yagComment', SyntaxOf('{{'), "Match comment's opening braces"
+  AssertEqual 'yagComment', SyntaxOf('/*'), "Match comment start delimiter"
+  AssertEqual 'yagComment', SyntaxOf('\w'), "Match comment text"
+  AssertEqual 'yagComment', SyntaxOf('$\w'), "Don't match identifier in comment"
+  AssertEqual 'yagComment', SyntaxOf('*/'), "Match comment end delimiter"
+  AssertEqual 'yagComment', SyntaxOf('}}', 2), "Match comment's closing braces"
