@@ -32,6 +32,9 @@ Before:
   source ../syntax/yagpdbcc.vim
   source ../syntax/yagpdbcc/keywords.vim
 
+After:
+  Restore
+
 Given (valid comments):
   {{/* This is a normal comment */}}
   {{/* what about $variables inside? */}}
