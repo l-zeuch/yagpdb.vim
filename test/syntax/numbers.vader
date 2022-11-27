@@ -1,0 +1,100 @@
+# Syntax tests: Numbers
+
+# Copyright (C) 2021    Lucas Ritzdorf, Luca Zeuch
+
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License along
+# with this program; if not, write to the Free Software Foundation, Inc.,
+# 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+# Language: YAGPDB Custom Commands
+# Maintainer: Luca Zeuch <l-zeuch@email.de>,
+#   LRitzdorf <42657792+LRitzdorf@users.noreply.github.com>
+
+# Available syntax functions are:
+#   SyntaxAt(): current cursor position
+#   SyntaxAt(col): current cursor line, at given column
+#   SyntaxAt(lnum, col): line and column
+#   SyntaxOf(pattern[, nth=1]): return a string with the name of the syntax
+#     group at the first character of the nth match of the given pattern. Return
+#     '' if there was no match.
+
+Before:
+  source ../syntax/yagpdbcc.vim
+
+After:
+  Restore
+
+Given (Integers):
+  {{ 3 }}
+  {{ +400 }}
+  {{ -200}}
+  {{ 3123123 -5237489023740823 }}
+
+Execute (Test integer matching):
+  AssertEqual 'yagIntImg', SyntaxOf('3'), "Match basic numbers"
+  AssertEqual 'yagIntImg', SyntaxOf('+400'), "Match numbers with positive sign"
+  AssertEqual 'yagIntImg', SyntaxOf('-200'), "Match numbers with negative sign"
+  AssertEqual 'yagIntImg', SyntaxAt(4, 4), "Match standalone numbers"
+  AssertEqual 'yagExpr', SyntaxAt(4, 11), "Don't expand number match too far"
+  AssertEqual 'yagIntImg', SyntaxAt(4, 12), "Match negative sign as number too"
+  AssertEqual 'yagExpr', SyntaxAt(4, 29), "Don't expand match too far"
+
+Given (Exponential integers):
+  {{ 3e4 }}
+  {{ 33E2 }}
+  {{ 3e3e3 }}
+
+Execute (Test exponent matching):
+  AssertEqual 'yagIntImg', SyntaxOf('3e4'), "Match exponential notation"
+  AssertEqual 'yagIntImg', SyntaxOf('33E2'), "Match exponential notation (l 2)"
+  AssertEqual 'yagExpr', SyntaxAt(3, 7), "Don't match second chained exponential"
+
+Given (Floats):
+  {{ 2.3 }}
+  {{ 20.23 344 }}
+
+Execute (Test floats):
+  AssertEqual 'yagFloatImg', SyntaxOf('2.3'), "Match floating-point numbers"
+  AssertEqual 'yagFloatImg', SyntaxAt(2, 4), "Match start of floating-point numbers"
+  AssertEqual 'yagExpr', SyntaxAt(2, 9), "Do not match space as number"
+  AssertEqual 'yagIntImg', SyntaxOf('344'), "Do not expand match of preceding number over to next number"
+
+Given (Exponential floats):
+  {{ 2.3e2 }}
+  {{ 33.33e3 }}
+
+Execute (Test exponential floats):
+  AssertEqual 'yagFloatImg', SyntaxOf('2.3e2'), "Match float exponential notation"
+  AssertEqual 'yagFloatImg', SyntaxOf('33.33e3'), "Match all numbers in long numbers"
+
+Given (Imaginary integers):
+  {{ 3+3i }}
+  {{ 3e2+2i }}
+  {{ 3+2e2i }}
+  {{ 3e2+2e2i }}
+
+Execute (Test imaginary ints):
+  AssertEqual 'yagIntImg', SyntaxOf('3+3i'), "Match imaginary number notation"
+  AssertEqual 'yagIntImg', SyntaxOf('3e2+2i'), "Match imaginary numbers with exponential real part"
+  AssertEqual 'yagIntImg', SyntaxOf('3e2+2e2i'), "Match imaginary numbers with exponential real and imaginary part"
+
+Given (Imaginary floats):
+  {{ 2.3+3i }}
+  {{ 2.3e2+3.2i }}
+  {{ 2.3+3.2e2i }}
+  {{ 2.3e2+3.2e2i }}
+
+Execute (Test imaginary floats):
+  AssertEqual 'yagFloatImg', SyntaxOf('2.3+3i'), "Match imaginary numbers with float real part"
+  AssertEqual 'yagFloatImg', SyntaxOf('2.3e2+3.2i'), "Match imaginary numbers with float real and imaginary part"
+  AssertEqual 'yagFloatImg', SyntaxOf('2.3e2+3.2e2i'), "Match imaginary numbers with float, exponential real and imaginary part"
