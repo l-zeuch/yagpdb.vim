@@ -79,6 +79,7 @@ syn keyword yagFunc sendTemplate sendTemplateDM seq range contained
 syn keyword yagFunc shuffle sleep sort execCC contained
 syn keyword yagFunc scheduleUniqueCC hasPrefix contained
 syn keyword yagFunc execTemplate verb contained
+syn keyword yagFunc cancelScheduledUniqueCC contained
 
 " Role
 syn keyword yagFunc addRoleID addRoleName getRole contained
