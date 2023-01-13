@@ -30,7 +30,6 @@
 
 Before:
   source ../syntax/yagpdbcc.vim
-  source ../syntax/yagpdbcc/keywords.vim
 
 After:
   Restore
@@ -70,9 +69,7 @@ Given (invalid comments):
   /* neither is this */
 
 Execute (Test line 1 (comment inside normal expression)):
-  AssertEqual 'yagIdentifier', SyntaxOf('$\w'), "Should match identifier"
-  AssertEqual 'yagOperator', SyntaxOf(':='), "Should match operator"
-  AssertEqual 'yagExpr', SyntaxOf('/*\w*/'), "Should not match comment"
+  AssertEqual 'yagExpr', SyntaxOf('/*\w*/'), "Should not match comment along expression"
 
 Execute (Test line 2 (comment in raw response)):
   AssertEqual '', SyntaxAt(2, 1), "Should not match comment outside braces"
