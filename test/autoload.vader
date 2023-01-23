@@ -26,9 +26,9 @@ Before:
 After:
   Restore
 
-Execute (yagpdbcc#PathSep()):
+Execute (yagpdbcc#util#PathSep()):
   if has('win32')
-    AssertEqual '\', yagpdbcc#PathSep()
+    AssertEqual '\', yagpdbcc#util#PathSep()
   else
-    AssertEqual '/', yagpdbcc#PathSep()
+    AssertEqual '/', yagpdbcc#util#PathSep()
   endif
