@@ -71,15 +71,5 @@ function! yagpdbcc#NextSection(type, backwards, visual) abort
     execute 'silent normal! ' . l:dir . l:pattern . l:dir . l:flags . '\r'
 endfunction
 
-" yagpdbcc#PathSep returns the OSs path separator.
-" For Microsoft Windows, that is \, for UNIX and UNIX-like it is /.
-function! yagpdbcc#PathSep() abort
-    if has('win32')
-        return '\'
-    endif
-
-    return '/'
-endfunction
-
 " Restore Vi compat
 let &cpoptions = s:cpo_save
