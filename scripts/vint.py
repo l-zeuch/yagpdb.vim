@@ -19,6 +19,7 @@ import json
 import shutil
 import subprocess
 import sys
+import glob
 
 # Generate our vint command and fail if the executable is not found.
 def generate_command():
@@ -28,7 +29,10 @@ def generate_command():
         print("No vint executable found. Install it with pip install vim-vint.")
         sys.exit(1)
 
-    return [exe, "--json", "."]
+    files = glob.glob('**/*.vim', recursive=True)
+    cmd = [exe, "--json"]
+    cmd.extend(files)
+    return cmd
 
 def generate_github_output(issues):
     # Map Vint's levels to GitHub's message levels.
