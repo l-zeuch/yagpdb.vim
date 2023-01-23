@@ -34,9 +34,7 @@ function! yagpdbcc#Copy() abort
             let @+=substitute(@+,'\n$','','')
         endif
     else
-        echohl Error
-        echo "Your Vim doesn't appear to have clipboard support."
-        echohl None
+        call yagpdbcc#util#Error("Your Vim doesn't appear to have clipboard support.")
     endif
 endfunction
 
@@ -69,16 +67,6 @@ function! yagpdbcc#NextSection(type, backwards, visual) abort
     endif
 
     execute 'silent normal! ' . l:dir . l:pattern . l:dir . l:flags . '\r'
-endfunction
-
-" yagpdbcc#PathSep returns the OSs path separator.
-" For Microsoft Windows, that is \, for UNIX and UNIX-like it is /.
-function! yagpdbcc#PathSep() abort
-    if has('win32')
-        return '\'
-    endif
-
-    return '/'
 endfunction
 
 " Restore Vi compat

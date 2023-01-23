@@ -39,8 +39,16 @@ endfunction
 " yagpdbcc#config#SnippetEngine returns the value of the global
 " yagpdbcc_snippet_engine variable used to determine what snippet engine to use.
 " Its default return value is an empty string ''.
+" Available snippet engines are ultisnips and neosnippet.
 function! yagpdbcc#config#SnippetEngine() abort
-    return get(g:, 'yagpdbcc_snippet_engine', '')
+    let l:engine = get(g:, 'yagpdbcc_snippet_engine', '')
+
+    if l:engine isnot? '' && l:engine isnot? 'ultisnips' && l:engine isnot? 'neosnippet'
+        call yagpdbcc#util#Warn(l:engine . ' is not a supported snippet engine.')
+        return ''
+    endif
+
+    return l:engine
 endfunction
 
 " Restore Vi compat
