@@ -34,9 +34,7 @@ function! yagpdbcc#Copy() abort
             let @+=substitute(@+,'\n$','','')
         endif
     else
-        echohl Error
-        echo "Your Vim doesn't appear to have clipboard support."
-        echohl None
+        call yagpdbcc#util#Error("Your Vim doesn't appear to have clipboard support.")
     endif
 endfunction
 
