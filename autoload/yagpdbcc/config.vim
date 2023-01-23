@@ -44,7 +44,7 @@ function! yagpdbcc#config#SnippetEngine() abort
     let l:engine = get(g:, 'yagpdbcc_snippet_engine', '')
 
     if l:engine isnot? '' && l:engine isnot? 'ultisnips' && l:engine isnot? 'neosnippet'
-        call yagpdbcc#util#Warn(l:engine . " is not a supported snippet engine.")
+        call yagpdbcc#util#Warn(l:engine . ' is not a supported snippet engine.')
         return ''
     endif
 

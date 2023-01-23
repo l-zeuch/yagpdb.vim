@@ -34,14 +34,14 @@ endfunction
 " yagpbcc#util#Error takes a string argument and highlights it as error.
 function! yagpdbcc#util#Error(msg) abort
     echohl ErrorMsg
-        echo "[yagpdb.vim]: " . a:msg
+        echo '[yagpdb.vim]: ' . a:msg
     echohl None
 endfunction
 
 " yagpdbcc#util#Warn takes a string argument and highlights it as warning.
 function! yagpdbcc#util#Warn(msg) abort
     echohl WarningMsg
-        echo "[yagpdb.vim]: " . a:msg
+        echo '[yagpdb.vim]: ' . a:msg
     echohl None
 endfunction
 
