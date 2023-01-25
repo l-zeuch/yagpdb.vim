@@ -50,8 +50,6 @@ With that in mind, you can infer how to invoke specific Vader files, however it'
 
 * `vimrc` is the clean, neutral, and minimal environment provided to both Neovim and Vim. Please only *add* to it if it's
   necessary to test a certain feature (such as indentation).
-* `test.vader` is the main file, which is invoked via the provided `make` targets. It only ever contains `Include` directives
-  calling the separate, specific files, plus the license header and description.
 * `autoload/` contains all tests relating to autoloaded functions. This one is a small exception to "one file per feature";
   it's quite nonsensical to have one file specific to only one function, thus it's one file per autoload group (e.g. `config`)
 * `feature/` contains tests relating to features that aren't very complex and can be done in one single file.
