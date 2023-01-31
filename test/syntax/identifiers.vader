@@ -74,8 +74,8 @@ Given (invalid identifiers):
   {{ $kebab-case := false }}
 
 Execute (Test invalid identifiers):
-  Log "\e[0;33mTODO: Some of these are currently failing the negative-test."
-  Log "      Fixing this requires changes to the current implementation"
-  Log "      of the `yagIdentifier` syntax match regex, so we'll just"
-  Log "      let this pass for now and instead have this note.\e[0m"
+  Log "\e[0;33mTODO: Some of these are currently failing the negative-test.\e[0m"
+  Log "      \e[0;33mFixing this requires changes to the current implementation\e[0m"
+  Log "      \e[0;33mof the `yagIdentifier` syntax match regex, so we'll just\e[0m"
+  Log "      \e[0;33mlet this pass for now and instead have this note.\e[0m"
   AssertEqual 1, 1
