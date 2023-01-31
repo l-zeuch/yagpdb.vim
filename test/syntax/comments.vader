@@ -51,7 +51,7 @@ Execute (Test line 2 (comment with variable)):
   AssertEqual 'yagComment', SyntaxOf('{{', 2), "Match comment's opening braces"
   AssertEqual 'yagComment', SyntaxOf('/*', 2), "Match comment start delimiter"
   AssertEqual 'yagComment', SyntaxOf('\w', 2), "Match comment content"
-  AssertEqual 'yagComment', SyntaxOf('$\w'), "Match variable inside comment"
+  AssertEqual 'yagComment', SyntaxOf('$\w'), "Match identifier inside comment as comment"
   AssertEqual 'yagComment', SyntaxOf('*/', 2), "Match comment end delimiter"
   AssertEqual 'yagComment', SyntaxOf('}}', 2), "Match comment's closing braces"
 
