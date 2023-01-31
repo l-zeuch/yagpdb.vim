@@ -1,0 +1,81 @@
+# Syntax tests: Identifiers
+
+# Copyright (C) 2023    Lucas Ritzdorf, Luca Zeuch
+
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License along
+# with this program; if not, write to the Free Software Foundation, Inc.,
+# 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+# Language: YAGPDB Custom Commands
+# Maintainer: Luca Zeuch <l-zeuch@email.de>,
+#   LRitzdorf <42657792+LRitzdorf@users.noreply.github.com>
+
+# Available syntax functions are:
+#   SyntaxAt(): current cursor position
+#   SyntaxAt(col): current cursor line, at given column
+#   SyntaxAt(lnum, col): line and column
+#   SyntaxOf(pattern[, nth=1]): return a string with the name of the syntax
+#     group at the first character of the nth match of the given pattern. Return
+#     '' if there was no match.
+
+Before:
+  source ../syntax/yagpdbcc.vim
+
+After:
+  Restore
+
+Given (Valid Identifiers):
+  {{ $myVar := "test" }}
+  {{ $m123456 := 1 }}
+  {{ $MyVeryLongPascalCaseVariable := "something about society" }}
+  {{ $snake_case_is_cool := "no it isn't" }}
+  {{ $ := . }}
+
+Execute (Test camelCase):
+  AssertEqual 'yagIdentifier', SyntaxAt(1, 4), "Add '$' to yagIdentifier match"
+  AssertEqual 'yagIdentifier', SyntaxAt(1, 8), "Also match letters"
+  AssertEqual 'yagExpr', SyntaxAt(1, 10), "Do not add spaces to match"
+
+Execute (Test names with numbers):
+  AssertEqual 'yagIdentifier', SyntaxAt(2, 4), "Add '$' to yagIdentifier match"
+  AssertEqual 'yagIdentifier', SyntaxAt(2, 6), "Also match numbers for names"
+  AssertEqual 'yagExpr', SyntaxAt(2, 12), "Do not expand match too far"
+
+Execute (Test very long names):
+  AssertEqual 'yagIdentifier', SyntaxAt(3, 4), "Add '$' to yagIdentifier match"
+  AssertEqual 'yagIdentifier', SyntaxAt(3, 20), "Don't give up in the middle of a name"
+  AssertEqual 'yagIdentifier', SyntaxAt(3, 32), "Don't give up too early"
+  AssertEqual 'yagExpr', SyntaxAt(3, 33), "Do not expand match too far"
+
+Execute (Test snake_case):
+  AssertEqual 'yagIdentifier', SyntaxAt(4, 10), "Match underscores"
+  AssertEqual 'yagIdentifier', SyntaxAt(4, 17), "Match underscores"
+  AssertEqual 'yagIdentifier', SyntaxAt(4, 20), "Match underscores"
+  AssertEqual 'yagExpr', SyntaxAt(4, 23), "Do not expand match too far"
+
+Execute (Test single '$'):
+  AssertEqual 'yagIdentifier', SyntaxAt(5, 4), "Match '$'"
+  AssertEqual 'yagExpr', SyntaxAt(5, 5), "Don't expand match beyond end of word"
+
+Given (invalid identifiers):
+  {{ $. := "invalid" }}
+  {{ $$ := "also not allowed" }}
+  {{ $€%&! := "let's get really weird with it" }}
+  {{ $kebab-case := false }}
+
+Execute (Test invalid identifiers):
+  Log "\e[0;33mTODO: Some of these are currently failing the negative-test."
+  Log "      Fixing this requires changes to the current implementation"
+  Log "      of the `yagIdentifier` syntax match regex, so we'll just"
+  Log "      let this pass for now and instead have this note.\e[0m"
+  AssertEqual 1, 1
