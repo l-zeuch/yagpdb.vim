@@ -95,7 +95,7 @@ syn keyword yagFunc reFind reFindAll reFindAllSubmatches contained
 syn keyword yagFunc reReplace reSplit slice split contained
 syn keyword yagFunc reQuoteMeta contained
 syn keyword yagFunc title trimSpace upper urlescape contained
-syn keyword yagFunc urlunescape js html contained
+syn keyword yagFunc urlunescape js html sanitizeText contained
 
 " Time
 syn keyword yagFunc currentTime formatTime contained
@@ -105,7 +105,7 @@ syn keyword yagFunc humanizeDurationSeconds contained
 syn keyword yagFunc humanizeTimeSinceDays contained
 syn keyword yagFunc loadLocation newDate contained
 syn keyword yagFunc snowflakeToTime weekNumber contained
-syn keyword yagFunc timestampToTime contained
+syn keyword yagFunc timestampToTime parseTime contained
 
 " Type conversion
 syn keyword yagFunc json structToSdict toByte toDuration contained
