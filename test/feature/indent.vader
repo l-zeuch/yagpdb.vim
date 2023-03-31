@@ -1,6 +1,6 @@
-# Test case file for indentation
+# Test file: Indentation
 
-# Copyright (C) 2022 Lucas Ritzdorf, Luca Zeuch
+# Copyright (C) 2023    Lucas Ritzdorf, Luca Zeuch
 
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -20,13 +20,21 @@
 # Maintainer: Luca Zeuch <l-zeuch@email.de>,
 #   LRitzdorf <42657792+LRitzdorf@users.noreply.github.com>
 
+# Available syntax functions are:
+#   SyntaxAt(): current cursor position
+#   SyntaxAt(col): current cursor line, at given column
+#   SyntaxAt(lnum, col): line and column
+#   SyntaxOf(pattern[, nth=1]): return a string with the name of the syntax
+#     group at the first character of the nth match of the given pattern. Return
+#     '' if there was no match.
+
 Before:
   source ../indent/yagpdbcc.vim
 
 After:
   Restore
 
-Given (simple code with no indents):
+Given (Unindented Code):
   {{ if true }}
   {{ print "hello" }}
   {{ else }}
@@ -36,14 +44,14 @@ Given (simple code with no indents):
 Do (apply indents):
   gg=G
 
-Expect (indented code):
+Expect (Indented in if/else block):
   {{ if true }}
     {{ print "hello" }}
   {{ else }}
     {{ print "bye" }}
   {{ end }}
 
-Given (code with indents all over the place):
+Given (Code with a few too many indents):
   {{ if false }}
           {{/* do stuff */}}
           {{ template "my_template" }}
@@ -56,7 +64,7 @@ Given (code with indents all over the place):
 Do (apply indents):
   gg=G
 
-Expect (fixed indents):
+Expect (Flattened Indents):
   {{ if false }}
     {{/* do stuff */}}
     {{ template "my_template" }}
@@ -93,7 +101,7 @@ Given (code with raw strings):
 Do (apply indents):
   gg=G
 
-Expect (neat indentation):
+Expect (Indentation that does not change raw strings):
   {{ if $something }}
     do stuff
     {{/* hello */}}
@@ -117,7 +125,7 @@ Expect (neat indentation):
     k
   {{ end }}
 
-Given (deep nests all over the place):
+Given (Code with multiple nested blocks and no indentation):
   {{ try }}
   {{ sendmessage 12345 "this might fail" }}
   {{ catch }}
@@ -138,7 +146,7 @@ Given (deep nests all over the place):
 Do (apply indents):
   gg=G
 
-Expect (readable code):
+Expect (Clear structure with indentation):
   {{ try }}
     {{ sendmessage 12345 "this might fail" }}
   {{ catch }}

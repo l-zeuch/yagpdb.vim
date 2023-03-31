@@ -81,7 +81,7 @@ Before you submit your Pull Request, follow these steps:
     git checkout -b my-branch master
     ```
 
-1. Make your changes, including tests when appropriate.
+1. Make your changes, including tests when appropriate. Please refer to [`test/README.md`](../test/README.md) for a guide.
 
 1. Make sure the tests are still passing locally.
     We use [vader.vim](https:/github.com/junegunn/vader.vim) as our testing framework. Run the tests using `make test`.

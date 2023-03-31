@@ -1,0 +1,127 @@
+# Syntax tests: Strings
+
+# Copyright (C) 2023    Lucas Ritzdorf, Luca Zeuch
+
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License along
+# with this program; if not, write to the Free Software Foundation, Inc.,
+# 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+# Language: YAGPDB Custom Commands
+# Maintainer: Luca Zeuch <l-zeuch@email.de>,
+#   LRitzdorf <42657792+LRitzdorf@users.noreply.github.com>
+
+# Available syntax functions are:
+#   SyntaxAt(): current cursor position
+#   SyntaxAt(col): current cursor line, at given column
+#   SyntaxAt(lnum, col): line and column
+#   SyntaxOf(pattern[, nth=1]): return a string with the name of the syntax
+#     group at the first character of the nth match of the given pattern. Return
+#     '' if there was no match.
+
+Before:
+  source ../syntax/yagpdbcc.vim
+
+After:
+  Restore
+
+Given (Normal Strings):
+  {{ $t := "this is a variable" }}
+  {{ print "another message with \"escaped quotes\" in it" }}
+  {{ $newline := "\n" }}
+  {{ $tabular := "\t" }}
+
+Execute (Test Normal Strings (line 1)):
+  AssertEqual 'yagExpr', SyntaxAt(1, 9), "Don't start matching too soon"
+  AssertEqual 'yagString', SyntaxAt(1, 10), "Match quotes as string too"
+  AssertEqual 'yagString', SyntaxOf('this is a variable'), "Match string content"
+  AssertEqual 'yagExpr', SyntaxAt(1, 30), "Stop match after closing delim"
+
+Execute (Test Normal Strings (line 2)):
+  AssertEqual 'yagExpr', SyntaxAt(2, 9), "Don't start matching too soon"
+  AssertEqual 'yagString', SyntaxAt(2, 10), "Match quotes as string too"
+  AssertEqual 'yagEscape', SyntaxOf('\\"'), "Match escaped quote as yagEscape"
+  AssertEqual 'yagEscape', SyntaxOf('\\"', 2), "Match escaped quote as yagEscape"
+  AssertEqual 'yagString', SyntaxAt(2, 56), "Match quotes as string too"
+  AssertEqual 'yagExpr', SyntaxAt(2, 57), "Stop match after closing delim"
+
+Execute (Test newline escape sequence (line 3)):
+  AssertEqual 'yagExpr', SyntaxAt(3, 15), "Don't start matching too soon"
+  AssertEqual 'yagString', SyntaxAt(3, 16), "Match quotes as string too"
+  AssertEqual 'yagEscape', SyntaxOf('\\n'), "Match \\n as yagEscape"
+  AssertEqual 'yagString', SyntaxAt(3, 19), "Match quotes as string too"
+  AssertEqual 'yagExpr', SyntaxAt(3, 20), "Stop match after closing delim"
+
+Execute (Test tab escape sequence (line 4)):
+  AssertEqual 'yagExpr', SyntaxAt(4, 15), "Don't start matching too soon"
+  AssertEqual 'yagString', SyntaxAt(4, 16), "Match quotes as string too"
+  AssertEqual 'yagEscape', SyntaxOf('\\t'), "Match \\t as yagEscape"
+  AssertEqual 'yagString', SyntaxAt(4, 19), "Match quotes as string too"
+  AssertEqual 'yagExpr', SyntaxAt(4, 20), "Stop match after closing delim"
+
+Given (Raw / Multiline Strings):
+  {{ $t := `This is a really long string, containing {{ expressions }},
+  $variables_that_do_not_exist (which should not be highlighted),
+  and "some" (str"ay) quotes.` }}
+
+Execute (Test Delimiters):
+  AssertEqual 'yagExpr', SyntaxAt(1, 9), "Don't start match too soon"
+  AssertEqual 'yagRawStr', SyntaxAt(1, 10), "Match ` delimiter as yagRawStr"
+  AssertEqual 'yagRawStr', SyntaxAt(3, 28), "Match ` delimiter as yagRawStr"
+  AssertEqual 'yagExpr', SyntaxAt(3, 29), "Don't expand match past final delim"
+
+Execute (Test Some Interesting Cases):
+# Here, we have to use the second match SyntaxOf returns, because of the outer
+# braces, without which this would never work.
+  AssertEqual 'yagRawStr', SyntaxOf('{{', 2), "Match braces in raw string as raw string"
+# Except for this one, because order and such.
+  AssertEqual 'yagRawStr', SyntaxOf('}}'), "Match braces in raw string as raw string"
+  AssertEqual 'yagRawStr', SyntaxOf('$\w', 2), "Match identifers in raw string as raw string"
+  AssertEqual 'yagRawStr', SyntaxOf('"'), "Match \" in raw string as raw string"
+  AssertEqual 'yagRawStr', SyntaxOf('"', 2), "Match \" in raw string as raw string"
+  AssertEqual 'yagRawStr', SyntaxOf('"', 3), "Match \" in raw string as raw string"
+
+Given (Character Constants and Escape Sequences):
+  {{ $t := 'a' }}
+  {{ $t := '\n' }}
+  {{ $t := 'invalid' }}
+  {{ $t := '\u12e4' }}
+
+Execute (Test Character Constant (line 1)):
+  AssertEqual 'yagExpr', SyntaxAt(1, 9), "Don't start match too early"
+  AssertEqual 'yagChar', SyntaxOf("'"), "Match (') as yagChar"
+  AssertEqual 'yagChar', SyntaxOf("a"), "Match (') as yagChar"
+  AssertEqual 'yagChar', SyntaxOf("'", 2), "Match (') as yagChar"
+  AssertEqual 'yagExpr', SyntaxAt(1, 13), "Don't expand match too far"
+
+Execute (Test Escape Sequence (line 2)):
+  AssertEqual 'yagExpr', SyntaxAt(2, 9), "Don't start match too early"
+  AssertEqual 'yagChar', SyntaxOf("'", 3), "Match (') as yagChar"
+  AssertEqual 'yagChar', SyntaxAt(2, 11), "Match escape seq in '' as yagChar"
+  AssertEqual 'yagChar', SyntaxAt(2, 12), "Match escape seq in '' as yagChar"
+  AssertEqual 'yagChar', SyntaxOf("'", 4), "Match (') as yagChar"
+  AssertEqual 'yagExpr', SyntaxAt(2, 14), "Don't expand match too far"
+
+Execute (Test Invalid Character Constant (line 3)):
+  AssertEqual 'yagExpr', SyntaxAt(3, 9), "Don't start match too early"
+  AssertEqual 'yagCharError', SyntaxOf("'", 5), "Match (') as yagChar"
+  AssertEqual 'yagCharError', SyntaxOf("invalid"), "Match invalid char const as yagCharError"
+  AssertEqual 'yagCharError', SyntaxOf("'", 6), "Match (') as yagChar"
+  AssertEqual 'yagExpr', SyntaxAt(3, 19), "Don't expand match too far"
+
+Execute (Test Unicode Escape Sequence (Line 4)):
+# See l-zeuch/yagpdb.vim#75
+  Log "\e[0;33mTODO: Currently unicode escape sequences are considered invalid.\e[0m"
+  Log "      \e[0;33mFixing this requires changes to the current implementation\e[0m"
+  Log "      \e[0;33mof the `yagChar` syntax logic, so we'll just\e[0m"
+  Log "      \e[0;33mlet this pass for now and instead have this note.\e[0m"
+  AssertEqual 1, 1

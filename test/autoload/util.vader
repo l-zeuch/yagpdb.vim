@@ -1,6 +1,6 @@
-# Test case file for autoloaded functions
+# Autoload Tests: Utility
 
-# Copyright (C) 2022    Lucas Ritzdorf, Luca Zeuch
+# Copyright (C) 2023    Lucas Ritzdorf, Luca Zeuch
 
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -20,8 +20,16 @@
 # Maintainer: Luca Zeuch <l-zeuch@email.de>,
 #   LRitzdorf <42657792+LRitzdorf@users.noreply.github.com>
 
+# Available syntax functions are:
+#   SyntaxAt(): current cursor position
+#   SyntaxAt(col): current cursor line, at given column
+#   SyntaxAt(lnum, col): line and column
+#   SyntaxOf(pattern[, nth=1]): return a string with the name of the syntax
+#     group at the first character of the nth match of the given pattern. Return
+#     '' if there was no match.
+
 Before:
-  source ../autoload/yagpdbcc.vim
+  source ../autoload/yagpdbcc/util.vim
 
 After:
   Restore
@@ -32,3 +40,17 @@ Execute (yagpdbcc#util#PathSep()):
   else
     AssertEqual '/', yagpdbcc#util#PathSep()
   endif
+
+# TODO: Figure out a way to properly test this.
+#       Perhaps it may be worthwhile to log it via `echom`
+#       and perform a search on :messages. This may require
+#       changing the called function.
+Execute (yagpdbcc#util#Error()):
+  call yagpdbcc#util#Error("test")
+
+# TODO: Figure out a way to properly test this.
+#       Perhaps it may be worthwhile to log it via `echom`
+#       and perform a search on :messages. This may require
+#       changing the called function.
+Execute (yagpdbcc#util#Warn()):
+  call yagpdbcc#util#Warn("test")
