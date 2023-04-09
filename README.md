@@ -8,17 +8,23 @@ Syntax highlighting for [YAGPDB](https://yagpdb.xyz) custom commands in (N)Vim.
 
 ### Manually
 
-To install without any external plugin-manager dependencies, simply download the `Makefile` and run `make install`.
-If you wish to install this for your Vim installation, but have Neovim installed as well, make sure to use the
-`install-vim` target.
+To install without any external plugin-manager dependencies, simply download the `Makefile` and run `make install`. For a
+different destination, invoke `make` with `DESTDIR=/path/to/destination`.
 
 ```shell
 wget https://raw.githubusercontent.com/l-zeuch/yagpdb.vim/master/Makefile && make install
 ```
 
+> **Note**
+> If you wish to install this for your Vim, but also have Neovim installed, make sure to invoke the `install-vim` target
+> instead.
+
 See also as Greg Hurrell's excellent Youtube video: [Vim screencast #75: Plugin managers](https://www.youtube.com/watch?v=X2_R3uxDN6g).
 
 ### With a Plugin Manager
+
+> **Note**
+> Installing with a plugin manager is recommended for Windows installations.
 
 Use your favorite plugin manager to install this plugin. [tpope/vim-pathogen](https://github.com/tpope/vim-pathogen),
 [VundleVim/Vundle.vim](https://github.com/VundleVim/Vundle.vim), [junegunn/vim-plug](https://github.com/junegunn/vim-plug),

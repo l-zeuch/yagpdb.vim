@@ -26,29 +26,28 @@
 # auto-detects whether a program is installed or not. Due to this, we can skip
 # targets if the required program for that target is not installed or not found.
 #
-# Because Windows is ~~weird~~ different, we need two branches for filling in
-# the values.
-#
 # ----------------------------------------------------------------------------
-PYTHON_PROG ?=
-NVIM_PROG   ?=
-VIM_PROG    ?=
-GIT_PROG    ?=
 
-ifeq ($(OS),WINDOWS_NT)
-PYTHON_PROG := $(shell where python3)
-NVIM_PROG   := $(shell where nvim)
-VIM_PROG    := $(shell where vim)
-GIT_PROG    := $(shell where git)
-else
-PYTHON_PROG := $(shell which python3)
-NVIM_PROG   := $(shell which nvim)
-VIM_PROG    := $(shell which vim)
-GIT_PROG    := $(shell which git)
+MAKEFILE := $(abspath $(lastword $(MAKEFILE_LIST)))
+
+PYTHON_PROG ?= $(shell which python3)
+NVIM_PROG ?= $(shell which nvim)
+VIM_PROG ?= $(shell which vim)
+GIT_PROG ?= $(shell which git)
+
+DATA_HOME ?= $(XDG_DATA_HOME)
+# if DATA_HOME is not set, we'll use this default value
+ifeq ($(strip $(DATA_HOME)),)
+	DATA_HOME := $(HOME)/.local/share
 endif
 
-DATA_HOME := $(XDG_DATA_HOME)
-DATA_HOME ?= '~/.local/share'
+# We'll use this variable in our installation targets,
+# Setting DESTDIR to either NVIM_DESTDIR or VIM_DESTDIR, if
+# DESTDIR itself was not set from user.
+NVIM_DESTDIR ?= $(DATA_HOME)/nvim/site/pack/l-zeuch/start/yagpdb.vim
+VIM_DESTDIR ?= ~/.vim/bundle/yagpdb.vim
+
+REPO_URL := https://github.com/l-zeuch/yagpdb.vim.git
 
 PHONY :=
 
@@ -82,10 +81,8 @@ help:
 	@echo	'General:'
 	@echo	'	all		- Run everything: test, lint, generate.'
 	@echo	'	install		- Install this plugin as a manually installed plugin.'
-	@echo	'				  Be careful, this target automagically prefers Neovim.'
-	@echo	'				  To force Vim, please use `install-vim`.'
-	@echo	'	install-vim	- Same as above, but ONLY try for Vim.'
-	@echo	'	uninstall	- Uninstall this plugin from both Neovim and Vim.'
+	@echo	'	install-vim	- Same as above, but only try Vim.'
+	@echo	'	install-nvim	- Same as above, but only try Neovim.'
 	@echo	'	help		- Print this help message. This is the default.'
 
 PHONY += all
@@ -96,51 +93,59 @@ clean:
 	rm -rf .bundle/
 
 PHONY += install
-install:
-	@echo 'Installing plugin...'
-	@echo 'Looking for Neovim...'
+install: check-windows
+	@echo 'Installing...'
 ifdef NVIM_PROG
-	@echo 'Found Neovim, installing to $(DATA_HOME)/nvim/site/pack/l-zeuch/start/yagpdb.vim'
-	mkdir -p $(DATA_HOME)/nvim/site/pack/l-zeuch/start/yagpdb.vim
-	git clone https://github.com/l-zeuch/yagpdb.vim.git \
-		$(DATA_HOME)/nvim/site/pack/l-zeuch/start/yagpdb.vim
-	@echo 'Done.'
+	@$(MAKE) -f $(MAKEFILE) install-nvim
 else ifdef VIM_PROG
-	@echo 'Falling back to Vim...'
-	@echo 'Installing to ~.vim/bundle/yagpdb.vim'
-	mkdir -p ~/.vim/bundle/
-	git clone https://github.com/l-zeuch/yagpdb.vim.git \
-		~/.vim/bundle/yagpdb.vim
-	@echo 'Done.'
-	@echo 'Please remember to add the folder to your runtimepath:'
-	@echo '	set runtimepath^=~/.vim/bundle/yagpdb.vim'
+	@$(MAKE) -f $(MAKEFILE) install-vim
 else
-	$(error Neiter Neovim nor Vim found, aborting.)
+	$(error Neither Vim nor Neovim in PATH. Make sure they are installed.)
 endif
+
+PHONY += install-nvim
+install-nvim: DESTDIR ?= $(NVIM_DESTDIR)
+install-nvim:
+ifndef NVIM_PROG
+	$(error No Neovim in PATH.)
+endif
+	@echo 'Found Neovim.'
+	@echo 'Installing to $(DESTDIR)...'
+	mkdir -p $(DESTDIR)
+	git clone $(REPO_URL) $(DESTDIR)
+	@echo 'Done.'
 
 PHONY += install-vim
+install-vim: DESTDIR ?= $(VIM_DESTDIR)
 install-vim:
-	@echo 'Installing plugin...'
-	@echo 'Looking for Vim...'
-ifdef VIM_PROG
-	@echo 'Found Vim, installing to ~/.vim/bundle/yagpdb.vim'
-	mkdir -p ~/.vim/bundle/
-	git clone https://github.com/l-zeuch/yagpdb.vim.git \
-		~/.vim/bundle/yagpdb.vim
-	@echo 'Done.'
-	@echo 'Please remember to add the folder to your runtimepath:'
-	@echo '	set runtimepath^=~/.vim/bundle/yagpdb.vim'
-else
-	$(error No Vim installation found, aborting.)
+ifndef VIM_PROG
+	$(error No Vim in PATH.)
 endif
-
-PHONY += uninstall
-uninstall:
-	@echo 'Uninstalling plugin...'
-	-rm -rf ~/.vim/bundle/yagpb.vim
-	-rm -rf $(DATA_HOME)/nvim/site/pack/l-zeuch/start/yagpdb.vim
+	@echo 'Found Vim.'
+	@echo 'Installing to $(DESTDIR)...'
+	mkdir -p $(DESTDIR)
+	git clone $(REPO_URL) $(DESTDIR)
 	@echo 'Done.'
-	@echo 'If you have added this to your runtimepath, remember to remove it again.'
+	@echo 'Remember to add this plugin to your runtimepath:'
+	@echo 'set rtp ^= $(DESTDIR)'
+
+define WINDOWS_ERROR
+
+It appears that you are running Windows as your OS.
+We recommend one of the three actions to continue:
+	- Set DESTDIR to the desired location
+	- Use a plugin manager
+	- Clone the repo manually
+
+endef
+
+PHONY += check-windows
+check-windows:
+ifeq ($(OS),WINDOWS_NT)
+ifndef DESTDIR
+	$(error $(WINDOWS_ERROR))
+endif
+endif
 
 # ----------------------------------------------------------------------------
 #
