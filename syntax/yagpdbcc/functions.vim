@@ -118,5 +118,8 @@ syn keyword yagFunc currentUserAgeMinutes contained
 syn keyword yagFunc currentUserCreated contained
 syn keyword yagFunc pastNicknames pastUsernames userArg contained
 
+" Moderation
+syn keyword yagFunc getWarnings contained
+
 " Finally
 highlight link yagFunc Function
