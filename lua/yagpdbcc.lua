@@ -45,23 +45,6 @@ end
 ---@param callback fun(response: lsp.CompletionResponse|nil)
 function source:complete(params, callback)
     callback({
-		{ label = 'if' },
-		{ label = 'else' },
-		{ label = 'with' },
-		{ label = 'try' },
-		{ label = 'catch' },
-		{ label = 'true' },
-		{ label = 'false' },
-		{ label = 'range' },
-		{ label = 'while' },
-		{ label = 'define' },
-		{ label = 'template' },
-		{ label = 'block' },
-		{ label = 'nil' },
-		{ label = 'end' },
-		{ label = 'return' },
-		{ label = 'break' },
-		{ label = 'continue' },
 		{ label = 'bitwiseAnd' },
 		{ label = 'bitwiseOr' },
 		{ label = 'bitwiseXor' },
@@ -242,7 +225,25 @@ function source:complete(params, callback)
 		{ label = 'currentUserCreated' },
 		{ label = 'pastNicknames' },
 		{ label = 'pastUsernames' },
-		{ label = 'userArg' }
+		{ label = 'userArg' },
+		{ label = 'getWarnings' },
+		{ label = 'if' },
+		{ label = 'else' },
+		{ label = 'with' },
+		{ label = 'try' },
+		{ label = 'catch' },
+		{ label = 'true' },
+		{ label = 'false' },
+		{ label = 'range' },
+		{ label = 'while' },
+		{ label = 'define' },
+		{ label = 'template' },
+		{ label = 'block' },
+		{ label = 'nil' },
+		{ label = 'end' },
+		{ label = 'return' },
+		{ label = 'break' },
+		{ label = 'continue' }
     })
 end
 
