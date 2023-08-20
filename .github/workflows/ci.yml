@@ -38,13 +38,15 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        version: [v8.0.0000, v8.2.0000, v9.0.0000, stable]
+        # 8.2.2434 is the current version on Debian Bullseye and its
+        # derivatives.
+        version: [v8.0.0000, v8.2.0000, v8.2.2434, v9.0.0000, stable]
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Install latest Vim stable
+      - name: Install Vim ${{ matrix.version }}
         uses: rhysd/action-setup-vim@v1
         with:
           version: ${{ matrix.version }}
@@ -59,13 +61,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        version: [v0.5.0, v0.6.0, v0.7.0, stable]
+        version: [v0.5.0, v0.6.0, v0.7.0, v0.8.0, stable]
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Install latest Neovim
+      - name: Install Neovim ${{ matrix.version }}
         uses: rhysd/action-setup-vim@v1
         with:
           neovim: true
