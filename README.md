@@ -126,6 +126,17 @@ sources = cmp.config.sources({
     ...
 })
 ```
+### Supported File Extensions
+
+We support the following list of file extensions:
+
+- `*.yag`
+- `*.yagcc`
+- `*.tmpl` <sup>1)</sup>
+- `*.go.tmpl` <sup>1)</sup>
+
+<sup>1)</sup> These extensions are not detected by default, as they are already used by Go. Please see below for instructions on how to
+enable them.
 
 ### Overriding Filetypes
 

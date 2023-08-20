@@ -31,11 +31,7 @@ set cpoptions&vim
 " Detect our 'own' extensions, which are usually used by a
 " vast majority of the userbase.
 au BufRead,BufNewFile   *.yag         setfiletype yagpdbcc
-au BufRead,BufNewFile   *.yagpdb      setfiletype yagpdbcc
 au BufRead,BufNewFile   *.yagcc       setfiletype yagpdbcc
-au BufRead,BufNewFile   *.yag-cc      setfiletype yagpdbcc
-au BufRead,BufNewFile   *.yagpdbcc    setfiletype yagpdbcc
-au BufRead,BufNewFile   *.yagpdb-cc   setfiletype yagpdbcc
 
 " Also use *.tmpl, *.gotmpl et al., which are originally only Go, if configured.
 " Here, we need to explicitly override the default syntax - "setfiletype"
