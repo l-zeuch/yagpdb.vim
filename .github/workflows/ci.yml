@@ -46,7 +46,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Install latest Vim stable
+      - name: Install Vim ${{ matrix.version }}
         uses: rhysd/action-setup-vim@v1
         with:
           version: ${{ matrix.version }}
@@ -67,7 +67,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Install latest Neovim
+      - name: Install Neovim ${{ matrix.version }}
         uses: rhysd/action-setup-vim@v1
         with:
           neovim: true
