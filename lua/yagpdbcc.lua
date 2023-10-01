@@ -129,6 +129,8 @@ function source:complete(params, callback)
 		{ label = 'sendMessageNoEscapeRetID' },
 		{ label = 'sendMessageRetID' },
 		{ label = 'unpinMessage' },
+		{ label = 'publishMessage' },
+		{ label = 'publishResponse' },
 		{ label = 'adjective' },
 		{ label = 'carg' },
 		{ label = 'cembed' },
