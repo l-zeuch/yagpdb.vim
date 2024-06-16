@@ -220,7 +220,7 @@ syntax: .bundle/lytfs
 ifdef PYTHON_PROG
 	$(PYTHON_PROG) scripts/gen_funcs.py
 else
-	$(error python3 not found, aborting generation.
+	$(error python3 not found, aborting generation.)
 endif
 
 # ----------------------------------------------------------------------------
