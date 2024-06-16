@@ -46,7 +46,10 @@ jobs:
           key: ${{ runner.os }}-lytfs-${{ hashFiles('.bundle/lytfs') }}
 
       - name: Generate Syntax Definitions
-        run: make syntax
+        run: |
+          make syntax
+          rm syntax/funcs
+
 
       - name: Setup git
         run: |
