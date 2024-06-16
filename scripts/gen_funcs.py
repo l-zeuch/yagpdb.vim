@@ -17,18 +17,14 @@
 
 import os
 
-def gen_code(file):
-    with open(file, "rt") as fin:
-        code = ""
-        for line in fin:
-            line = line.strip()
-            code += f"syn keyword yagFunc {line} contained\n"
+def gen_code(funcs):
+    code = ""
+    for func in funcs:
+        code += f"syn keyword yagFunc {func} contained\n"
 
     return code
 
-def write_file(code):
-    outfile = "syntax/yagpdbcc/functions.vim"
-
+def write_file(code, outfile):
     if "syntax" not in os.listdir():
         try:
             os.mkdir("syntax")
@@ -36,21 +32,27 @@ def write_file(code):
             print(error)
             os._exit(1)
 
-    # clear the old file
-    with open(outfile, "wt") as fout:
-        fout.write("")
-
     # insert the header comment and append the code
-    with open("scripts/comment.txt", "rt") as fin, open(outfile, "wt") as fout:
-        for line in fin:
-            fout.write(line)
+    with open("scripts/comment.txt", "rt") as fin, open(outfile, "w+") as fout:
+        fout.write(fin.read())
+        fout.write("\n")
         fout.write(code)
 
 
 def main():
     file = 'syntax/funcs'
-    code = gen_code(file)
-    write_file(code)
+
+    funcs = []
+    with open(file, "rt") as fin:
+        for line in fin:
+            line = line.strip()
+            funcs.append(line)
+
+    code = gen_code(funcs)
+
+    outfile = 'syntax/yagpdbcc/functions.vim'
+    write_file(code, outfile)
+
     print("Generated syntax file for functions.")
 
 if __name__ == "__main__":
