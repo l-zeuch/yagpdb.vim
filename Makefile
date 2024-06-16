@@ -34,6 +34,7 @@ PYTHON_PROG ?= $(shell which python3)
 NVIM_PROG ?= $(shell which nvim)
 VIM_PROG ?= $(shell which vim)
 GIT_PROG ?= $(shell which git)
+GO_PROG ?= $(shell which go)
 
 DATA_HOME ?= $(XDG_DATA_HOME)
 # if DATA_HOME is not set, we'll use this default value
@@ -48,6 +49,8 @@ NVIM_DESTDIR ?= $(DATA_HOME)/nvim/site/pack/l-zeuch/start/yagpdb.vim
 VIM_DESTDIR ?= ~/.vim/bundle/yagpdb.vim
 
 REPO_URL := https://github.com/l-zeuch/yagpdb.vim.git
+
+current_dir := $(shell pwd)
 
 PHONY :=
 
@@ -211,6 +214,15 @@ else
 	$(error python3 not found, aborting generation.)
 endif
 
+PHONY += syntax
+syntax: .bundle/lytfs
+	.bundle/lytfs > syntax/funcs
+ifdef PYTHON_PROG
+	$(PYTHON_PROG) scripts/gen_funcs.py
+else
+	$(error python3 not found, aborting generation.
+endif
+
 # ----------------------------------------------------------------------------
 #
 # Dependencies
@@ -232,6 +244,13 @@ ifdef GIT_PROG
 		.bundle/vader.vim
 else
 	$(error git not found, aborting test suites.)
+endif
+
+.bundle/lytfs:
+ifdef GO_PROG
+	GOBIN=$(current_dir)/.bundle/ $(GO_PROG) install github.com/jo3-l/yagfuncdata/cmd/lytfs@latest
+else
+	$(error go not found, aborting syntax check.)
 endif
 
 # Evaluate all PHONY targets, i.e. which either don't match any file or don't
