@@ -66,7 +66,7 @@ PHONY :=
 PHONY += help
 help:
 	@echo	'Cleaning:'
-	@echo	'	clean		- Remove all dependencies located in `.bundle/`.'
+	@echo	'	clean		- Remove all dependencies and temporary files.'
 	@echo	''
 	@echo	'Development:'
 	@echo	'	test		- Run test suite for Neovim and Vim.'
@@ -80,6 +80,7 @@ help:
 	@echo	'				  requires python3 and vim-vint module.'
 	@echo	'	generate	- Create completion sources for nvim-cmp.'
 	@echo	'				  Requires python3.'
+	@echo	'	syntax		- Generate syntax highlighting for functions.'
 	@echo	''
 	@echo	'General:'
 	@echo	'	all		- Run everything: test, lint, generate.'
@@ -94,6 +95,7 @@ all: test lint generate
 PHONY += clean
 clean:
 	rm -rf .bundle/
+	rm syntax/funcs
 
 PHONY += install
 install: check-windows
