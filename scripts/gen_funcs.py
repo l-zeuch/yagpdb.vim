@@ -18,11 +18,7 @@
 import os
 
 def gen_code(funcs):
-    code = ""
-    for func in funcs:
-        code += f"syn keyword yagFunc {func} contained\n"
-
-    return code
+    return '\n'.join([f"syn keyword yagFunc {func} contained" for func in funcs])
 
 def write_file(code, outfile):
     if "syntax" not in os.listdir():
