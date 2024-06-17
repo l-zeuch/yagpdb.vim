@@ -42,11 +42,8 @@ def write_file(code, outfile):
 def main():
     file = 'syntax/funcs'
 
-    funcs = []
     with open(file, "rt") as fin:
-        for line in fin:
-            line = line.strip()
-            funcs.append(line)
+        funcs = [line.strip() for line in fin]
 
     code = gen_code(funcs)
 
