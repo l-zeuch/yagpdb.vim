@@ -70,7 +70,7 @@ jobs:
           body: 'This PR regenerates the syntax definitions.'
           branch: 'regenerate-syntax'
           base: 'master'
-          author: $GIT_USER
+          author: 'github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>'
           labels: |
             area/syntax
             editor/vim-neovim
