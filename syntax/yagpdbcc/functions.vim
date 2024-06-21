@@ -1,125 +1,239 @@
 " Vim syntax file
-" Add-on file, containing function keywords
-
-" Copyright (C) 2021    Lucas Ritzdorf, Luca Zeuch
-
+" Add-on file, containing function keywords.
+"
+" Automatically generated. DO NOT EDIT.
+"
+" Copyright (C) 2024    Luca Zeuch, Lucas Ritzdorf
+"
 " This program is free software; you can redistribute it and/or modify
 " it under the terms of the GNU General Public License as published by
 " the Free Software Foundation; either version 2 of the License, or
 " (at your option) any later version.
-
 " This program is distributed in the hope that it will be useful,
 " but WITHOUT ANY WARRANTY; without even the implied warranty of
 " MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 " GNU General Public License for more details.
+"
 " You should have received a copy of the GNU General Public License along
 " with this program; if not, write to the Free Software Foundation, Inc.,
 " 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-" Language: YAGPDB Custom Commands
-" Maintainer: Luca Zeuch <l-zeuch@email.de>,
-"   LRitzdorf <42657792+LRitzdorf@users.noreply.github.com>
-
-" See https://docs.yagpdb.xyz/reference/templates/functions
-" for a list of all functions defined.
-
-" Bitwise ops
-syn keyword yagFunc bitwiseAnd bitwiseOr bitwiseXor bitwiseNot contained
-syn keyword yagFunc bitwiseAndNot bitwiseLeftShift bitwiseRightShift contained
-
-" Channel
-syn keyword yagFunc editChannelName editChannelTopic contained
-syn keyword yagFunc getChannel getChannelOrThread contained
-syn keyword yagFunc getPinCount getThread getChannelPins contained
-
-" Database
-syn keyword yagFunc dbBottomEntries dbCount dbDel dbSet contained
-syn keyword yagFunc dbDelByID dbDelMultiple dbGet contained
-syn keyword yagFunc dbGetPattern dbGetPatternReverse contained
-syn keyword yagFunc dbIncr dbRank dbSetExpire dbTopEntries contained
-
-" Math
-syn keyword yagFunc add cbrt div fdiv log mod mult pow contained
-syn keyword yagFunc randInt round roundCeil roundEven contained
-syn keyword yagFunc roundFloor sqrt sub mathConst contained
-syn keyword yagFunc min max contained
-
-" Logic
-syn keyword yagFunc not and or ne eq lt le gt ge contained
-
-" Member
-syn keyword yagFunc editNickname getMember onlineCount contained
-
-" Member permissions
-syn keyword yagFunc hasPermissions targetHasPermissions contained
-syn keyword yagFunc getTargetPermissionsInChannel contained
-
-" Mentions
-syn keyword yagFunc mentionEveryone mentionHere contained
-syn keyword yagFunc mentionRoleID mentionRoleName contained
-
-" Message
-syn keyword yagFunc addMessageReactions addReactions contained
-syn keyword yagFunc addResponseReactions complexMessage contained
-syn keyword yagFunc complexMessageEdit deleteMessage contained
-syn keyword yagFunc deleteAllMessageReactions editMessage contained
-syn keyword yagFunc deleteMessageReaction deleteResponse contained
-syn keyword yagFunc deleteTrigger editMessageNoEscape contained
-syn keyword yagFunc getMessage pinMessage sendDM contained
-syn keyword yagFunc sendMessage sendMessageNoEscape contained
-syn keyword yagFunc sendMessageNoEscapeRetID sendMessageRetID contained
-syn keyword yagFunc unpinMessage publishMessage publishResponse contained
-
-" Misc
-syn keyword yagFunc adjective carg cembed createTicket contained
-syn keyword yagFunc cslice sdict dict exec execAdmin contained
-syn keyword yagFunc hasSuffix humanizeThousands in index contained
-syn keyword yagFunc inFold kindOf len noun parseArgs contained
-syn keyword yagFunc sendTemplate sendTemplateDM seq range contained
-syn keyword yagFunc shuffle sleep sort execCC contained
-syn keyword yagFunc scheduleUniqueCC hasPrefix contained
-syn keyword yagFunc execTemplate verb contained
-syn keyword yagFunc cancelScheduledUniqueCC contained
-
-" Role
-syn keyword yagFunc addRoleID addRoleName getRole contained
-syn keyword yagFunc giveRoleID giveRoleName hasRoleID contained
-syn keyword yagFunc hasRoleName removeRoleID contained
-syn keyword yagFunc removeRoleName roleAbove setRoles contained
-syn keyword yagFunc setRoles takeRoleID takeRoleName contained
-syn keyword yagFunc targetHasRoleID targetHasRoleName contained
-
-" Strings
-syn keyword yagFunc joinStr lower print printf println contained
-syn keyword yagFunc reFind reFindAll reFindAllSubmatches contained
-syn keyword yagFunc reReplace reSplit slice split contained
+syn keyword yagFunc editMessage contained
+syn keyword yagFunc editMessageNoEscape contained
+syn keyword yagFunc pinMessage contained
+syn keyword yagFunc publishMessage contained
+syn keyword yagFunc publishResponse contained
+syn keyword yagFunc sendDM contained
+syn keyword yagFunc sendMessage contained
+syn keyword yagFunc sendMessageNoEscape contained
+syn keyword yagFunc sendMessageNoEscapeRetID contained
+syn keyword yagFunc sendMessageRetID contained
+syn keyword yagFunc sendTemplate contained
+syn keyword yagFunc sendTemplateDM contained
+syn keyword yagFunc unpinMessage contained
+syn keyword yagFunc mentionEveryone contained
+syn keyword yagFunc mentionHere contained
+syn keyword yagFunc mentionRole contained
+syn keyword yagFunc mentionRoleName contained
+syn keyword yagFunc mentionRoleID contained
+syn keyword yagFunc getRole contained
+syn keyword yagFunc getRoleID contained
+syn keyword yagFunc getRoleName contained
+syn keyword yagFunc hasRole contained
+syn keyword yagFunc hasRoleID contained
+syn keyword yagFunc hasRoleName contained
+syn keyword yagFunc targetHasRole contained
+syn keyword yagFunc targetHasRoleID contained
+syn keyword yagFunc targetHasRoleName contained
+syn keyword yagFunc giveRole contained
+syn keyword yagFunc giveRoleID contained
+syn keyword yagFunc giveRoleName contained
+syn keyword yagFunc addRole contained
+syn keyword yagFunc addRoleID contained
+syn keyword yagFunc addRoleName contained
+syn keyword yagFunc takeRole contained
+syn keyword yagFunc takeRoleID contained
+syn keyword yagFunc takeRoleName contained
+syn keyword yagFunc removeRole contained
+syn keyword yagFunc removeRoleID contained
+syn keyword yagFunc removeRoleName contained
+syn keyword yagFunc setRoles contained
+syn keyword yagFunc hasPermissions contained
+syn keyword yagFunc targetHasPermissions contained
+syn keyword yagFunc getTargetPermissionsIn contained
+syn keyword yagFunc addMessageReactions contained
+syn keyword yagFunc addReactions contained
+syn keyword yagFunc addResponseReactions contained
+syn keyword yagFunc deleteAllMessageReactions contained
+syn keyword yagFunc deleteMessage contained
+syn keyword yagFunc deleteMessageReaction contained
+syn keyword yagFunc deleteResponse contained
+syn keyword yagFunc deleteTrigger contained
+syn keyword yagFunc getChannel contained
+syn keyword yagFunc getChannelPins contained
+syn keyword yagFunc getChannelOrThread contained
+syn keyword yagFunc getPinCount contained
+syn keyword yagFunc getMember contained
+syn keyword yagFunc getMessage contained
+syn keyword yagFunc getThread contained
+syn keyword yagFunc addThreadMember contained
+syn keyword yagFunc closeThread contained
+syn keyword yagFunc createThread contained
+syn keyword yagFunc deleteThread contained
+syn keyword yagFunc editThread contained
+syn keyword yagFunc openThread contained
+syn keyword yagFunc removeThreadMember contained
+syn keyword yagFunc createForumPost contained
+syn keyword yagFunc deleteForumPost contained
+syn keyword yagFunc pinForumPost contained
+syn keyword yagFunc unpinForumPost contained
+syn keyword yagFunc currentUserAgeHuman contained
+syn keyword yagFunc currentUserAgeMinutes contained
+syn keyword yagFunc currentUserCreated contained
+syn keyword yagFunc reFind contained
+syn keyword yagFunc reFindAll contained
+syn keyword yagFunc reFindAllSubmatches contained
+syn keyword yagFunc reReplace contained
+syn keyword yagFunc reSplit contained
+syn keyword yagFunc sleep contained
+syn keyword yagFunc editChannelName contained
+syn keyword yagFunc editChannelTopic contained
+syn keyword yagFunc editNickname contained
+syn keyword yagFunc onlineCount contained
+syn keyword yagFunc onlineCountBots contained
+syn keyword yagFunc sort contained
+syn keyword yagFunc str contained
+syn keyword yagFunc toString contained
+syn keyword yagFunc toInt contained
+syn keyword yagFunc toInt64 contained
+syn keyword yagFunc toFloat contained
+syn keyword yagFunc toDuration contained
+syn keyword yagFunc toRune contained
+syn keyword yagFunc toByte contained
+syn keyword yagFunc hasPrefix contained
+syn keyword yagFunc hasSuffix contained
+syn keyword yagFunc joinStr contained
+syn keyword yagFunc lower contained
+syn keyword yagFunc slice contained
+syn keyword yagFunc split contained
+syn keyword yagFunc title contained
+syn keyword yagFunc trimSpace contained
+syn keyword yagFunc upper contained
+syn keyword yagFunc urlescape contained
+syn keyword yagFunc urlunescape contained
+syn keyword yagFunc print contained
+syn keyword yagFunc println contained
+syn keyword yagFunc printf contained
+syn keyword yagFunc sanitizeText contained
 syn keyword yagFunc reQuoteMeta contained
-syn keyword yagFunc title trimSpace upper urlescape contained
-syn keyword yagFunc urlunescape js html sanitizeText contained
-
-" Time
-syn keyword yagFunc currentTime formatTime contained
+syn keyword yagFunc add contained
+syn keyword yagFunc cbrt contained
+syn keyword yagFunc div contained
+syn keyword yagFunc fdiv contained
+syn keyword yagFunc log contained
+syn keyword yagFunc mathConst contained
+syn keyword yagFunc max contained
+syn keyword yagFunc min contained
+syn keyword yagFunc mod contained
+syn keyword yagFunc mult contained
+syn keyword yagFunc pow contained
+syn keyword yagFunc round contained
+syn keyword yagFunc roundCeil contained
+syn keyword yagFunc roundEven contained
+syn keyword yagFunc roundFloor contained
+syn keyword yagFunc sqrt contained
+syn keyword yagFunc sub contained
+syn keyword yagFunc bitwiseAnd contained
+syn keyword yagFunc bitwiseOr contained
+syn keyword yagFunc bitwiseXor contained
+syn keyword yagFunc bitwiseNot contained
+syn keyword yagFunc bitwiseAndNot contained
+syn keyword yagFunc bitwiseLeftShift contained
+syn keyword yagFunc bitwiseRightShift contained
+syn keyword yagFunc humanizeThousands contained
+syn keyword yagFunc dict contained
+syn keyword yagFunc sdict contained
+syn keyword yagFunc structToSdict contained
+syn keyword yagFunc cembed contained
+syn keyword yagFunc cbutton contained
+syn keyword yagFunc cmenu contained
+syn keyword yagFunc cmodal contained
+syn keyword yagFunc cslice contained
+syn keyword yagFunc complexMessage contained
+syn keyword yagFunc complexMessageEdit contained
+syn keyword yagFunc kindOf contained
+syn keyword yagFunc adjective contained
+syn keyword yagFunc in contained
+syn keyword yagFunc inFold contained
+syn keyword yagFunc json contained
+syn keyword yagFunc jsonToSdict contained
+syn keyword yagFunc noun contained
+syn keyword yagFunc randInt contained
+syn keyword yagFunc roleAbove contained
+syn keyword yagFunc seq contained
+syn keyword yagFunc shuffle contained
+syn keyword yagFunc verb contained
+syn keyword yagFunc currentTime contained
+syn keyword yagFunc parseTime contained
+syn keyword yagFunc formatTime contained
+syn keyword yagFunc loadLocation contained
+syn keyword yagFunc newDate contained
+syn keyword yagFunc snowflakeToTime contained
+syn keyword yagFunc timestampToTime contained
+syn keyword yagFunc weekNumber contained
 syn keyword yagFunc humanizeDurationHours contained
 syn keyword yagFunc humanizeDurationMinutes contained
 syn keyword yagFunc humanizeDurationSeconds contained
 syn keyword yagFunc humanizeTimeSinceDays contained
-syn keyword yagFunc loadLocation newDate contained
-syn keyword yagFunc snowflakeToTime weekNumber contained
-syn keyword yagFunc timestampToTime parseTime contained
-
-" Type conversion
-syn keyword yagFunc json structToSdict toByte toDuration contained
-syn keyword yagFunc toFloat toInt toInt64 toRune ToString contained
-syn keyword yagFunc str jsonToSdict contained
-
-" User
-syn keyword yagFunc currentUserAgeHuman contained
-syn keyword yagFunc currentUserAgeMinutes contained
-syn keyword yagFunc currentUserCreated contained
-syn keyword yagFunc pastNicknames pastUsernames userArg contained
-
-" Moderation
-syn keyword yagFunc getWarnings contained
-
-" Finally
-highlight link yagFunc Function
+syn keyword yagFunc editResponse contained
+syn keyword yagFunc editResponseNoEscape contained
+syn keyword yagFunc ephemeralResponse contained
+syn keyword yagFunc getResponse contained
+syn keyword yagFunc sendModal contained
+syn keyword yagFunc sendResponse contained
+syn keyword yagFunc sendResponseNoEscape contained
+syn keyword yagFunc sendResponseNoEscapeRetID contained
+syn keyword yagFunc sendResponseRetID contained
+syn keyword yagFunc updateMessage contained
+syn keyword yagFunc updateMessageNoEscape contained
+syn keyword yagFunc and contained
+syn keyword yagFunc call contained
+syn keyword yagFunc execTemplate contained
+syn keyword yagFunc html contained
+syn keyword yagFunc index contained
+syn keyword yagFunc js contained
+syn keyword yagFunc len contained
+syn keyword yagFunc not contained
+syn keyword yagFunc or contained
+syn keyword yagFunc urlquery contained
+syn keyword yagFunc eq contained
+syn keyword yagFunc ge contained
+syn keyword yagFunc gt contained
+syn keyword yagFunc le contained
+syn keyword yagFunc lt contained
+syn keyword yagFunc ne contained
+syn keyword yagFunc pastUsernames contained
+syn keyword yagFunc pastNicknames contained
+syn keyword yagFunc createTicket contained
+syn keyword yagFunc exec contained
+syn keyword yagFunc execAdmin contained
+syn keyword yagFunc userArg contained
+syn keyword yagFunc parseArgs contained
+syn keyword yagFunc carg contained
+syn keyword yagFunc execCC contained
+syn keyword yagFunc scheduleUniqueCC contained
+syn keyword yagFunc cancelScheduledUniqueCC contained
+syn keyword yagFunc dbSet contained
+syn keyword yagFunc dbSetExpire contained
+syn keyword yagFunc dbIncr contained
+syn keyword yagFunc dbGet contained
+syn keyword yagFunc dbGetPattern contained
+syn keyword yagFunc dbGetPatternReverse contained
+syn keyword yagFunc dbDel contained
+syn keyword yagFunc dbDelById contained
+syn keyword yagFunc dbDelByID contained
+syn keyword yagFunc dbDelMultiple contained
+syn keyword yagFunc dbTopEntries contained
+syn keyword yagFunc dbBottomEntries contained
+syn keyword yagFunc dbCount contained
+syn keyword yagFunc dbRank contained
