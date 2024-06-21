@@ -39,6 +39,11 @@ jobs:
         with:
           ref: master
 
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '^1.18'
+
       - name: Cache Dependencies
         uses: actions/cache@v2
         with:
@@ -49,7 +54,6 @@ jobs:
         run: |
           make syntax
           rm syntax/funcs
-
 
       - name: Setup git
         run: |
