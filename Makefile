@@ -34,6 +34,7 @@ PYTHON_PROG ?= $(shell which python3)
 NVIM_PROG ?= $(shell which nvim)
 VIM_PROG ?= $(shell which vim)
 GIT_PROG ?= $(shell which git)
+GO_PROG ?= $(shell which go)
 
 DATA_HOME ?= $(XDG_DATA_HOME)
 # if DATA_HOME is not set, we'll use this default value
@@ -49,6 +50,8 @@ VIM_DESTDIR ?= ~/.vim/bundle/yagpdb.vim
 
 REPO_URL := https://github.com/l-zeuch/yagpdb.vim.git
 
+current_dir := $(shell pwd)
+
 PHONY :=
 
 # ----------------------------------------------------------------------------
@@ -63,7 +66,7 @@ PHONY :=
 PHONY += help
 help:
 	@echo	'Cleaning:'
-	@echo	'	clean		- Remove all dependencies located in `.bundle/`.'
+	@echo	'	clean		- Remove all dependencies and temporary files.'
 	@echo	''
 	@echo	'Development:'
 	@echo	'	test		- Run test suite for Neovim and Vim.'
@@ -77,6 +80,7 @@ help:
 	@echo	'				  requires python3 and vim-vint module.'
 	@echo	'	generate	- Create completion sources for nvim-cmp.'
 	@echo	'				  Requires python3.'
+	@echo	'	syntax		- Generate syntax highlighting for functions.'
 	@echo	''
 	@echo	'General:'
 	@echo	'	all		- Run everything: test, lint, generate.'
@@ -91,6 +95,7 @@ all: test lint generate
 PHONY += clean
 clean:
 	rm -rf .bundle/
+	rm syntax/funcs
 
 PHONY += install
 install: check-windows
@@ -211,6 +216,15 @@ else
 	$(error python3 not found, aborting generation.)
 endif
 
+PHONY += syntax
+syntax: .bundle/lytfs
+	.bundle/lytfs > syntax/funcs
+ifdef PYTHON_PROG
+	$(PYTHON_PROG) scripts/gen_funcs.py
+else
+	$(error python3 not found, aborting generation.)
+endif
+
 # ----------------------------------------------------------------------------
 #
 # Dependencies
@@ -232,6 +246,13 @@ ifdef GIT_PROG
 		.bundle/vader.vim
 else
 	$(error git not found, aborting test suites.)
+endif
+
+.bundle/lytfs:
+ifdef GO_PROG
+	GOBIN=$(current_dir)/.bundle/ $(GO_PROG) install github.com/jo3-l/yagfuncdata/cmd/lytfs@latest
+else
+	$(error go not found, aborting syntax check.)
 endif
 
 # Evaluate all PHONY targets, i.e. which either don't match any file or don't
