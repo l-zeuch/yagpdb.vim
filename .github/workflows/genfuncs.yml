@@ -38,6 +38,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: master
+          ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: Setup Go
         uses: actions/setup-go@v5
@@ -69,7 +70,7 @@ jobs:
           body: 'This PR regenerates the syntax definitions.'
           branch: 'regenerate-syntax'
           base: 'master'
-          reviewers: 'l-zeuch'
+          author: $GIT_USER
           labels: |
             area/syntax
             editor/vim-neovim
