@@ -187,8 +187,10 @@ Where `owner/repo` is the repository you wish to generate the syntax for, and `b
 current Python 3 installation is required.
 
 > [!WARNING]
-> The `lytfs` tool is potentially fragile — it makes assumptions about the file structure of the project. Make sure to read
-> the source code of the tool before using it and verify compatibility with your version of YAGPDB.
+> The [`lytfs` tool][lytfs] is potentially fragile — it makes assumptions about the file structure of the project.
+> Make sure to read the source code of the tool before using it and verify compatibility with your version of YAGPDB.
+
+[lytfs]: https://github.com/jo3-l/yagfuncdata
 
 ## Legal Mumbo Jumbo
 
