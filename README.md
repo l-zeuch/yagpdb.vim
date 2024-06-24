@@ -196,7 +196,7 @@ current Python 3 installation is required.
 
 ### Disclaimer
 
-1) The YAGPDB developers, staff, and/or suport are not responsible for any difficulties caused by this plugin.
+1) The YAGPDB developers, staff, and/or support are not responsible for any difficulties caused by this plugin.
 
 2) This plugin is provided as-is, without the intention to cause offense of any kind.
 
