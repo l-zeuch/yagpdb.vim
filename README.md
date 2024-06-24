@@ -170,6 +170,26 @@ Please refer to [CONTRIBUTING](.github/CONTRIBUTING.md) for our guidelines on ho
 Some of the regex in this plugin was developed by [@DZ-TM](https://github.com/DZ-TM).
 If you like it, feel free to give him cookies as a reward.
 
+## (Re-)Generating Function Syntax
+
+We aim to provide up-to-date function syntax highlighting based on the official instance of YAGPDB located at
+[botlabs-gg/yagpdb](https://github.com/botlabs-gg/yagpdb). Should you use a fork or otherwise modified version, and wish to
+generate the highlighting for that repository, modify the [Makefile](Makefile) such that the call to `.bundle/lytfs` in the
+`syntax:` recipe reads as follows:
+
+```make
+syntax: .bundle/lytfs
+    .bundle/lytfs owner/repo@branch > syntax/funcs
+# [...]
+```
+
+Where `owner/repo` is the repository you wish to generate the syntax for, and `branch` is the branch you wish to use. A
+current Python 3 installation is required.
+
+> [!WARNING]
+> The `lytfs` tool is potentially fragile — it makes assumptions about the file structure of the project. Make sure to read
+> the source code of the tool before using it and verify compatibility with your version of YAGPDB.
+
 ## Legal Mumbo Jumbo
 
 ### Disclaimer
