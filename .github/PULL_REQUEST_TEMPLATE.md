@@ -3,4 +3,4 @@
 
 **Terms**
 - [ ] I agree to follow this project's [Code of Conduct](CODE_OF_CONDUCT.md)
-- [ ] I have read and understood this project's [Contributing Guidelines](../CONTRIBUTING.md)
+- [ ] I have read and understood this project's [Contributing Guidelines](CONTRIBUTING.md)
