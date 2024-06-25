@@ -54,7 +54,7 @@ jobs:
 
       - name: Regenerate Syntax and Completion
         run: |
-          make syntax
+          make generate
           rm syntax/funcs
 
       - name: Setup git
