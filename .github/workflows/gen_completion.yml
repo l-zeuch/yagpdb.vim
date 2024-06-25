@@ -1,4 +1,4 @@
-# GitHub workflow configuration file: Syntax definition generation.
+# GitHub workflow configuration file: Completion source (re)generation
 #
 # Copyright (C) 2022    Lucas Ritzdorf, Luca Zeuch
 #
@@ -17,60 +17,47 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 ---
-name: Generate Syntax Definitions
+name: Generate Completion Sources
 
 on:
-  schedule:
-    - cron: '0 0 * * *'
-  workflow_dispatch:
-
+  pull_request:
+    paths:
+      - 'syntax/**'
+      - 'scripts/boilerplate.lua'
+      - 'scripts/gen_code_completion.py'
 
 jobs:
+
   generate:
     runs-on: ubuntu-latest
 
     env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       GIT_USER: github-actions
       GIT_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v2
         with:
-          ref: master
           ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
-      - name: Setup Go
-        uses: actions/setup-go@v5
-        with:
-          go-version: '^1.18'
-
-      - name: Cache Dependencies
-        uses: actions/cache@v2
-        with:
-          path: .bundle/lytfs
-          key: ${{ runner.os }}-lytfs-${{ hashFiles('.bundle/lytfs') }}
-
-      - name: Generate Syntax Definitions
-        run: |
-          make syntax
-          rm syntax/funcs
 
       - name: Setup git
         run: |
           git config user.name $GIT_USER
           git config user.email $GIT_EMAIL
 
-      - name: Create PR
-        uses: peter-evans/create-pull-request@v6
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: 'syntax: regenerate syntax definitions'
-          title: 'syntax: regenerate syntax definitions'
-          body: 'This PR regenerates the syntax definitions.'
-          branch: 'regenerate-syntax'
-          base: 'master'
-          author: 'github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>'
-          labels: |
-            area/syntax
-            editor/vim-neovim
+      - name: Checkout PR
+        run: gh pr checkout ${{ github.event.pull_request.number }}
+
+      - name: Generate Completion
+        run: make completion
+
+      - name: Commit changes
+        run: |
+          if [[ -n "$(git status -s lua/)" ]]; then
+            git commit lua/ -m "completion: regenerate sources"
+          fi
+
+      - name: Push changes
+        run: git push
