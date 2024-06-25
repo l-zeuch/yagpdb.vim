@@ -78,9 +78,12 @@ help:
 	@echo	'Code Analysis:'
 	@echo	'	lint		- Run linter on Vim script codebase,'
 	@echo	'				  requires python3 and vim-vint module.'
-	@echo	'	generate	- Create completion sources for nvim-cmp.'
+	@echo	'	generate	- Run completion and syntax targets.'
+	@echo	'				  Requires python3 and go.'
+	@echo	'	completion	- Create completion sources for nvim-cmp.'
 	@echo	'				  Requires python3.'
 	@echo	'	syntax		- Generate syntax highlighting for functions.'
+	@echo	'				  Requires python3 and go.'
 	@echo	''
 	@echo	'General:'
 	@echo	'	all		- Run everything: test, lint, generate.'
@@ -209,7 +212,10 @@ else
 endif
 
 PHONY += generate
-generate:
+generate: syntax completion
+
+PHONY += completion
+completion:
 ifdef PYTHON_PROG
 	$(PYTHON_PROG) scripts/gen_code_completion.py
 else
