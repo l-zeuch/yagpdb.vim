@@ -46,13 +46,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Cache Vim
-        uses: actions/cache@v2
-        with:
-          path: /home/runner/vim-${{ matrix.version }}
-          key: vim-${{ matrix.version }}-${{ runner.os }}
-
-
       - name: Install Vim ${{ matrix.version }}
         uses: rhysd/action-setup-vim@v1
         with:
@@ -73,12 +66,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
-      - name: Cache Neovim
-        uses: actions/cache@v2
-        with:
-          path: /home/runner/nvim-${{ matrix.version }}
-          key: nvim-${{ matrix.version }}-${{ runner.os }}
 
       - name: Install Neovim ${{ matrix.version }}
         uses: rhysd/action-setup-vim@v1
