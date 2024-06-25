@@ -50,6 +50,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: /home/runner/vim-${{ matrix.version }}
+          key: vim-${{ matrix.version }}-${{ runner.os }}
 
 
       - name: Install Vim ${{ matrix.version }}
@@ -77,6 +78,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: /home/runner/nvim-${{ matrix.version }}
+          key: nvim-${{ matrix.version }}-${{ runner.os }}
 
       - name: Install Neovim ${{ matrix.version }}
         uses: rhysd/action-setup-vim@v1
