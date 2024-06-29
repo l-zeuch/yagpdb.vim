@@ -173,6 +173,9 @@ syn keyword yagFunc roleAbove contained
 syn keyword yagFunc seq contained
 syn keyword yagFunc shuffle contained
 syn keyword yagFunc verb contained
+syn keyword yagFunc hash contained
+syn keyword yagFunc decodeBase64 contained
+syn keyword yagFunc encodeBase64 contained
 syn keyword yagFunc currentTime contained
 syn keyword yagFunc parseTime contained
 syn keyword yagFunc formatTime contained
