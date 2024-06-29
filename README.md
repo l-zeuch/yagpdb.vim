@@ -186,6 +186,8 @@ syntax: .bundle/lytfs
 Where `owner/repo` is the repository you wish to generate the syntax for, and `branch` is the branch you wish to use. A
 current Python 3 installation is required.
 
+After your modification, run `make generate` to update syntax definitions and the completion source file.
+
 > [!WARNING]
 > The [`lytfs` tool][lytfs] is potentially fragile — it makes assumptions about the file structure of the project.
 > Make sure to read the source code of the tool before using it and verify compatibility with your version of YAGPDB.
