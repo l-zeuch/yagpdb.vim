@@ -41,6 +41,7 @@ def main():
     with open(file, "rt") as fin:
         funcs = [line.strip() for line in fin]
 
+    funcs.sort()
     code = gen_code(funcs)
 
     outfile = 'syntax/yagpdbcc/functions.vim'
