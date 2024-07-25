@@ -33,6 +33,7 @@ def write_file(code, outfile):
         fout.write(fin.read())
         fout.write("\n")
         fout.write(code)
+        fout.write("\n")
 
 
 def main():
