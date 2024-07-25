@@ -56,6 +56,7 @@ def main():
     for f in files:
         keywords.extend(gen_keyword_list(f))
 
+    keywords.sort()
     write_file(gen_completion(keywords))
 
     print("Done!")
