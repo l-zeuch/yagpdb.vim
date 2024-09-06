@@ -135,6 +135,7 @@ function source:complete(params, callback)
 		{ label = 'getChannelOrThread' },
 		{ label = 'getChannelPins' },
 		{ label = 'getMember' },
+		{ label = 'getMemberVoiceState' },
 		{ label = 'getMessage' },
 		{ label = 'getPinCount' },
 		{ label = 'getResponse' },
