@@ -100,6 +100,7 @@ syn keyword yagFunc getChannel contained
 syn keyword yagFunc getChannelOrThread contained
 syn keyword yagFunc getChannelPins contained
 syn keyword yagFunc getMember contained
+syn keyword yagFunc getMemberVoiceState contained
 syn keyword yagFunc getMessage contained
 syn keyword yagFunc getPinCount contained
 syn keyword yagFunc getResponse contained
