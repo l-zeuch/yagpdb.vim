@@ -103,6 +103,7 @@ function source:complete(params, callback)
 		{ label = 'define' },
 		{ label = 'deleteAllMessageReactions' },
 		{ label = 'deleteForumPost' },
+		{ label = 'deleteInteractionResponse' },
 		{ label = 'deleteMessage' },
 		{ label = 'deleteMessageReaction' },
 		{ label = 'deleteResponse' },
