@@ -71,6 +71,7 @@ syn keyword yagFunc dbTopEntries contained
 syn keyword yagFunc decodeBase64 contained
 syn keyword yagFunc deleteAllMessageReactions contained
 syn keyword yagFunc deleteForumPost contained
+syn keyword yagFunc deleteInteractionResponse contained
 syn keyword yagFunc deleteMessage contained
 syn keyword yagFunc deleteMessageReaction contained
 syn keyword yagFunc deleteResponse contained
