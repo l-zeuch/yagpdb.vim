@@ -31,7 +31,7 @@ syn case match
 
 " Define the region of the template expressions, where the real code is.
 syn region      yagExpr             start=#\v\{\{#ms=e+1 end=#\}\}#me=s-1
-    \ contains=ALLBUT,yagComment,yagEscape,yagFormat,yagTodo
+    \ contains=ALLBUT,yagComment,yagEscape,yagFormat,yagTodo keepend
 
 
 " Identifiers, i.e. $my_var, $myVar ($my-var is now allowed though).
@@ -42,7 +42,7 @@ hi def link     yagIdentifier       Identifier
 " Errors
 syn match       yagCharError        contained "\v'.{-}'"
 syn match       yagError            contained "\v>\$\w*"
-syn region      yagNestedBrace      contained start=#\v\{\{# end=#\v\}\}#
+syn region      yagNestedBrace      contained start=#\v\{\{# end=#\v\}\}# extend
 
 hi def link     yagCharError        yagError
 hi def link     yagNestedBrace      yagError
@@ -65,7 +65,7 @@ syn region      yagString           contained start=+"+
                                   \ skip=+\\\\\|\\"+ end=+"\|$+
                                   \ contains=@yagStringGroup,@Spell
 syn region      yagRawStr           contained start=#\v`# end=#\v`#
-                                  \ contains=yagFormat,@Spell fold
+                                  \ contains=yagFormat,@Spell fold extend
 
 hi def link     yagRawStr           yagString
 hi def link     yagString           String
