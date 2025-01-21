@@ -160,22 +160,40 @@ like so:
 let g:yagpdbcc_snippet_engine = "ultisnips"
 ```
 
-## Contributing
+### Language Server Protocol
 
-If you spot an error, or want to contribute new features, feel free open a pull request!
-Please refer to [CONTRIBUTING](.github/CONTRIBUTING.md) for our guidelines on how to contribute.
+An LSP implementation can be found at <https://github.com/jo3-l/yag-template-lsp>. You'll have to install it from source and
+make it available in your `$PATH`; an installation of Rust is required. In the cloned repository, move to
+`crates/yag-template-lsp` and run `cargo install --path .` to install the LSP. Make sure that whichever location cargo
+installs to is in your `$PATH`.
 
-### Other Contributions
+As Neovim provides excellent inbuilt LSP support, we'll provide you with a sample configuration based on the [nvim-lspconfig]
+plugin; this can go anywhere in your `init.lua`.
 
-Some of the regex in this plugin was developed by [@DZ-TM](https://github.com/DZ-TM).
-If you like it, feel free to give him cookies as a reward.
+```lua
+local lsp = require("lspconfig")
+local configs = require("lspconfig.configs")
+if not configs.yag_template_lsp then
+  configs.yag_template_lsp = {
+    default_config = {
+      cmd = { "yag-template-lsp" },
+      filetypes = { "yagpdbcc" },
+      settings = {},
+      single_file_support = true,
+     },
+  }
+end
+lsp.yag_template_lsp.setup{}
+```
 
-## (Re-)Generating Function Syntax
+[nvim-lspconfig]: https://github.com/neovim/nvim-lspconfig
+
+### (Re-)Generating Syntax Files
 
 We aim to provide up-to-date function syntax highlighting based on the official instance of YAGPDB located at
 [botlabs-gg/yagpdb](https://github.com/botlabs-gg/yagpdb). Should you use a fork or otherwise modified version, and wish to
 generate the highlighting for that repository, modify the [Makefile](Makefile) such that the call to `.bundle/lytfs` in the
-`syntax:` recipe reads as follows:
+`syntax:` recipe reads as follows
 
 ```make
 syntax: .bundle/lytfs
@@ -193,6 +211,16 @@ After your modification, run `make generate` to update syntax definitions and th
 > Make sure to read the source code of the tool before using it and verify compatibility with your version of YAGPDB.
 
 [lytfs]: https://github.com/jo3-l/yagfuncdata
+
+## Contributing
+
+If you spot an error, or want to contribute new features, feel free open a pull request!
+Please refer to [CONTRIBUTING](.github/CONTRIBUTING.md) for our guidelines on how to contribute.
+
+### Other Contributions
+
+Some of the regex in this plugin was developed by [@DZ-TM](https://github.com/DZ-TM).
+If you like it, feel free to give him cookies as a reward.
 
 ## Legal Mumbo Jumbo
 
