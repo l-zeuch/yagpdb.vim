@@ -217,8 +217,8 @@ in your |init.lua|.
         configs.yag_template_lsp = {
             default_config = {
                 cmd = { "yag-template-lsp" },
-		filetypes = { "yagpdbcc" },
-		settings = {},
+                filetypes = { "yagpdbcc" },
+                settings = {},
                 single_file_support = true,
             },
         }
@@ -278,7 +278,7 @@ Before submitting a patch, be sure to read CONTRIBUTING.md for a full guide.
 * Other Vim plugins for inspiration, especially on how to structure
   plugin documentation (vim-go, vim-pathogen, vim-fugitive)
 * yagpdb.vim contributors:
-  https://github.com/l-zeuch/vim-go/graphs/contributors.
+  https://github.com/l-zeuch/yagpdb.vim/graphs/contributors.
 
 ==============================================================================
 9. License						    *yagpdbcc-license*
