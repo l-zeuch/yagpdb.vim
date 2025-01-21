@@ -199,6 +199,55 @@ Afterwards, to refresh the completion source, run the `generate` target via
 We recommend you read the currently existing syntax definitions carefully
 before expanding them with your own.
 
+LANGUAGE SERVER PROTOCOL                                          *yagpdbcc-lsp*
+
+An LSP implementation can be found at https://github.com/jo3-l/yag-template-lsp.
+You'll have to install it from source and make it available in your $PATH; an
+installation of Rust is required. In the cloned repository, move to
+`crates/yag-template-lsp` and run `cargo install --path .` to install the LSP.
+Make sure that whichever location cargo installs to is in your $PATH.
+
+As Neovim provides excellent inbuilt LSP support, we'll provide you with a
+sample configuration based on the nvim-lspconfig plugin; this can go anywhere
+in your |init.lua|.
+>
+    local lsp = require("lspconfig")
+    local configs = require("lspconfig.configs")
+    if not configs.yag_template_lsp then
+        configs.yag_template_lsp = {
+            default_config = {
+                cmd = { "yag-template-lsp" },
+		filetypes = { "yagpdbcc" },
+		settings = {},
+                single_file_support = true,
+            },
+        }
+    end
+    lsp.yag_template_lsp.setup{}
+<
+RE-GENERATING SYNTAX FILES                                   *yagpdbcc-generate*
+
+We aim to provide up-to-date function syntax highlighting based on the
+official instance of YAGPDB located at https://github.com/botlabs-gg/yagpdb.
+Should you use a fork or otherwise modified version, and wish to generate the
+highlighting for that repository, modify the Makefile such that the call to
+`.bundle/lytfs` in the `syntax:` recipe reads as follows
+>
+    syntax: .bundle/lytfs
+        .bundle/lytfs owner/repo@branch > syntax/funcs
+<
+
+Where `owner/repo` is the repository you wish to generate the syntax for, and
+`branch` is the branch you wish to use. A current Python 3 installation is
+required.
+
+After your modification, run `make generate` to update syntax definitions and
+the completion source file.
+
+Beware that the `lytfs` tool is potentially fragile — it makes assumptions
+about the file structure of the project. Make sure to read the source code of
+the tool before using it and verify compatibility with your version of YAGPDB.
+
 ==============================================================================
 7. Development						*yagpdbcc-development*
 
