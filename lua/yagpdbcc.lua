@@ -45,6 +45,7 @@ end
 ---@param callback fun(response: lsp.CompletionResponse|nil)
 function source:complete(params, callback)
     callback({
+		{ label = 'abs' },
 		{ label = 'add' },
 		{ label = 'addMessageReactions' },
 		{ label = 'addReactions' },
