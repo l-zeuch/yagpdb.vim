@@ -167,26 +167,20 @@ make it available in your `$PATH`; an installation of Rust is required. In the c
 `crates/yag-template-lsp` and run `cargo install --path .` to install the LSP. Make sure that whichever location cargo
 installs to is in your `$PATH`.
 
-As Neovim provides excellent inbuilt LSP support, we'll provide you with a sample configuration based on the [nvim-lspconfig]
-plugin; this can go anywhere in your `init.lua`.
+As Neovim provides excellent inbuilt LSP support, we'll provide you with a sample configuration using the native LSP client,
+giving you inlay hints and code completion.
 
 ```lua
-local lsp = require("lspconfig")
-local configs = require("lspconfig.configs")
-if not configs.yag_template_lsp then
-  configs.yag_template_lsp = {
-    default_config = {
-      cmd = { "yag-template-lsp" },
-      filetypes = { "yagpdbcc" },
-      settings = {},
-      single_file_support = true,
-     },
-  }
-end
-lsp.yag_template_lsp.setup{}
+vim.lsp.config('YAGPDB CC', {
+  cmd = { 'yag-template-lsp' },
+  filetypes = { 'yagpdbcc' },
+  on_attach = function(client, bufnr)
+    vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+    vim.lsp.completion.enable(true, client.id, bufnr, {})
+  end,
+})
+vim.lsp.enable('YAGPDB CC')
 ```
-
-[nvim-lspconfig]: https://github.com/neovim/nvim-lspconfig
 
 ### (Re-)Generating Syntax Files
 
