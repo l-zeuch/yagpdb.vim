@@ -26,7 +26,8 @@ To install from source, clone the repository, change into `crates/yag-template-l
 $ git clone github.com/jo3-l/yag-template-lsp
 $ cd yag-template-lsp/crates/yag-template-lsp
 $ cargo install
---path . ```
+--path .
+```
 
 This will place the binary in your cargo bin directory, which should be in your `$PATH` already.
 
