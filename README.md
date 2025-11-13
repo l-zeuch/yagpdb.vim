@@ -15,7 +15,7 @@ different destination, invoke `make` with `DESTDIR=/path/to/destination`.
 wget https://raw.githubusercontent.com/l-zeuch/yagpdb.vim/master/Makefile && make install
 ```
 
-> **Note**
+> [!NOTE]
 > If you wish to install this for your Vim, but also have Neovim installed, make sure to invoke the `install-vim` target
 > instead.
 
@@ -23,7 +23,7 @@ See also as Greg Hurrell's excellent Youtube video: [Vim screencast #75: Plugin 
 
 ### With a Plugin Manager
 
-> **Note**
+> [!NOTE]
 > Installing with a plugin manager is recommended for Windows installations.
 
 Use your favorite plugin manager to install this plugin. [tpope/vim-pathogen](https://github.com/tpope/vim-pathogen),
@@ -31,77 +31,6 @@ Use your favorite plugin manager to install this plugin. [tpope/vim-pathogen](ht
 and [Shougo/dein.vim](https://github.com/Shougo/dein.vim) are some of the more popular ones.
 A lengthy discussion of these and other managers can be found on
 [vi.stackexchange.com](https://vi.stackexchange.com/questions/388/what-is-the-difference-between-the-vim-plugin-managers).
-Basic instructions are provided below, but please **be sure to read, understand, and follow all the safety rules that
-come with your ~~power tools~~ plugin manager.**
-
-<details>
-<summary>Pathogen</summary>
-Pathogen is more of a runtime path manager than a plugin manager. You must clone the plugins' repositories yourself to
-a specific location, and Pathogen makes sure they are available in Vim.
-
-1. In the terminal,
-
-    ```bash
-    git clone https://github.com/l-zeuch/yagpdb.vim.git ~/.vim/bundle/yagpdb.vim
-    ```
-
-1. In your `vimrc`,
-
-    ```vim
-    call pathogen#infect()
-    syntax on
-    filetype plugin indent on
-    ```
-
-</details>
-
-<details>
-  <summary>Vundle</summary>
-
-1. Install Vundle, according to its instructions.
-1. Add the following text to your `vimrc`.
-
-    ```vim
-    call vundle#begin()
-      Plugin 'l-zeuch/yagpdb.vim'
-    call vundle#end()
-    ```
-
-1. Restart Vim, and run the `:PluginInstall` statement to install your plugins.
-
-</details>
-
-<details>
-  <summary>Vim-Plug</summary>
-
-1. Install Vim-Plug, according to its instructions.
-1. Add the following text to your `vimrc`.
-
-    ```vim
-    call plug#begin()
-      Plug 'l-zeuch/yagpdb.vim'
-    call plug#end()
-    ```
-
-1. Restart Vim, and run the `:PlugInstall` statement to install your plugins.
-
-</details>
-
-<details>
-  <summary>Dein</summary>
-
-1. Install Dein, according to its instructions.
-1. Add the following text to your `vimrc`.
-
-    ```vim
-    call dein#begin()
-      call dein#add('l-zeuch/yagpdb.vim')
-    call dein#end()
-    ```
-
-1. Restart Vim, and run the `:call dein#install()` statement to install your plugins.
-
-</details>
 
 ## Configuration
 
@@ -162,25 +91,7 @@ let g:yagpdbcc_snippet_engine = "ultisnips"
 
 ### Language Server Protocol
 
-An LSP implementation can be found at <https://github.com/jo3-l/yag-template-lsp>. You'll have to install it from source and
-make it available in your `$PATH`; an installation of Rust is required. In the cloned repository, move to
-`crates/yag-template-lsp` and run `cargo install --path .` to install the LSP. Make sure that whichever location cargo
-installs to is in your `$PATH`.
-
-As Neovim provides excellent inbuilt LSP support, we'll provide you with a sample configuration using the native LSP client,
-giving you inlay hints and code completion.
-
-```lua
-vim.lsp.config('YAGPDB CC', {
-  cmd = { 'yag-template-lsp' },
-  filetypes = { 'yagpdbcc' },
-  on_attach = function(client, bufnr)
-    vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-    vim.lsp.completion.enable(true, client.id, bufnr, {})
-  end,
-})
-vim.lsp.enable('YAGPDB CC')
-```
+For information on installing and configuring a language server for YAGPDB custom commands, please see [LSP.md](LSP.md).
 
 ### (Re-)Generating Syntax Files
 

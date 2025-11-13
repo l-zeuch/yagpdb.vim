@@ -54,7 +54,7 @@ That way, you will have a Vim 8 packages compatible installation.
 If you have both Neovim and Vim installed, but wish to install this preferably
 for Vim, make sure to use the `install-vim` target instead.
 
-WITH A PLUGIN MANAGER
+PLUGIN MANAGER
 
 Use your favourite plugin manager to install this plugin. tpope/vim-pathogen,
 VundleVim/Vundle.vim, junegunn/vim-plug, and Shougo/dein.vim are some of the
@@ -64,69 +64,6 @@ A lenghty discussion of these and other managers can be found on
 vi.stackexchange:
 https://vi.stackexchange.com/questions/388/what-is-the-difference-between-the-vim-plugin-managers
 
-Basic instructions are provided below, but please be sure to read, understand,
-and follow all the safety rules that come with your power tools.
-
-Pathogen~
-
-(https://github.com/tpope/vim-pathogen)
-
-Pathogen is more of a runtime path manager than a plugin manager.
-You must clone the plugins' repositories yourself to a specific location,
-and Pathogen makes sure they are available in Vim.
-
-In the terminal:
->
-    git clone https://github.com/l-zeuch/yagpdb.vim.git \
-	~/.vim/bundle/yagpdb.vim
-<
-In your |vimrc|:
->
-    call pathogen#infect()
-    syntax on
-    filetype plugin indent on
-<
-
-Vundle~
-
-(https://github.com/VundleVim/Vundle.vim)
-
-Install Vundle, according to its instructions. Afterwards, add the following
-text to your |vimrc|:
->
-    call vundle#begin()
-	Plugin 'l-zeuch/yagpdb.vim'
-    call vundle#end()
-<
-Restart Vim, and run :PluginInstall to install your plugins.
-
-Vim-Plug~
-
-(https://github.com/junegunn/vim-plug)
-
-Install Vim-Plug, according to its instructions. Afterwards, add the following
-text to your |vimrc|:
->
-    call plug#begin()
-	Plug 'l-zeuch/yagpdb.vim'
-    call plug#end()
-<
-Restart Vim and run the :PlugInstall statement to install your plugins.
-
-Dein~
-
-(https://github.com/Shougo/dein.vim)
-
-Install Dein, according to its instructions. Afterwards, add the following
-text to your |vimrc|:
->
-    call dein#begin()
-	call dein#add('l-zeuch/yagpdb.vim')
-    call dein#end()
-<
-Restart Vim and run the :call dein#install() statement to install your
-plugins.
-
 ==============================================================================
 3. Configuration					     *yagpdbcc-config*
 
@@ -134,7 +71,7 @@ CLIPBOARD						*g:yagpdbcc_use_primary*
 
 If you prefer to insert text with the middle mouse button instead of Ctrl V,
 change to the PRIMARY register as follows:
->
+>vim
     let g:yagpdbcc_use_primary = 1
 <
 CODE COMPLETION
@@ -144,7 +81,7 @@ Requires Neovim 0.5 or higher, see |Lua|.
 We provided bundled sources for code-completion to be used with
 hrsh7th/nvim-cmp. Follow the installation instructions there and enable the
 source as follows:
->
+>lua
     sources = cmp.config.sources({
 	-- ...
 	{ name = 'yagpdb-cc' },
@@ -156,7 +93,7 @@ OVERRIDING FILETYPES					*g:yagpdbcc_override_ft*
 Sometimes, you may with to use a file extension already in use by another
 language, such as `*.gotmpl`. If that is the case, also select those
 extensions as follows:
->
+>vim
     let g:yagpdbcc_override_ft = 1
 <
 SNIPPET ENGINES					    *g:yagpdbcc_snippet_engine*
@@ -166,7 +103,7 @@ Shogo/neosnippet.vim.
 
 Select which one to use by setting the |g:yagpdbcc_snippet_engine| variable to
 either "ultisnips", or "neosnippet, like so:
->
+>vim
     let g:yagpdbcc_snippet_engine = "ultisnips"
 <
 ==============================================================================
@@ -201,27 +138,108 @@ before expanding them with your own.
 
 LANGUAGE SERVER PROTOCOL                                          *yagpdbcc-lsp*
 
-An LSP implementation can be found at https://github.com/jo3-l/yag-template-lsp.
-You'll have to install it from source and make it available in your $PATH; an
-installation of Rust is required. In the cloned repository, move to
-`crates/yag-template-lsp` and run `cargo install --path .` to install the LSP.
-Make sure that whichever location cargo installs to is in your $PATH.
+An implementation of the Language Server Protocol for YAGPDB custom commands
+can be found at <github.com/jo3-l/yag-template-lsp>.
 
-As Neovim provides excellent inbuilt LSP support, we'll provide you with a
-sample configuration based on the native client; this can go anywhere in your
-|init.lua|.
->
+Installing `yag-template-lsp` for Neovim is a little more involved than for
+VSCode, as you'll have to install the binary yourself and also install some
+syntax definition for YAGPDB's custom command language.
 
+Prerequisites~
+
+If you wish to compile `yag-template-lsp` from source, you'll need to have Git
+and the Rust toolchain installed.
+
+Installing the Server~
+
+You can either download a precompiled `yag-template-lsp` binary from the
+releases, or compile it from source. Either way you'll need to place it in
+your `$PATH`, so that Neovim's LSP client can find it.
+
+To install from source, clone the repository, change into
+`crates/yag-template-lsp` and build the binary.
+
+```shellsession
+$ git clone github.com/jo3-l/yag-template-lsp
+$ cd yag-template-lsp/crates/yag-template-lsp
+$ cargo install
+--path . ```
+
+This will place the binary in your cargo bin directory, which should be in
+your `$PATH` already.
+
+Configuring Neovim~
+
+In your |init.lua|, let the LSP client know about the binary, the associated
+filetype and some basic configuration. If you prefer using a plugin like
+`nvim-lspconfig`, you can adapt the configuration accordingly, in this example
+we'll just use the built-in LSP client configuration functions.
+
+For Windows, be aware that the binary will be named
+`yag-template-lsp-x86_64-pc-windows-msvc.exe` or similar, depending on your
+toolchain, so you'll need to use that name for `cmd` instead.
+
+>lua
+    -- baseline lsp configuration. make sure the cmd string matches the
+    -- filename of the LSP binary!
     vim.lsp.config('YAGPDB CC', {
-      cmd = { 'yag-template-lsp' },
-      filetypes = { 'yagpdbcc' },
-      on_attach = function(client, bufnr)
-    	vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-    	vim.lsp.completion.enable(true, client.id, bufnr, {})
-      end,
+    	cmd = { 'yag-template-lsp' },
+    	filetypes = { 'yagpdbcc' },
+    	on_attach = function(client, bufnr)
+            vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+            vim.lsp.completion.enable(true, client.id, bufnr, {})
+    	end,
     })
     vim.lsp.enable('YAGPDB CC')
 <
+
+Because `yag-template-lsp` provides inlay hints for functions with three or
+more parameters, we'll enable `severity.HINT` diagnostics for virtual text
+display as well. It is a good idea to let the client update in insert mode,
+but if you're struggling with performance, you can disable that.
+
+>lua
+    -- enumerate all severities for virtual text display.
+    -- we want the inlay type hints too!
+    severities = {
+    	vim.diagnostic.severity.ERROR,
+    	vim.diagnostic.severity.WARN,
+    	vim.diagnostic.severity.INFO,
+    	vim.diagnostic.severity.HINT,
+    }
+
+    -- enable diagnostics for inlay hints and stuff
+    vim.diagnostic.config({
+    	virtual_text = {
+            source = true,
+            severity = severities,
+    	},
+    	update_in_insert = true, })
+<
+
+## Testing the Configuration
+
+To verify that everything is working correctly, open a `.yag` or `.yagcc` file
+in Neovim, preferably one that already contains some code. You should see
+syntax highlighting (if you installed the plugin) and inlay hints for
+functions with three or more parameters, as well as diagnostics for any issues
+in the code.
+
+We provided a sample of YAGPDB command code below that you can use to test
+your setup.
+
+```
+{{ sendMessage nil "hi" }}
+{{ $x := parseArgs 1 "pain" (carg "int" "how much pain?") }}
+{{}}
+{{ $y := }}
+```
+
+You should see inlay hints for the `parseArgs` function parameters and
+diagnostics for the incomplete command at the end, errors for the empty `{{}}`
+and the incomplete assignment to `$y`.
+
+
 
 RE-GENERATING SYNTAX FILES                                   *yagpdbcc-generate*
 
@@ -230,9 +248,9 @@ official instance of YAGPDB located at https://github.com/botlabs-gg/yagpdb.
 Should you use a fork or otherwise modified version, and wish to generate the
 highlighting for that repository, modify the Makefile such that the call to
 `.bundle/lytfs` in the `syntax:` recipe reads as follows
->
+>make
     syntax: .bundle/lytfs
-        .bundle/lytfs owner/repo@branch > syntax/funcs
+    	.bundle/lytfs owner/repo@branch > syntax/funcs
 <
 
 Where `owner/repo` is the repository you wish to generate the syntax for, and
