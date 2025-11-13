@@ -1,7 +1,12 @@
 # yag-template-lsp for Neovim
 
+> [!NOTE]
+> Initially I wrote this guide for one user on the YAGPDB support server, but I figured others might find it useful as well.
+> The idea is to go into some detail why we need to do certain things. If you're already familiar with Neovim, please feel
+> free to ignore those :-)
+
 An implementation of the Language Server Protocol for YAGPDB custom commands can be found at
-<github.com/jo3-l/yag-template-lsp>.
+<https://github.com/jo3-l/yag-template-lsp>.
 
 Installing `yag-template-lsp` for Neovim is a little more involved than for VSCode, as you'll have to install the binary
 yourself and also install some syntax definition for YAGPDB's custom command language.
