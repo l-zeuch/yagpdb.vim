@@ -28,9 +28,9 @@ you'll need to place it in your `$PATH`, so that Neovim's LSP client can find it
 To install from source, clone the repository, change into `crates/yag-template-lsp` and build the binary.
 
 ```shellsession
-$ git clone github.com/jo3-l/yag-template-lsp
-$ cd yag-template-lsp/crates/yag-template-lsp
-$ cargo install --path .
+git clone github.com/jo3-l/yag-template-lsp
+cd yag-template-lsp/crates/yag-template-lsp
+cargo install --path .
 ```
 
 This will place the binary in your cargo bin directory, which should be in your `$PATH` already.
@@ -109,7 +109,7 @@ or more parameters, as well as diagnostics for any issues in the code.
 
 We provided a sample of YAGPDB command code below that you can use to test your setup.
 
-```
+```go
 {{ sendMessage nil "hi" }}
 {{ $x := parseArgs 1 "pain" (carg "int" "how much pain?") }}
 {{}}
@@ -118,4 +118,3 @@ We provided a sample of YAGPDB command code below that you can use to test your 
 
 You should see inlay hints for the `parseArgs` function parameters and diagnostics for the incomplete command at the end,
 errors for the empty `{{}}` and the incomplete assignment to `$y`.
-
