@@ -42,6 +42,7 @@ syn keyword yagFunc carg contained
 syn keyword yagFunc cbrt contained
 syn keyword yagFunc cbutton contained
 syn keyword yagFunc cembed contained
+syn keyword yagFunc clabel contained
 syn keyword yagFunc closeThread contained
 syn keyword yagFunc cmenu contained
 syn keyword yagFunc cmodal contained
@@ -52,6 +53,8 @@ syn keyword yagFunc createForumPost contained
 syn keyword yagFunc createThread contained
 syn keyword yagFunc createTicket contained
 syn keyword yagFunc cslice contained
+syn keyword yagFunc ctextDisplay contained
+syn keyword yagFunc ctextInput contained
 syn keyword yagFunc currentTime contained
 syn keyword yagFunc currentUserAgeHuman contained
 syn keyword yagFunc currentUserAgeMinutes contained
@@ -154,6 +157,7 @@ syn keyword yagFunc mentionRoleID contained
 syn keyword yagFunc mentionRoleName contained
 syn keyword yagFunc min contained
 syn keyword yagFunc mod contained
+syn keyword yagFunc modalBuilder contained
 syn keyword yagFunc mult contained
 syn keyword yagFunc ne contained
 syn keyword yagFunc newDate contained
