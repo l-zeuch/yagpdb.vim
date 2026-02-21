@@ -41,6 +41,8 @@ syn keyword yagFunc cancelScheduledUniqueCC contained
 syn keyword yagFunc carg contained
 syn keyword yagFunc cbrt contained
 syn keyword yagFunc cbutton contained
+syn keyword yagFunc ccheckbox contained
+syn keyword yagFunc ccheckboxGroup contained
 syn keyword yagFunc cembed contained
 syn keyword yagFunc clabel contained
 syn keyword yagFunc closeThread contained
@@ -49,6 +51,7 @@ syn keyword yagFunc cmodal contained
 syn keyword yagFunc complexMessage contained
 syn keyword yagFunc complexMessageEdit contained
 syn keyword yagFunc componentBuilder contained
+syn keyword yagFunc cradioGroup contained
 syn keyword yagFunc createForumPost contained
 syn keyword yagFunc createThread contained
 syn keyword yagFunc createTicket contained
@@ -150,6 +153,8 @@ syn keyword yagFunc lower contained
 syn keyword yagFunc lt contained
 syn keyword yagFunc mathConst contained
 syn keyword yagFunc max contained
+syn keyword yagFunc memberAbove contained
+syn keyword yagFunc memberAboveRole contained
 syn keyword yagFunc mentionEveryone contained
 syn keyword yagFunc mentionHere contained
 syn keyword yagFunc mentionRole contained
