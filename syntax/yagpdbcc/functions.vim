@@ -124,6 +124,7 @@ syn keyword yagFunc giveRole contained
 syn keyword yagFunc giveRoleID contained
 syn keyword yagFunc giveRoleName contained
 syn keyword yagFunc gt contained
+syn keyword yagFunc hasAnyPermissions contained
 syn keyword yagFunc hasPermissions contained
 syn keyword yagFunc hasPrefix contained
 syn keyword yagFunc hasRole contained
@@ -234,6 +235,7 @@ syn keyword yagFunc sub contained
 syn keyword yagFunc takeRole contained
 syn keyword yagFunc takeRoleID contained
 syn keyword yagFunc takeRoleName contained
+syn keyword yagFunc targetHasAnyPermissions contained
 syn keyword yagFunc targetHasPermissions contained
 syn keyword yagFunc targetHasRole contained
 syn keyword yagFunc targetHasRoleID contained
