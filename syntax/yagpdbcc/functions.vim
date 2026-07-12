@@ -261,3 +261,4 @@ syn keyword yagFunc urlunescape contained
 syn keyword yagFunc userArg contained
 syn keyword yagFunc verb contained
 syn keyword yagFunc weekNumber contained
+hi def link yagFunc Function

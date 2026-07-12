@@ -44,6 +44,7 @@ def main():
 
     funcs.sort()
     code = gen_code(funcs)
+    code += "\nhi def link yagFunc Function"
 
     outfile = 'syntax/yagpdbcc/functions.vim'
     write_file(code, outfile)
