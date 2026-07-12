@@ -5,6 +5,7 @@
 # Base
 /ftdetect/              @LRitzdorf
 /ftplugin/              @LRitzdorf
+/ftplugin/yagpdbdef.vim @l-zeuch
 /syntax/                @LRitzdorf
 /syntax/yagpdbdef.vim   @l-zeuch
 /autoload/              @l-zeuch

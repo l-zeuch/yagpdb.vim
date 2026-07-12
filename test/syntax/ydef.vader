@@ -1,6 +1,6 @@
 # Syntax tests: YAGPDB Custom Commands - Function Definitions
 
-# Copyright (C) 2026    Lucas Ritzdorf, Luca Zeuch
+# Copyright (C) 2026    Luca Zeuch
 
 # Available syntax functions are:
 #   SyntaxAt(): current cursor position

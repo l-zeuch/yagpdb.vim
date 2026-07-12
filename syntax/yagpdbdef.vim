@@ -1,6 +1,6 @@
 " yagpdb.vim: Vim syntax file for yagpdb custom commands.
 
-" Copyright (C) 2026    Lucas Ritzdorf, Luca Zeuch
+" Copyright (C) 2026    Luca Zeuch
 
 " This program is free software; you can redistribute it and/or modify
 " it under the terms of the GNU General Public License as published by
