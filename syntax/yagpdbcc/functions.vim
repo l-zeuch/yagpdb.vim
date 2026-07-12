@@ -18,247 +18,247 @@
 " with this program; if not, write to the Free Software Foundation, Inc.,
 " 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-syn keyword yagFunc abs contained
-syn keyword yagFunc add contained
-syn keyword yagFunc addMessageReactions contained
-syn keyword yagFunc addReactions contained
-syn keyword yagFunc addResponseReactions contained
-syn keyword yagFunc addRole contained
-syn keyword yagFunc addRoleID contained
-syn keyword yagFunc addRoleName contained
-syn keyword yagFunc addThreadMember contained
-syn keyword yagFunc adjective contained
-syn keyword yagFunc and contained
-syn keyword yagFunc bitwiseAnd contained
-syn keyword yagFunc bitwiseAndNot contained
-syn keyword yagFunc bitwiseLeftShift contained
-syn keyword yagFunc bitwiseNot contained
-syn keyword yagFunc bitwiseOr contained
-syn keyword yagFunc bitwiseRightShift contained
-syn keyword yagFunc bitwiseXor contained
-syn keyword yagFunc call contained
-syn keyword yagFunc cancelScheduledUniqueCC contained
-syn keyword yagFunc carg contained
-syn keyword yagFunc cbrt contained
-syn keyword yagFunc cbutton contained
-syn keyword yagFunc ccheckbox contained
-syn keyword yagFunc ccheckboxGroup contained
-syn keyword yagFunc cembed contained
-syn keyword yagFunc clabel contained
-syn keyword yagFunc closeThread contained
-syn keyword yagFunc cmenu contained
-syn keyword yagFunc cmodal contained
-syn keyword yagFunc complexMessage contained
-syn keyword yagFunc complexMessageEdit contained
-syn keyword yagFunc componentBuilder contained
-syn keyword yagFunc cradioGroup contained
-syn keyword yagFunc createForumPost contained
-syn keyword yagFunc createThread contained
-syn keyword yagFunc createTicket contained
-syn keyword yagFunc cslice contained
-syn keyword yagFunc ctextDisplay contained
-syn keyword yagFunc ctextInput contained
-syn keyword yagFunc currentTime contained
-syn keyword yagFunc currentUserAgeHuman contained
-syn keyword yagFunc currentUserAgeMinutes contained
-syn keyword yagFunc currentUserCreated contained
-syn keyword yagFunc dbBottomEntries contained
-syn keyword yagFunc dbCount contained
-syn keyword yagFunc dbDel contained
-syn keyword yagFunc dbDelByID contained
-syn keyword yagFunc dbDelById contained
-syn keyword yagFunc dbDelMultiple contained
-syn keyword yagFunc dbGet contained
-syn keyword yagFunc dbGetPattern contained
-syn keyword yagFunc dbGetPatternReverse contained
-syn keyword yagFunc dbIncr contained
-syn keyword yagFunc dbRank contained
-syn keyword yagFunc dbSet contained
-syn keyword yagFunc dbSetExpire contained
-syn keyword yagFunc dbTopEntries contained
-syn keyword yagFunc decodeBase64 contained
-syn keyword yagFunc deleteAllMessageReactions contained
-syn keyword yagFunc deleteForumPost contained
-syn keyword yagFunc deleteInteractionResponse contained
-syn keyword yagFunc deleteMessage contained
-syn keyword yagFunc deleteMessageReaction contained
-syn keyword yagFunc deleteResponse contained
-syn keyword yagFunc deleteThread contained
-syn keyword yagFunc deleteTrigger contained
-syn keyword yagFunc dict contained
-syn keyword yagFunc div contained
-syn keyword yagFunc editChannelName contained
-syn keyword yagFunc editChannelTopic contained
-syn keyword yagFunc editComponentMessage contained
-syn keyword yagFunc editComponentMessageNoEscape contained
-syn keyword yagFunc editMessage contained
-syn keyword yagFunc editMessageNoEscape contained
-syn keyword yagFunc editNickname contained
-syn keyword yagFunc editResponse contained
-syn keyword yagFunc editResponseNoEscape contained
-syn keyword yagFunc editThread contained
-syn keyword yagFunc encodeBase64 contained
-syn keyword yagFunc ephemeralResponse contained
-syn keyword yagFunc eq contained
-syn keyword yagFunc exec contained
-syn keyword yagFunc execAdmin contained
-syn keyword yagFunc execCC contained
-syn keyword yagFunc execTemplate contained
-syn keyword yagFunc fdiv contained
-syn keyword yagFunc formatTime contained
-syn keyword yagFunc ge contained
-syn keyword yagFunc getChannel contained
-syn keyword yagFunc getChannelOrThread contained
-syn keyword yagFunc getChannelPins contained
-syn keyword yagFunc getMember contained
-syn keyword yagFunc getMemberVoiceState contained
-syn keyword yagFunc getMessage contained
-syn keyword yagFunc getPinCount contained
-syn keyword yagFunc getResponse contained
-syn keyword yagFunc getRole contained
-syn keyword yagFunc getRoleID contained
-syn keyword yagFunc getRoleName contained
-syn keyword yagFunc getTargetPermissionsIn contained
-syn keyword yagFunc getThread contained
-syn keyword yagFunc giveRole contained
-syn keyword yagFunc giveRoleID contained
-syn keyword yagFunc giveRoleName contained
-syn keyword yagFunc gt contained
-syn keyword yagFunc hasAnyPermissions contained
-syn keyword yagFunc hasPermissions contained
-syn keyword yagFunc hasPrefix contained
-syn keyword yagFunc hasRole contained
-syn keyword yagFunc hasRoleID contained
-syn keyword yagFunc hasRoleName contained
-syn keyword yagFunc hasSuffix contained
-syn keyword yagFunc hash contained
-syn keyword yagFunc html contained
-syn keyword yagFunc humanizeDurationHours contained
-syn keyword yagFunc humanizeDurationMinutes contained
-syn keyword yagFunc humanizeDurationSeconds contained
-syn keyword yagFunc humanizeThousands contained
-syn keyword yagFunc humanizeTimeSinceDays contained
-syn keyword yagFunc in contained
-syn keyword yagFunc inFold contained
-syn keyword yagFunc index contained
-syn keyword yagFunc joinStr contained
-syn keyword yagFunc js contained
-syn keyword yagFunc json contained
-syn keyword yagFunc jsonToSdict contained
-syn keyword yagFunc kindOf contained
-syn keyword yagFunc le contained
-syn keyword yagFunc len contained
-syn keyword yagFunc loadLocation contained
-syn keyword yagFunc log contained
-syn keyword yagFunc lower contained
-syn keyword yagFunc lt contained
-syn keyword yagFunc mathConst contained
-syn keyword yagFunc max contained
-syn keyword yagFunc memberAbove contained
-syn keyword yagFunc memberAboveRole contained
-syn keyword yagFunc mentionEveryone contained
-syn keyword yagFunc mentionHere contained
-syn keyword yagFunc mentionRole contained
-syn keyword yagFunc mentionRoleID contained
-syn keyword yagFunc mentionRoleName contained
-syn keyword yagFunc min contained
-syn keyword yagFunc mod contained
-syn keyword yagFunc modalBuilder contained
-syn keyword yagFunc mult contained
-syn keyword yagFunc ne contained
-syn keyword yagFunc newDate contained
-syn keyword yagFunc not contained
-syn keyword yagFunc noun contained
-syn keyword yagFunc onlineCount contained
-syn keyword yagFunc onlineCountBots contained
-syn keyword yagFunc openThread contained
-syn keyword yagFunc or contained
-syn keyword yagFunc parseArgs contained
-syn keyword yagFunc parseTime contained
-syn keyword yagFunc pastNicknames contained
-syn keyword yagFunc pastUsernames contained
-syn keyword yagFunc pinForumPost contained
-syn keyword yagFunc pinMessage contained
-syn keyword yagFunc pow contained
-syn keyword yagFunc print contained
-syn keyword yagFunc printf contained
-syn keyword yagFunc println contained
-syn keyword yagFunc publishMessage contained
-syn keyword yagFunc publishResponse contained
-syn keyword yagFunc randInt contained
-syn keyword yagFunc reFind contained
-syn keyword yagFunc reFindAll contained
-syn keyword yagFunc reFindAllSubmatches contained
-syn keyword yagFunc reQuoteMeta contained
-syn keyword yagFunc reReplace contained
-syn keyword yagFunc reSplit contained
-syn keyword yagFunc removeRole contained
-syn keyword yagFunc removeRoleID contained
-syn keyword yagFunc removeRoleName contained
-syn keyword yagFunc removeThreadMember contained
-syn keyword yagFunc roleAbove contained
-syn keyword yagFunc round contained
-syn keyword yagFunc roundCeil contained
-syn keyword yagFunc roundEven contained
-syn keyword yagFunc roundFloor contained
-syn keyword yagFunc sanitizeText contained
-syn keyword yagFunc scheduleUniqueCC contained
-syn keyword yagFunc sdict contained
-syn keyword yagFunc sendComponentMessage contained
-syn keyword yagFunc sendComponentMessageNoEscape contained
-syn keyword yagFunc sendComponentMessageNoEscapeRetID contained
-syn keyword yagFunc sendComponentMessageRetID contained
-syn keyword yagFunc sendDM contained
-syn keyword yagFunc sendMessage contained
-syn keyword yagFunc sendMessageNoEscape contained
-syn keyword yagFunc sendMessageNoEscapeRetID contained
-syn keyword yagFunc sendMessageRetID contained
-syn keyword yagFunc sendModal contained
-syn keyword yagFunc sendResponse contained
-syn keyword yagFunc sendResponseNoEscape contained
-syn keyword yagFunc sendResponseNoEscapeRetID contained
-syn keyword yagFunc sendResponseRetID contained
-syn keyword yagFunc sendTemplate contained
-syn keyword yagFunc sendTemplateDM contained
-syn keyword yagFunc seq contained
-syn keyword yagFunc setRoles contained
-syn keyword yagFunc shuffle contained
-syn keyword yagFunc sleep contained
-syn keyword yagFunc slice contained
-syn keyword yagFunc snowflakeToTime contained
-syn keyword yagFunc sort contained
-syn keyword yagFunc split contained
-syn keyword yagFunc sqrt contained
-syn keyword yagFunc str contained
-syn keyword yagFunc structToSdict contained
-syn keyword yagFunc sub contained
-syn keyword yagFunc takeRole contained
-syn keyword yagFunc takeRoleID contained
-syn keyword yagFunc takeRoleName contained
-syn keyword yagFunc targetHasAnyPermissions contained
-syn keyword yagFunc targetHasPermissions contained
-syn keyword yagFunc targetHasRole contained
-syn keyword yagFunc targetHasRoleID contained
-syn keyword yagFunc targetHasRoleName contained
-syn keyword yagFunc timestampToTime contained
-syn keyword yagFunc title contained
-syn keyword yagFunc toByte contained
-syn keyword yagFunc toDuration contained
-syn keyword yagFunc toFloat contained
-syn keyword yagFunc toInt contained
-syn keyword yagFunc toInt64 contained
-syn keyword yagFunc toRune contained
-syn keyword yagFunc toString contained
-syn keyword yagFunc trimSpace contained
-syn keyword yagFunc unpinForumPost contained
-syn keyword yagFunc unpinMessage contained
-syn keyword yagFunc updateMessage contained
-syn keyword yagFunc updateMessageNoEscape contained
-syn keyword yagFunc upper contained
-syn keyword yagFunc urlescape contained
-syn keyword yagFunc urlquery contained
-syn keyword yagFunc urlunescape contained
-syn keyword yagFunc userArg contained
-syn keyword yagFunc verb contained
-syn keyword yagFunc weekNumber contained
+syn keyword yagFunc abs
+syn keyword yagFunc add
+syn keyword yagFunc addMessageReactions
+syn keyword yagFunc addReactions
+syn keyword yagFunc addResponseReactions
+syn keyword yagFunc addRole
+syn keyword yagFunc addRoleID
+syn keyword yagFunc addRoleName
+syn keyword yagFunc addThreadMember
+syn keyword yagFunc adjective
+syn keyword yagFunc and
+syn keyword yagFunc bitwiseAnd
+syn keyword yagFunc bitwiseAndNot
+syn keyword yagFunc bitwiseLeftShift
+syn keyword yagFunc bitwiseNot
+syn keyword yagFunc bitwiseOr
+syn keyword yagFunc bitwiseRightShift
+syn keyword yagFunc bitwiseXor
+syn keyword yagFunc call
+syn keyword yagFunc cancelScheduledUniqueCC
+syn keyword yagFunc carg
+syn keyword yagFunc cbrt
+syn keyword yagFunc cbutton
+syn keyword yagFunc ccheckbox
+syn keyword yagFunc ccheckboxGroup
+syn keyword yagFunc cembed
+syn keyword yagFunc clabel
+syn keyword yagFunc closeThread
+syn keyword yagFunc cmenu
+syn keyword yagFunc cmodal
+syn keyword yagFunc complexMessage
+syn keyword yagFunc complexMessageEdit
+syn keyword yagFunc componentBuilder
+syn keyword yagFunc cradioGroup
+syn keyword yagFunc createForumPost
+syn keyword yagFunc createThread
+syn keyword yagFunc createTicket
+syn keyword yagFunc cslice
+syn keyword yagFunc ctextDisplay
+syn keyword yagFunc ctextInput
+syn keyword yagFunc currentTime
+syn keyword yagFunc currentUserAgeHuman
+syn keyword yagFunc currentUserAgeMinutes
+syn keyword yagFunc currentUserCreated
+syn keyword yagFunc dbBottomEntries
+syn keyword yagFunc dbCount
+syn keyword yagFunc dbDel
+syn keyword yagFunc dbDelByID
+syn keyword yagFunc dbDelById
+syn keyword yagFunc dbDelMultiple
+syn keyword yagFunc dbGet
+syn keyword yagFunc dbGetPattern
+syn keyword yagFunc dbGetPatternReverse
+syn keyword yagFunc dbIncr
+syn keyword yagFunc dbRank
+syn keyword yagFunc dbSet
+syn keyword yagFunc dbSetExpire
+syn keyword yagFunc dbTopEntries
+syn keyword yagFunc decodeBase64
+syn keyword yagFunc deleteAllMessageReactions
+syn keyword yagFunc deleteForumPost
+syn keyword yagFunc deleteInteractionResponse
+syn keyword yagFunc deleteMessage
+syn keyword yagFunc deleteMessageReaction
+syn keyword yagFunc deleteResponse
+syn keyword yagFunc deleteThread
+syn keyword yagFunc deleteTrigger
+syn keyword yagFunc dict
+syn keyword yagFunc div
+syn keyword yagFunc editChannelName
+syn keyword yagFunc editChannelTopic
+syn keyword yagFunc editComponentMessage
+syn keyword yagFunc editComponentMessageNoEscape
+syn keyword yagFunc editMessage
+syn keyword yagFunc editMessageNoEscape
+syn keyword yagFunc editNickname
+syn keyword yagFunc editResponse
+syn keyword yagFunc editResponseNoEscape
+syn keyword yagFunc editThread
+syn keyword yagFunc encodeBase64
+syn keyword yagFunc ephemeralResponse
+syn keyword yagFunc eq
+syn keyword yagFunc exec
+syn keyword yagFunc execAdmin
+syn keyword yagFunc execCC
+syn keyword yagFunc execTemplate
+syn keyword yagFunc fdiv
+syn keyword yagFunc formatTime
+syn keyword yagFunc ge
+syn keyword yagFunc getChannel
+syn keyword yagFunc getChannelOrThread
+syn keyword yagFunc getChannelPins
+syn keyword yagFunc getMember
+syn keyword yagFunc getMemberVoiceState
+syn keyword yagFunc getMessage
+syn keyword yagFunc getPinCount
+syn keyword yagFunc getResponse
+syn keyword yagFunc getRole
+syn keyword yagFunc getRoleID
+syn keyword yagFunc getRoleName
+syn keyword yagFunc getTargetPermissionsIn
+syn keyword yagFunc getThread
+syn keyword yagFunc giveRole
+syn keyword yagFunc giveRoleID
+syn keyword yagFunc giveRoleName
+syn keyword yagFunc gt
+syn keyword yagFunc hasAnyPermissions
+syn keyword yagFunc hasPermissions
+syn keyword yagFunc hasPrefix
+syn keyword yagFunc hasRole
+syn keyword yagFunc hasRoleID
+syn keyword yagFunc hasRoleName
+syn keyword yagFunc hasSuffix
+syn keyword yagFunc hash
+syn keyword yagFunc html
+syn keyword yagFunc humanizeDurationHours
+syn keyword yagFunc humanizeDurationMinutes
+syn keyword yagFunc humanizeDurationSeconds
+syn keyword yagFunc humanizeThousands
+syn keyword yagFunc humanizeTimeSinceDays
+syn keyword yagFunc in
+syn keyword yagFunc inFold
+syn keyword yagFunc index
+syn keyword yagFunc joinStr
+syn keyword yagFunc js
+syn keyword yagFunc json
+syn keyword yagFunc jsonToSdict
+syn keyword yagFunc kindOf
+syn keyword yagFunc le
+syn keyword yagFunc len
+syn keyword yagFunc loadLocation
+syn keyword yagFunc log
+syn keyword yagFunc lower
+syn keyword yagFunc lt
+syn keyword yagFunc mathConst
+syn keyword yagFunc max
+syn keyword yagFunc memberAbove
+syn keyword yagFunc memberAboveRole
+syn keyword yagFunc mentionEveryone
+syn keyword yagFunc mentionHere
+syn keyword yagFunc mentionRole
+syn keyword yagFunc mentionRoleID
+syn keyword yagFunc mentionRoleName
+syn keyword yagFunc min
+syn keyword yagFunc mod
+syn keyword yagFunc modalBuilder
+syn keyword yagFunc mult
+syn keyword yagFunc ne
+syn keyword yagFunc newDate
+syn keyword yagFunc not
+syn keyword yagFunc noun
+syn keyword yagFunc onlineCount
+syn keyword yagFunc onlineCountBots
+syn keyword yagFunc openThread
+syn keyword yagFunc or
+syn keyword yagFunc parseArgs
+syn keyword yagFunc parseTime
+syn keyword yagFunc pastNicknames
+syn keyword yagFunc pastUsernames
+syn keyword yagFunc pinForumPost
+syn keyword yagFunc pinMessage
+syn keyword yagFunc pow
+syn keyword yagFunc print
+syn keyword yagFunc printf
+syn keyword yagFunc println
+syn keyword yagFunc publishMessage
+syn keyword yagFunc publishResponse
+syn keyword yagFunc randInt
+syn keyword yagFunc reFind
+syn keyword yagFunc reFindAll
+syn keyword yagFunc reFindAllSubmatches
+syn keyword yagFunc reQuoteMeta
+syn keyword yagFunc reReplace
+syn keyword yagFunc reSplit
+syn keyword yagFunc removeRole
+syn keyword yagFunc removeRoleID
+syn keyword yagFunc removeRoleName
+syn keyword yagFunc removeThreadMember
+syn keyword yagFunc roleAbove
+syn keyword yagFunc round
+syn keyword yagFunc roundCeil
+syn keyword yagFunc roundEven
+syn keyword yagFunc roundFloor
+syn keyword yagFunc sanitizeText
+syn keyword yagFunc scheduleUniqueCC
+syn keyword yagFunc sdict
+syn keyword yagFunc sendComponentMessage
+syn keyword yagFunc sendComponentMessageNoEscape
+syn keyword yagFunc sendComponentMessageNoEscapeRetID
+syn keyword yagFunc sendComponentMessageRetID
+syn keyword yagFunc sendDM
+syn keyword yagFunc sendMessage
+syn keyword yagFunc sendMessageNoEscape
+syn keyword yagFunc sendMessageNoEscapeRetID
+syn keyword yagFunc sendMessageRetID
+syn keyword yagFunc sendModal
+syn keyword yagFunc sendResponse
+syn keyword yagFunc sendResponseNoEscape
+syn keyword yagFunc sendResponseNoEscapeRetID
+syn keyword yagFunc sendResponseRetID
+syn keyword yagFunc sendTemplate
+syn keyword yagFunc sendTemplateDM
+syn keyword yagFunc seq
+syn keyword yagFunc setRoles
+syn keyword yagFunc shuffle
+syn keyword yagFunc sleep
+syn keyword yagFunc slice
+syn keyword yagFunc snowflakeToTime
+syn keyword yagFunc sort
+syn keyword yagFunc split
+syn keyword yagFunc sqrt
+syn keyword yagFunc str
+syn keyword yagFunc structToSdict
+syn keyword yagFunc sub
+syn keyword yagFunc takeRole
+syn keyword yagFunc takeRoleID
+syn keyword yagFunc takeRoleName
+syn keyword yagFunc targetHasAnyPermissions
+syn keyword yagFunc targetHasPermissions
+syn keyword yagFunc targetHasRole
+syn keyword yagFunc targetHasRoleID
+syn keyword yagFunc targetHasRoleName
+syn keyword yagFunc timestampToTime
+syn keyword yagFunc title
+syn keyword yagFunc toByte
+syn keyword yagFunc toDuration
+syn keyword yagFunc toFloat
+syn keyword yagFunc toInt
+syn keyword yagFunc toInt64
+syn keyword yagFunc toRune
+syn keyword yagFunc toString
+syn keyword yagFunc trimSpace
+syn keyword yagFunc unpinForumPost
+syn keyword yagFunc unpinMessage
+syn keyword yagFunc updateMessage
+syn keyword yagFunc updateMessageNoEscape
+syn keyword yagFunc upper
+syn keyword yagFunc urlescape
+syn keyword yagFunc urlquery
+syn keyword yagFunc urlunescape
+syn keyword yagFunc userArg
+syn keyword yagFunc verb
+syn keyword yagFunc weekNumber
 hi def link yagFunc Function

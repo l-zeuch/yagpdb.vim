@@ -20,14 +20,14 @@
 " Maintainer: Luca Zeuch <l-zeuch@email.de>,
 "   LRitzdorf <42657792+LRitzdorf@users.noreply.github.com>
 
-syn keyword yagCond             if else with try catch        contained
-syn keyword yagBool             true false                    contained
-syn keyword yagRepeat           range while                   contained
-syn keyword yagLabel            define template block         contained
-syn keyword yagKeyword          nil end                       contained
-syn keyword yagStatement        return break continue         contained
-syn match   yagOperator         "\v\:\="                      contained
-syn match   yagOperator         "\v\="                        contained
+syn keyword yagCond             if else with try catch
+syn keyword yagBool             true false
+syn keyword yagRepeat           range while
+syn keyword yagLabel            define template block
+syn keyword yagKeyword          nil end
+syn keyword yagStatement        return break continue
+syn match   yagOperator         "\v\:\="
+syn match   yagOperator         "\v\="
 
 hi def link yagCond             Conditional
 hi def link yagBool             Boolean

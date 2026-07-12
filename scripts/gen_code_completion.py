@@ -21,12 +21,12 @@ import os
 from typing import Iterable
 
 def gen_keyword_list(file) -> Iterable:
-    p = re.compile(r'(?<=keyword yag)\w+\s+(.*?)(?=\s+contained$)', re.MULTILINE)
+    p = re.compile(r'(?<=keyword yag)\w+\s+(.+)', re.MULTILINE)
     with open(file) as f:
         matches = [match for line in f if (match := p.findall(line))]
         for sublist in matches:
             for item in sublist:
-                yield from item.split()
+                yield from [k for k in item.split() if k != "contained"]
 
 def gen_completion(keywords) -> str:
         list = [f"\t\t\u007b label = '{keyword}' \u007d" for keyword in keywords]
