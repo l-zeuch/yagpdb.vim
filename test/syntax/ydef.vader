@@ -1,0 +1,63 @@
+# Syntax tests: YAGPDB Custom Commands - Function Definitions
+
+# Copyright (C) 2026    Lucas Ritzdorf, Luca Zeuch
+
+# Available syntax functions are:
+#   SyntaxAt(): current cursor position
+#   SyntaxAt(col): current line at given column
+#   SyntaxAt(lnum, col): line and column
+#   SyntaxOf(pattern[, nth=1]): return syntax group name at first match
+
+# do not expand tabs -- ydef is a file format with significant whitespace.
+# vim: set noexpandtab:
+
+Before:
+  source ../syntax/yagpdbdef.vim
+
+After:
+  Restore
+
+Given (Function Definition):
+  func sendMessage channel= content= ?
+
+Execute (Test Function Keyword):
+  AssertEqual 'ydefDeclaration', SyntaxAt(1, 1), "Match func as declaration keyword"
+
+Execute (Test Function Parameters):
+  AssertEqual 'ydefParameter', SyntaxOf('channel='), "Match parameter assignments"
+  AssertEqual 'ydefParameter', SyntaxOf('content='), "Match parameter assignments"
+
+Execute (Test Function Operators):
+  AssertEqual 'ydefOperator', SyntaxOf('?'), "Match optional operator"
+
+
+Given (Comments):
+  == This is a section comment TODO
+
+Execute (Test Comment):
+  AssertEqual 'ydefComment', SyntaxAt(1, 1), "Match section comment"
+  AssertEqual 'ydefTodo', SyntaxOf('TODO'), "Match TODO marker"
+
+Given (Documentation);
+func foo
+	This is a documentation line.
+	TODO explain this later.
+
+Execute (Test Documentation):
+  AssertEqual 'ydefDocstring', SyntaxAt(2, 1), "Match documentation block"
+  AssertEqual 'ydefDocstring', SyntaxAt(3, 1), "Continue documentation block"
+  AssertEqual 'ydefTodo', SyntaxOf('TODO'), "Match TODO inside documentation"
+
+
+Given (Embedded YAGPDB Code Block);
+	Example:
+	```yag
+	{{ sendMessage nil "hello" }}
+	```
+
+Execute (Test Embedded Code Fence):
+  AssertEqual 'ydefDocstring', SyntaxAt(1, 1), "Docstring starts"
+  AssertEqual 'markdownCodeDelimiter', SyntaxOf('```yag'), "Match opening fence"
+  AssertEqual 'ydefCodeblock', SyntaxOf('{{'), "Load YAGPDB syntax inside fence"
+  AssertEqual 'yagFunc', SyntaxOf('sendMessage'), "Highlight embedded YAGPDB"
+  AssertEqual 'markdownCodeDelimiter', SyntaxOf('```', 2), "Match closing fence"
