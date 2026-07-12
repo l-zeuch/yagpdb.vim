@@ -26,6 +26,12 @@ if exists('b:current_syntax')
 endif
 let b:current_syntax = 'yagpdbcc'
 
+let s:cpo_save = &cpoptions
+set cpoptions&vim
+
+runtime! syntax/yagpdbcc/functions.vim
+runtime! syntax/yagpdbcc/keywords.vim
+
 " Be case sensitive
 syn case match
 
@@ -117,3 +123,6 @@ syn match       yagObject           contained "\v%(>|[\$\)])@<!\.[[:alnum:]\_]+"
 hi def link     yagDot              yagType
 hi def link     yagObject           yagType
 hi def link     yagType             Type
+
+let &cpoptions = s:cpo_save
+unlet s:cpo_save

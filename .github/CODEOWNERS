@@ -5,7 +5,9 @@
 # Base
 /ftdetect/              @LRitzdorf
 /ftplugin/              @LRitzdorf
+/ftplugin/yagpdbdef.vim @l-zeuch
 /syntax/                @LRitzdorf
+/syntax/yagpdbdef.vim   @l-zeuch
 /autoload/              @l-zeuch
 /plugin/                @l-zeuch
 /indent/                @l-zeuch
@@ -15,5 +17,6 @@
 
 # Build and automation
 /test/                  @LRitzdorf
+/test/ydef.vim          @l-zeuch
 /.github/workflows/     @l-zeuch
 /Makefile               @l-zeuch

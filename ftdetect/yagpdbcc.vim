@@ -33,6 +33,10 @@ set cpoptions&vim
 au BufRead,BufNewFile   *.yag         setfiletype yagpdbcc
 au BufRead,BufNewFile   *.yagcc       setfiletype yagpdbcc
 
+" LSP syntax definitons.
+" See https://github.com/jo3-l/yag-template-lsp/tree/main/bundled-defs
+au BufRead,BufNewFile   *.ydef        setfiletype yagpdbdef
+
 " Also use *.tmpl, *.gotmpl et al., which are originally only Go, if configured.
 " Here, we need to explicitly override the default syntax - "setfiletype"
 " will not override an existing filetype.
