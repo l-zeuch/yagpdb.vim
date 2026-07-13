@@ -58,6 +58,6 @@ Given (Embedded YAGPDB Code Block);
 Execute (Test Embedded Code Fence):
   AssertEqual 'ydefDocstring', SyntaxAt(1, 1), "Docstring starts"
   AssertEqual 'markdownCodeDelimiter', SyntaxOf('```yag'), "Match opening fence"
-  AssertEqual 'ydefCodeblock', SyntaxOf('{{'), "Load YAGPDB syntax inside fence"
+  AssertEqual 'yagTemplate', SyntaxOf('{{'), "Load YAGPDB syntax inside fence"
   AssertEqual 'yagFunc', SyntaxOf('sendMessage'), "Highlight embedded YAGPDB"
   AssertEqual 'markdownCodeDelimiter', SyntaxOf('```', 2), "Match closing fence"
