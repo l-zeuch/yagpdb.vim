@@ -49,22 +49,22 @@ Execute (Test Normal Strings (line 1)):
 Execute (Test Normal Strings (line 2)):
   AssertEqual 'yagExpr', SyntaxAt(2, 9), "Don't start matching too soon"
   AssertEqual 'yagString', SyntaxAt(2, 10), "Match quotes as string too"
-  AssertEqual 'yagEscape', SyntaxOf('\\"'), "Match escaped quote as yagEscape"
-  AssertEqual 'yagEscape', SyntaxOf('\\"', 2), "Match escaped quote as yagEscape"
+  AssertEqual 'goEscapeC', SyntaxOf('\\"'), "Match escaped quote as goEscapeC"
+  AssertEqual 'goEscapeC', SyntaxOf('\\"', 2), "Match escaped quote as goEscapeC"
   AssertEqual 'yagString', SyntaxAt(2, 56), "Match quotes as string too"
   AssertEqual 'yagExpr', SyntaxAt(2, 57), "Stop match after closing delim"
 
 Execute (Test newline escape sequence (line 3)):
   AssertEqual 'yagExpr', SyntaxAt(3, 15), "Don't start matching too soon"
   AssertEqual 'yagString', SyntaxAt(3, 16), "Match quotes as string too"
-  AssertEqual 'yagEscape', SyntaxOf('\\n'), "Match \\n as yagEscape"
+  AssertEqual 'goEscapeC', SyntaxOf('\\n'), "Match \\n as goEscapeC"
   AssertEqual 'yagString', SyntaxAt(3, 19), "Match quotes as string too"
   AssertEqual 'yagExpr', SyntaxAt(3, 20), "Stop match after closing delim"
 
 Execute (Test tab escape sequence (line 4)):
   AssertEqual 'yagExpr', SyntaxAt(4, 15), "Don't start matching too soon"
   AssertEqual 'yagString', SyntaxAt(4, 16), "Match quotes as string too"
-  AssertEqual 'yagEscape', SyntaxOf('\\t'), "Match \\t as yagEscape"
+  AssertEqual 'goEscapeC', SyntaxOf('\\t'), "Match \\t as goEscapeC"
   AssertEqual 'yagString', SyntaxAt(4, 19), "Match quotes as string too"
   AssertEqual 'yagExpr', SyntaxAt(4, 20), "Stop match after closing delim"
 
@@ -93,7 +93,6 @@ Execute (Test Some Interesting Cases):
 Given (Character Constants and Escape Sequences):
   {{ $t := 'a' }}
   {{ $t := '\n' }}
-  {{ $t := 'invalid' }}
   {{ $t := '\u12e4' }}
 
 Execute (Test Character Constant (line 1)):
@@ -106,22 +105,14 @@ Execute (Test Character Constant (line 1)):
 Execute (Test Escape Sequence (line 2)):
   AssertEqual 'yagExpr', SyntaxAt(2, 9), "Don't start match too early"
   AssertEqual 'yagChar', SyntaxOf("'", 3), "Match (') as yagChar"
-  AssertEqual 'yagChar', SyntaxAt(2, 11), "Match escape seq in '' as yagChar"
-  AssertEqual 'yagChar', SyntaxAt(2, 12), "Match escape seq in '' as yagChar"
+  AssertEqual 'goEscapeC', SyntaxAt(2, 11), "Match escape seq in '' as goEscapeC"
+  AssertEqual 'goEscapeC', SyntaxAt(2, 12), "Match escape seq in '' as goEscapeC"
   AssertEqual 'yagChar', SyntaxOf("'", 4), "Match (') as yagChar"
   AssertEqual 'yagExpr', SyntaxAt(2, 14), "Don't expand match too far"
 
-Execute (Test Invalid Character Constant (line 3)):
+Execute (Test Unicode Escape Sequence (Line 3)):
   AssertEqual 'yagExpr', SyntaxAt(3, 9), "Don't start match too early"
-  AssertEqual 'yagCharError', SyntaxOf("'", 5), "Match (') as yagChar"
-  AssertEqual 'yagCharError', SyntaxOf("invalid"), "Match invalid char const as yagCharError"
-  AssertEqual 'yagCharError', SyntaxOf("'", 6), "Match (') as yagChar"
-  AssertEqual 'yagExpr', SyntaxAt(3, 19), "Don't expand match too far"
-
-Execute (Test Unicode Escape Sequence (Line 4)):
-# See l-zeuch/yagpdb.vim#75
-  Log "\e[0;33mTODO: Currently unicode escape sequences are considered invalid.\e[0m"
-  Log "      \e[0;33mFixing this requires changes to the current implementation\e[0m"
-  Log "      \e[0;33mof the `yagChar` syntax logic, so we'll just\e[0m"
-  Log "      \e[0;33mlet this pass for now and instead have this note.\e[0m"
-  AssertEqual 1, 1
+  AssertEqual 'yagChar', SyntaxOf("'", 5), "Match (') as yagChar"
+  AssertEqual 'goEscapeU', SyntaxOf("\\\\u12e4"), "Match Unicode escape seq in '' as goEscapeU"
+  AssertEqual 'yagChar', SyntaxOf("'", 6), "Match (') as yagChar"
+  AssertEqual 'yagExpr', SyntaxAt(3, 18), "Don't expand match too far"

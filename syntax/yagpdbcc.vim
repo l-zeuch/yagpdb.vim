@@ -29,9 +29,11 @@ if !exists('b:main_syntax')
     let b:main_syntax = 'yagpdbcc'
 endif
 
-" Include Markdown syntax to save ourselves some work
+" Include Markdown and Go syntaxes to save ourselves some work
 unlet! b:current_syntax
 syn include @Md syntax/markdown.vim
+unlet! b:current_syntax
+syn include syntax/go.vim
 
 let b:current_syntax = 'yagpdbcc'
 
@@ -50,7 +52,6 @@ syn case match
 syn match       yagNestedBrace      "\v[\{\}]{2}"
 syn match       yagTrailingVarError "\v>\$\w*"
 
-hi def link     yagCharError        yagError
 hi def link     yagNestedBrace      yagError
 hi def link     yagTrailingVarError yagError
 hi def link     yagError            Error
@@ -78,22 +79,18 @@ syn match       yagIdentifier       "\v>@!\$[A-Za-z0-9_]*"
 hi def link     yagIdentifier       Identifier
 
 
-" Escapes
-syn match       yagChar             "\v'%([^\\]|\\[abefnrtv\\'])'"
-syn match       yagEscape           "\v\\[nt\"\\]"
-syn match       yagFormat           "\v\%\d?[dfsu\%]"
+" Characters
+syn region      yagChar             start=+'+ skip=+\\\\\|\\'+ end=+'+
+                                  \ contains=@goCharacterGroup
 
 hi def link     yagChar             Character
-hi def link     yagEscape           Special
-hi def link     yagFormat           Special
 
 
 " Strings
-syn cluster     yagStringGroup      contains=yagEscape,yagFormat
 syn region      yagString           start=+"+ skip=+\\\\\|\\"+ end=+"\|$+
-                                  \ contains=@yagStringGroup,@Spell
+                                  \ contains=@goStringGroup,goFormatSpecifier,@Spell
 syn region      yagRawStr           start=#\v`# end=#\v`#
-                                  \ contains=yagFormat,@Spell fold extend
+                                  \ contains=goFormatSpecifier,@Spell fold extend
 
 hi def link     yagRawStr           String
 hi def link     yagString           String
