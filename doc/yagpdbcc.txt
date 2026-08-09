@@ -184,6 +184,14 @@ toolchain, so you'll need to use that name for `cmd` instead.
     -- filename of the LSP binary!
     vim.lsp.config('YAGPDB CC', {
     	cmd = { 'yag-template-lsp' },
+    	settings = {
+    	    yagTemplate = {
+    	        extraEnvDefFiles = {
+    	            'path/to/file/a.ydef',
+    	            'path/to/file/b.ydef',
+    	        },
+    	    },
+    	},
     	filetypes = { 'yagpdbcc' },
     	on_attach = function(client, bufnr)
             vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })

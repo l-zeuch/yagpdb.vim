@@ -101,6 +101,25 @@ vim.diagnostic.config({
     update_in_insert = true, })
 ```
 
+#### Adding Additional Functions
+
+The latest version of the language server supports additional function definitions. These are resolved relative to the
+current working directory (CWD).
+
+```lua
+    vim.lsp.config('YAGPDB CC', {
+        settings = {
+            yagTemplate = {
+                extraEnvDefFiles = {
+                    'path/to/file/a.ydef',
+                    'path/to/file/b.ydef',
+                },
+            },
+        },
+        -- ... snip ...
+    })
+```
+
 ## Testing the Configuration
 
 To verify that everything is working correctly, open a `.yag` or `.yagcc` file in Neovim, preferably one that already
