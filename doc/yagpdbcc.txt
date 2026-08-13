@@ -186,7 +186,7 @@ toolchain, so you'll need to use that name for `cmd` instead.
     	cmd = { 'yag-template-lsp' },
     	settings = {
     	    yagTemplate = {
-    	        extraEnvDefFiles = {
+    	        extraEnvdefFiles = {
     	            'path/to/file/a.ydef',
     	            'path/to/file/b.ydef',
     	        },

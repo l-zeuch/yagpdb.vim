@@ -110,7 +110,7 @@ current working directory (CWD).
     vim.lsp.config('YAGPDB CC', {
         settings = {
             yagTemplate = {
-                extraEnvDefFiles = {
+                extraEnvdefFiles = {
                     'path/to/file/a.ydef',
                     'path/to/file/b.ydef',
                 },
