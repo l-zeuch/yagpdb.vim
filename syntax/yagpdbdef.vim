@@ -28,6 +28,9 @@ let s:cpo_save = &cpoptions
 set cpoptions&vim
 
 unlet! b:current_syntax
+syntax include @Markdown syntax/markdown.vim
+
+unlet! b:current_syntax
 syntax include @Yagpdbcc syntax/yagpdbcc.vim
 
 let b:current_syntax = 'yagpdbdef'
@@ -35,12 +38,15 @@ let b:current_syntax = 'yagpdbdef'
 syn case match
 
 
-" Markdown helper
+" Markdown helpers
+syn region    ydefInlineCode       start="`" end="`" contained
 syn cluster   ydefInlineMarkdown   contains=markdownBold,
                                           \ markdownItalic,
-                                          \ markdownCode,
+                                          \ markdownBoldItalic,
+                                          \ markdownStrike,
                                           \ markdownLink,
-                                          \ markdownUrl
+                                          \ ydefInlineCode,
+hi def link   ydefInlineCode       markdownCode
 
 " Function definitions
 syn keyword   ydefDeclaration      func
