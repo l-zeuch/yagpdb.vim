@@ -149,6 +149,7 @@ syn keyword yagFunc kindOf contained
 syn keyword yagFunc le contained
 syn keyword yagFunc len contained
 syn keyword yagFunc loadLocation contained
+syn keyword yagFunc lockThread contained
 syn keyword yagFunc log contained
 syn keyword yagFunc lower contained
 syn keyword yagFunc lt contained
@@ -186,6 +187,7 @@ syn keyword yagFunc println contained
 syn keyword yagFunc publishMessage contained
 syn keyword yagFunc publishResponse contained
 syn keyword yagFunc randInt contained
+syn keyword yagFunc randNorm contained
 syn keyword yagFunc reFind contained
 syn keyword yagFunc reFindAll contained
 syn keyword yagFunc reFindAllSubmatches contained
