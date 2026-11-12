@@ -224,6 +224,7 @@ syn keyword yagFunc sendTemplate contained
 syn keyword yagFunc sendTemplateDM contained
 syn keyword yagFunc seq contained
 syn keyword yagFunc setRoles contained
+syn keyword yagFunc setVoiceStatus contained
 syn keyword yagFunc shuffle contained
 syn keyword yagFunc sleep contained
 syn keyword yagFunc slice contained
