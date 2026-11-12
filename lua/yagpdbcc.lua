@@ -263,6 +263,7 @@ function source:complete(params, callback)
 		{ label = 'sendTemplateDM' },
 		{ label = 'seq' },
 		{ label = 'setRoles' },
+		{ label = 'setVoiceStatus' },
 		{ label = 'shuffle' },
 		{ label = 'sleep' },
 		{ label = 'slice' },
