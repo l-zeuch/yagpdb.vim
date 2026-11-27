@@ -89,8 +89,6 @@ syn keyword yagFunc dict contained
 syn keyword yagFunc div contained
 syn keyword yagFunc editChannelName contained
 syn keyword yagFunc editChannelTopic contained
-syn keyword yagFunc editComponentMessage contained
-syn keyword yagFunc editComponentMessageNoEscape contained
 syn keyword yagFunc editMessage contained
 syn keyword yagFunc editMessageNoEscape contained
 syn keyword yagFunc editNickname contained
@@ -206,10 +204,6 @@ syn keyword yagFunc roundFloor contained
 syn keyword yagFunc sanitizeText contained
 syn keyword yagFunc scheduleUniqueCC contained
 syn keyword yagFunc sdict contained
-syn keyword yagFunc sendComponentMessage contained
-syn keyword yagFunc sendComponentMessageNoEscape contained
-syn keyword yagFunc sendComponentMessageNoEscapeRetID contained
-syn keyword yagFunc sendComponentMessageRetID contained
 syn keyword yagFunc sendDM contained
 syn keyword yagFunc sendMessage contained
 syn keyword yagFunc sendMessageNoEscape contained
